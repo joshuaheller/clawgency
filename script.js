@@ -190,7 +190,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
     const btn = form.querySelector('button[type="submit"]');
     const originalText = btn.innerHTML;
-    btn.innerHTML = '<span class="btn__icon">⏳</span> Wird gesendet…';
+    btn.innerHTML = '<span class="btn__icon">🦀</span> Wird gesendet…';
     btn.disabled = true;
 
     await new Promise(resolve => setTimeout(resolve, 1500));
@@ -236,7 +236,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(230,57,70,0.06) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
     transform: translate(-50%, -50%);
@@ -320,5 +320,5 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   });
 })();
 
-console.log('%cClawgency ⚡', 'color: #00e5ff; font-size: 1.5rem; font-weight: bold;');
+console.log('%cClawgency 🦀', 'color: #e63946; font-size: 1.5rem; font-weight: bold;');
 console.log('%cKI-Agenten für den DACH-Mittelstand', 'color: #8892a4;');
