@@ -468,7 +468,7 @@ a { color: inherit; text-decoration: none; }
   word-wrap: break-word;
 }
 
-.hero__actions { margin-bottom: 3.5rem; }
+.hero__actions { margin-bottom: 3.5rem; width: 100%; max-width: 100%; }
 
 .hero__stats {
   display: flex;
@@ -563,8 +563,9 @@ a { color: inherit; text-decoration: none; }
   .hero__stat { padding: 0.5rem 1rem; min-width: 100px; }
   .hero__stat-divider { display: none; }
   .hero__stat-num { font-size: 1.5rem; }
-  .hero__content { padding: 0 0.5rem; }
-  .hero__actions .btn { width: 100%; max-width: 100%; }
+  .hero__content { padding: 0 1rem; }
+  .hero__actions { width: 100%; max-width: 100%; box-sizing: border-box; }
+  .hero__actions .btn { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
 }
 
 /* ============================================================
