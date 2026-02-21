@@ -51,7 +51,7 @@
   --t-slow:  0.6s ease;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--f-body);
@@ -74,6 +74,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, h4 {
@@ -127,6 +129,7 @@ a { color: inherit; text-decoration: none; }
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-family: var(--f-body);
   font-size: 0.95rem;
@@ -137,7 +140,8 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
   transition: all var(--t-base);
   text-decoration: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
 }
 
 .btn--primary {
@@ -395,6 +399,10 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   z-index: 1;
   text-align: center;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .hero__badge {
@@ -424,10 +432,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__headline {
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2rem, 6vw, 6rem);
   color: var(--c-white);
   margin-bottom: 1.5rem;
   letter-spacing: -0.03em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .hero__headline-em {
@@ -449,11 +459,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__sub {
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
   color: var(--c-text-muted);
   max-width: 680px;
   margin: 0 auto 2.5rem;
   line-height: 1.7;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .hero__actions { margin-bottom: 3.5rem; }
@@ -551,6 +563,8 @@ a { color: inherit; text-decoration: none; }
   .hero__stat { padding: 0.5rem 1rem; min-width: 100px; }
   .hero__stat-divider { display: none; }
   .hero__stat-num { font-size: 1.5rem; }
+  .hero__content { padding: 0 0.5rem; }
+  .hero__actions .btn { width: 100%; max-width: 100%; }
 }
 
 /* ============================================================
@@ -1459,8 +1473,9 @@ a { color: inherit; text-decoration: none; }
 ============================================================ */
 @media (max-width: 480px) {
   .section-title { font-size: 1.75rem; }
-  .hero__headline { font-size: 2.5rem; }
+  .hero__headline { font-size: 2rem; }
   .hero__stats { flex-direction: column; }
   .hero__stat-divider { display: none; }
   .contact__form-wrap { padding: 1.5rem; }
+  .container { padding: 0 1rem; }
 }

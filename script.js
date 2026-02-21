@@ -179,32 +179,44 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   });
 })();
 
-// CONTACT FORM
+// CONTACT FORM – opens email app with pre-filled content
 (function initContactForm() {
   const form = $('#contactForm');
-  const success = $('#formSuccess');
   if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
+  const EMAIL_TO = 'clawgency@theaisoftwarecompany.com';
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const btn = form.querySelector('button[type="submit"]');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<span class="btn__icon">🦀</span> Wird gesendet…';
-    btn.disabled = true;
+    const name = (form.querySelector('#name')?.value || '').trim();
+    const company = (form.querySelector('#company')?.value || '').trim();
+    const email = (form.querySelector('#email')?.value || '').trim();
+    const challenge = (form.querySelector('#challenge')?.value || '').trim();
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    if (!name || !company || !email) {
+      const btn = form.querySelector('button[type="submit"]');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="btn__icon">🦀</span> Bitte alle Pflichtfelder ausfüllen';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.disabled = false;
+      }, 2000);
+      return;
+    }
 
-    form.style.display = 'none';
-    success.style.display = 'block';
+    const subject = encodeURIComponent(`Kontaktanfrage von ${name} (${company})`);
+    const bodyLines = [
+      `Name: ${name}`,
+      `Unternehmen: ${company}`,
+      `E-Mail: ${email}`,
+      challenge ? `\nGrößte Herausforderung:\n${challenge}` : ''
+    ].filter(Boolean);
+    const body = encodeURIComponent(bodyLines.join('\n'));
 
-    setTimeout(() => {
-      form.reset();
-      form.style.display = 'flex';
-      success.style.display = 'none';
-      btn.innerHTML = originalText;
-      btn.disabled = false;
-    }, 8000);
+    const mailto = `mailto:${EMAIL_TO}?subject=${subject}&body=${body}`;
+    window.location.href = mailto;
   });
 })();
 
