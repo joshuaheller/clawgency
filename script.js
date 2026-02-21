@@ -355,5 +355,65 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   videos.forEach(v => observer.observe(v));
 })();
 
+// ROI CALCULATOR
+(function initROICalc() {
+  const employees = $('#roiEmployees');
+  const hours = $('#roiHours');
+  const cost = $('#roiCost');
+  const automation = $('#roiAutomation');
+
+  if (!employees || !hours || !cost || !automation) return;
+
+  const employeesVal = $('#roiEmployeesVal');
+  const hoursVal = $('#roiHoursVal');
+  const costVal = $('#roiCostVal');
+  const automationVal = $('#roiAutomationVal');
+
+  const savedHoursEl = $('#roiSavedHours');
+  const savedMonthlyEl = $('#roiSavedMonthly');
+  const savedYearlyEl = $('#roiSavedYearly');
+  const paybackEl = $('#roiPayback');
+  const barFill = $('#roiBarFill');
+
+  function formatCurrency(num) {
+    return num.toLocaleString('de-DE') + '€';
+  }
+
+  function calculate() {
+    const e = parseInt(employees.value);
+    const h = parseInt(hours.value);
+    const c = parseInt(cost.value);
+    const a = parseInt(automation.value) / 100;
+
+    employeesVal.textContent = e;
+    hoursVal.textContent = h + 'h';
+    costVal.textContent = c + '€';
+    automationVal.textContent = (a * 100) + '%';
+
+    const weeklyHoursSaved = e * h * a;
+    const monthlySaving = weeklyHoursSaved * c * 4.33;
+    const yearlySaving = monthlySaving * 12;
+
+    const implCost = Math.max(5000, e * 500);
+    const monthlyOpsCost = Math.max(500, e * 80);
+    const firstYearCost = implCost + (monthlyOpsCost * 12);
+    const paybackMonths = monthlySaving > 0 ? Math.ceil(implCost / (monthlySaving - monthlyOpsCost)) : 99;
+
+    savedHoursEl.textContent = Math.round(weeklyHoursSaved);
+    savedMonthlyEl.textContent = formatCurrency(Math.round(monthlySaving));
+    savedYearlyEl.textContent = formatCurrency(Math.round(yearlySaving));
+    paybackEl.textContent = paybackMonths > 0 && paybackMonths < 24 ? paybackMonths : '<1';
+
+    const barPct = Math.min(100, Math.round((yearlySaving / Math.max(firstYearCost, 1)) * 100));
+    barFill.style.width = barPct + '%';
+  }
+
+  [employees, hours, cost, automation].forEach(input => {
+    input.addEventListener('input', calculate);
+  });
+
+  calculate();
+})();
+
 console.log('%cClawgency 🦀', 'color: #e63946; font-size: 1.5rem; font-weight: bold;');
-console.log('%cKI-Agenten für den DACH-Mittelstand', 'color: #8892a4;');
+console.log('%cOpenClaw-Experten für den DACH-Mittelstand', 'color: #8892a4;');
