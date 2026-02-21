@@ -320,5 +320,28 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   });
 })();
 
+// LAZY-LOAD CTA VIDEO
+(function initLazyVideos() {
+  const videos = $$('video[preload="none"]');
+  if (!videos.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const video = entry.target;
+      const sources = $$('source[data-src]', video);
+      sources.forEach(s => {
+        s.src = s.dataset.src;
+        s.removeAttribute('data-src');
+      });
+      if (sources.length) video.load();
+      video.play().catch(() => {});
+      observer.unobserve(video);
+    });
+  }, { rootMargin: '200px' });
+
+  videos.forEach(v => observer.observe(v));
+})();
+
 console.log('%cClawgency 🦀', 'color: #e63946; font-size: 1.5rem; font-weight: bold;');
 console.log('%cKI-Agenten für den DACH-Mittelstand', 'color: #8892a4;');

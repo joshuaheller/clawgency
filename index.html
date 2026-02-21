@@ -44,17 +44,68 @@
   }
   </script>
 
-  <!-- Fonts -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-crab-48.png" />
+
+  <!-- Fonts: preconnect + async load to avoid render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/favicon-crab.png" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦀</text></svg>" />
+  <!-- Critical CSS inlined, full stylesheet deferred -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--c-bg:#0b0c10;--c-bg-2:#10111a;--c-surface:#1a1b28;--c-border:rgba(255,255,255,.07);--c-accent:#e63946;--c-accent-dim:rgba(230,57,70,.12);--c-accent-glow:rgba(230,57,70,.35);--c-text:#e8eaf0;--c-text-muted:#8892a4;--c-text-dim:#4a5568;--c-white:#fff;--f-heading:'Syne',sans-serif;--f-body:'Space Grotesk',sans-serif;--r-full:9999px;--r-md:12px;--r-lg:20px;--t-base:.3s ease}
+    html{scroll-behavior:smooth}body{font-family:var(--f-body);background:var(--c-bg);color:var(--c-text);line-height:1.65;font-size:1rem;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    .container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+    h1,h2,h3,h4{font-family:var(--f-heading);font-weight:700;line-height:1.1;letter-spacing:-.02em}
+    a{color:inherit;text-decoration:none}.text-accent{color:var(--c-accent)}em{font-style:italic}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 0;transition:background var(--t-base)}
+    .nav.scrolled{background:rgba(11,12,16,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--c-border)}
+    .nav__inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:2rem}
+    .nav__logo{display:flex;align-items:center;gap:.5rem;font-family:var(--f-heading);font-size:1.25rem;font-weight:700;color:var(--c-white);flex-shrink:0}
+    .nav__logo-img{height:32px;width:auto;border-radius:4px}
+    .nav__links{display:flex;list-style:none;gap:.25rem;margin-left:auto}
+    .nav__link{font-size:.9rem;font-weight:500;color:var(--c-text-muted);padding:.4rem .75rem;border-radius:6px;transition:color .15s ease}
+    .nav__link:hover{color:var(--c-white)}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-body);font-size:.95rem;font-weight:600;padding:.75rem 1.5rem;border-radius:var(--r-full);border:none;cursor:pointer;transition:all var(--t-base);text-decoration:none;white-space:nowrap}
+    .btn--nav{background:var(--c-accent);color:var(--c-white);font-size:.85rem;padding:.55rem 1.2rem}
+    .btn--primary{background:var(--c-accent);color:var(--c-white);box-shadow:0 0 24px var(--c-accent-glow)}
+    .btn--lg{padding:1rem 2rem;font-size:1rem}
+    .nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.5rem;margin-left:auto}
+    .nav__burger span{display:block;width:22px;height:2px;background:var(--c-text);border-radius:2px}
+    .nav__mobile{display:none}
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:7rem 0 4rem}
+    .hero__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(230,57,70,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(230,57,70,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+    .hero__orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+    .hero__video-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+    .hero__video-bg video{width:100%;height:100%;object-fit:cover;opacity:.15;mix-blend-mode:screen}
+    .hero__content{position:relative;z-index:1;text-align:center}
+    .hero__badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;color:var(--c-accent);background:var(--c-accent-dim);border:1px solid rgba(230,57,70,.3);padding:.4rem 1rem;border-radius:var(--r-full);margin-bottom:1.5rem}
+    .hero__headline{font-size:clamp(3rem,7vw,6rem);color:var(--c-white);margin-bottom:1.5rem;letter-spacing:-.03em}
+    .hero__headline-em{color:var(--c-accent);font-style:italic}
+    .hero__sub{font-size:clamp(1rem,2vw,1.2rem);color:var(--c-text-muted);max-width:680px;margin:0 auto 2.5rem;line-height:1.7}
+    .hero__actions{margin-bottom:3.5rem}
+    .hero__stats{display:flex;align-items:center;justify-content:center;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:1.5rem 2rem;max-width:780px;margin:0 auto;flex-wrap:wrap}
+    .hero__stat{display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.5rem 2rem;flex:1;min-width:140px}
+    .hero__stat-num{font-family:var(--f-heading);font-size:2rem;font-weight:800;color:var(--c-white);line-height:1}
+    .hero__stat-plus{font-family:var(--f-heading);font-size:1.5rem;font-weight:800;color:var(--c-accent);line-height:1}
+    .hero__stat-label{font-size:.78rem;color:var(--c-text-muted);text-align:center}
+    .hero__stat-divider{width:1px;height:40px;background:var(--c-border);flex-shrink:0}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal--delay-1{transition-delay:.1s}.reveal--delay-2{transition-delay:.2s}.reveal--delay-3{transition-delay:.3s}.reveal--delay-4{transition-delay:.4s}
+    .hero__badge-dot{width:6px;height:6px;background:var(--c-accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    @media(max-width:900px){.nav__links{display:none}.nav__burger{display:flex}.btn--nav{display:none}}
+    @media(max-width:768px){.hide-mobile{display:none}.hero__stats{padding:1rem}.hero__stat{padding:.5rem 1rem;min-width:100px}.hero__stat-divider{display:none}.hero__stat-num{font-size:1.5rem}}
+  </style>
+  <link rel="preload" as="style" href="styles.min.css" />
+  <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="styles.min.css" /></noscript>
 </head>
 <body>
 
@@ -62,7 +113,7 @@
   <nav class="nav" id="nav">
     <div class="nav__inner">
       <a href="#" class="nav__logo">
-        <img src="assets/logo-crab.png" alt="Clawgency Crab" class="nav__logo-img" />
+        <img src="assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
         <span class="nav__logo-text">Clawgency</span>
       </a>
       <ul class="nav__links">
@@ -94,7 +145,7 @@
     <div class="hero__orb hero__orb--2"></div>
     <div class="hero__orb hero__orb--3"></div>
     <div class="hero__video-bg">
-      <video autoplay muted loop playsinline poster="assets/hero-bg.png">
+      <video autoplay muted loop playsinline poster="assets/hero-bg.webp" preload="none">
         <source src="assets/hero-bg.mp4" type="video/mp4" />
       </video>
     </div>
@@ -522,8 +573,8 @@
       <div class="cta-banner__orb cta-banner__orb--1"></div>
       <div class="cta-banner__orb cta-banner__orb--2"></div>
       <div class="cta-banner__video">
-        <video autoplay muted loop playsinline poster="assets/cta-bg.png">
-          <source src="assets/cta-bg.mp4" type="video/mp4" />
+        <video muted loop playsinline poster="assets/cta-bg.webp" preload="none">
+          <source data-src="assets/cta-bg.mp4" type="video/mp4" />
         </video>
       </div>
     </div>
@@ -665,7 +716,7 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a href="#" class="footer__logo">
-            <img src="assets/logo-crab.png" alt="Clawgency Crab" class="nav__logo-img" style="height:28px;" />
+            <img src="assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="28" height="28" loading="lazy" style="height:28px;" />
             <span>Clawgency</span>
           </a>
           <p class="footer__tagline">KI-Agenten-Spezialisten<br />für den DACH-Mittelstand.</p>
@@ -713,6 +764,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.min.js" defer></script>
 </body>
 </html>
