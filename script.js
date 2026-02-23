@@ -179,15 +179,85 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   });
 })();
 
-// CONTACT FORM – opens email app with pre-filled content
+// CONTACT FORM – opens email app with desktop-safe fallback options
 (function initContactForm() {
   const form = $('#contactForm');
   if (!form) return;
 
   const EMAIL_TO = 'clawgency@theaisoftwarecompany.com';
+  const MAIL_APP_TIMEOUT_MS = 1200;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const fallbackWrap = form.querySelector('#contactFallback');
+  const fallbackMailto = form.querySelector('#contactFallbackMailto');
+  const fallbackGmail = form.querySelector('#contactFallbackGmail');
+  const fallbackOutlook = form.querySelector('#contactFallbackOutlook');
+  const fallbackCopy = form.querySelector('#contactFallbackCopy');
+  const copyBtnDefault = fallbackCopy?.textContent || 'E-Mail-Adresse kopieren';
+
+  function showSubmitFeedback(message, delay = 2000) {
+    if (!submitBtn) return;
+    const original = submitBtn.innerHTML;
+    submitBtn.innerHTML = `<span class="btn__icon">🦀</span> ${message}`;
+    submitBtn.disabled = true;
+    setTimeout(() => {
+      submitBtn.innerHTML = original;
+      submitBtn.disabled = false;
+    }, delay);
+  }
+
+  function buildComposeLinks(subject, body) {
+    const to = encodeURIComponent(EMAIL_TO);
+    return {
+      mailto: `mailto:${EMAIL_TO}?subject=${subject}&body=${body}`,
+      gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`,
+      outlook: `https://outlook.office.com/mail/deeplink/compose?to=${to}&subject=${subject}&body=${body}`
+    };
+  }
+
+  function hideFallback() {
+    if (fallbackWrap) fallbackWrap.hidden = true;
+  }
+
+  function showFallback(links) {
+    if (!fallbackWrap) return;
+    fallbackMailto?.setAttribute('href', links.mailto);
+    fallbackGmail?.setAttribute('href', links.gmail);
+    fallbackOutlook?.setAttribute('href', links.outlook);
+    fallbackWrap.hidden = false;
+  }
+
+  async function copyToClipboard(text) {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (_) {}
+    }
+
+    const helper = document.createElement('textarea');
+    helper.value = text;
+    helper.setAttribute('readonly', '');
+    helper.style.position = 'fixed';
+    helper.style.left = '-9999px';
+    document.body.appendChild(helper);
+    helper.select();
+    helper.setSelectionRange(0, helper.value.length);
+    const copied = document.execCommand('copy');
+    helper.remove();
+    return copied;
+  }
+
+  fallbackCopy?.addEventListener('click', async () => {
+    const copied = await copyToClipboard(EMAIL_TO);
+    fallbackCopy.textContent = copied ? 'Kopiert' : 'Kopieren fehlgeschlagen';
+    setTimeout(() => {
+      fallbackCopy.textContent = copyBtnDefault;
+    }, 1800);
+  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    hideFallback();
 
     const name = (form.querySelector('#name')?.value || '').trim();
     const company = (form.querySelector('#company')?.value || '').trim();
@@ -195,14 +265,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     const challenge = (form.querySelector('#challenge')?.value || '').trim();
 
     if (!name || !company || !email) {
-      const btn = form.querySelector('button[type="submit"]');
-      const orig = btn.innerHTML;
-      btn.innerHTML = '<span class="btn__icon">🦀</span> Bitte alle Pflichtfelder ausfüllen';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.innerHTML = orig;
-        btn.disabled = false;
-      }, 2000);
+      showSubmitFeedback('Bitte alle Pflichtfelder ausfüllen');
       return;
     }
 
@@ -214,9 +277,32 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       challenge ? `\nGrößte Herausforderung:\n${challenge}` : ''
     ].filter(Boolean);
     const body = encodeURIComponent(bodyLines.join('\n'));
+    const composeLinks = buildComposeLinks(subject, body);
 
-    const mailto = `mailto:${EMAIL_TO}?subject=${subject}&body=${body}`;
-    window.location.href = mailto;
+    let switchedContext = false;
+    const markAsSwitched = () => {
+      switchedContext = true;
+      cleanupListeners();
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') markAsSwitched();
+    };
+    const cleanupListeners = () => {
+      window.removeEventListener('blur', markAsSwitched);
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+
+    window.addEventListener('blur', markAsSwitched, { once: true });
+    document.addEventListener('visibilitychange', onVisibility);
+
+    window.location.href = composeLinks.mailto;
+
+    setTimeout(() => {
+      cleanupListeners();
+      if (switchedContext) return;
+      showFallback(composeLinks);
+      showSubmitFeedback('Fallback aktiviert: Bitte Option unten wählen', 2600);
+    }, MAIL_APP_TIMEOUT_MS);
   });
 })();
 
