@@ -1293,6 +1293,10 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
 }
 
+.contact-fallback[hidden] {
+  display: none;
+}
+
 .contact-fallback__text {
   margin: 0;
   font-size: 0.84rem;
