@@ -188,11 +188,9 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const MAIL_APP_TIMEOUT_MS = 1200;
   const submitBtn = form.querySelector('button[type="submit"]');
   const fallbackWrap = form.querySelector('#contactFallback');
-  const fallbackMailto = form.querySelector('#contactFallbackMailto');
-  const fallbackGmail = form.querySelector('#contactFallbackGmail');
-  const fallbackOutlook = form.querySelector('#contactFallbackOutlook');
   const fallbackCopy = form.querySelector('#contactFallbackCopy');
-  const copyBtnDefault = fallbackCopy?.textContent || 'E-Mail-Adresse kopieren';
+  const copyBtnDefault = fallbackCopy?.textContent || 'E-Mail-Entwurf kopieren';
+  let fallbackDraftText = '';
 
   function showSubmitFeedback(message, delay = 2000) {
     if (!submitBtn) return;
@@ -205,24 +203,33 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     }, delay);
   }
 
-  function buildComposeLinks(subject, body) {
-    const to = encodeURIComponent(EMAIL_TO);
+  function buildComposeData(name, company, email, challenge) {
+    const subjectText = `Kontaktanfrage von ${name} (${company})`;
+    const bodyLines = [
+      `Name: ${name}`,
+      `Unternehmen: ${company}`,
+      `E-Mail: ${email}`,
+      challenge ? `\nGrößte Herausforderung:\n${challenge}` : ''
+    ].filter(Boolean);
+    const bodyText = bodyLines.join('\n');
+    const subject = encodeURIComponent(subjectText);
+    const body = encodeURIComponent(bodyText);
+
     return {
       mailto: `mailto:${EMAIL_TO}?subject=${subject}&body=${body}`,
-      gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`,
-      outlook: `https://outlook.office.com/mail/deeplink/compose?to=${to}&subject=${subject}&body=${body}`
+      draftText: `An: ${EMAIL_TO}\nBetreff: ${subjectText}\n\n${bodyText}`
     };
   }
 
   function hideFallback() {
     if (fallbackWrap) fallbackWrap.hidden = true;
+    if (fallbackCopy) fallbackCopy.textContent = copyBtnDefault;
+    fallbackDraftText = '';
   }
 
-  function showFallback(links) {
+  function showFallback(composeData) {
     if (!fallbackWrap) return;
-    fallbackMailto?.setAttribute('href', links.mailto);
-    fallbackGmail?.setAttribute('href', links.gmail);
-    fallbackOutlook?.setAttribute('href', links.outlook);
+    fallbackDraftText = composeData.draftText;
     fallbackWrap.hidden = false;
   }
 
@@ -248,8 +255,8 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   }
 
   fallbackCopy?.addEventListener('click', async () => {
-    const copied = await copyToClipboard(EMAIL_TO);
-    fallbackCopy.textContent = copied ? 'Kopiert' : 'Kopieren fehlgeschlagen';
+    const copied = await copyToClipboard(fallbackDraftText || `An: ${EMAIL_TO}\nBetreff:\n\n`);
+    fallbackCopy.textContent = copied ? 'Entwurf kopiert' : 'Kopieren fehlgeschlagen';
     setTimeout(() => {
       fallbackCopy.textContent = copyBtnDefault;
     }, 1800);
@@ -269,15 +276,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       return;
     }
 
-    const subject = encodeURIComponent(`Kontaktanfrage von ${name} (${company})`);
-    const bodyLines = [
-      `Name: ${name}`,
-      `Unternehmen: ${company}`,
-      `E-Mail: ${email}`,
-      challenge ? `\nGrößte Herausforderung:\n${challenge}` : ''
-    ].filter(Boolean);
-    const body = encodeURIComponent(bodyLines.join('\n'));
-    const composeLinks = buildComposeLinks(subject, body);
+    const composeData = buildComposeData(name, company, email, challenge);
 
     let switchedContext = false;
     const markAsSwitched = () => {
@@ -295,13 +294,13 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     window.addEventListener('blur', markAsSwitched, { once: true });
     document.addEventListener('visibilitychange', onVisibility);
 
-    window.location.href = composeLinks.mailto;
+    window.location.href = composeData.mailto;
 
     setTimeout(() => {
       cleanupListeners();
       if (switchedContext) return;
-      showFallback(composeLinks);
-      showSubmitFeedback('Fallback aktiviert: Bitte Option unten wählen', 2600);
+      showFallback(composeData);
+      showSubmitFeedback('Fast geschafft - Entwurf jetzt kopieren', 2600);
     }, MAIL_APP_TIMEOUT_MS);
   });
 })();

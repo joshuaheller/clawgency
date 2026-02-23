@@ -1296,15 +1296,10 @@
               Kostenloses Erstgespräch buchen
             </button>
             <p class="form-note">Kein Spam. Keine Weitergabe. Nur ein Gespräch.</p>
-            <div class="form-note" id="contactFallback" hidden>
-              Falls sich kein Mail-Programm öffnet:
-              <a id="contactFallbackMailto" href="mailto:clawgency@theaisoftwarecompany.com">Mail-App erneut öffnen</a>,
-              <a id="contactFallbackGmail" href="https://mail.google.com/mail/?view=cm&fs=1&to=clawgency%40theaisoftwarecompany.com" target="_blank" rel="noopener">Gmail im Browser</a>
-              oder
-              <a id="contactFallbackOutlook" href="https://outlook.office.com/mail/deeplink/compose?to=clawgency%40theaisoftwarecompany.com" target="_blank" rel="noopener">Outlook im Browser</a>.
-              <br />
-              Oder direkt an <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a> schreiben -
-              <button id="contactFallbackCopy" type="button" style="background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;">E-Mail-Adresse kopieren</button>
+            <div class="contact-fallback" id="contactFallback" hidden>
+              <p class="contact-fallback__text">Fast geschafft: Falls sich kein Mail-Programm öffnet, kopieren Sie den Entwurf und senden ihn anschließend per E-Mail.</p>
+              <button id="contactFallbackCopy" type="button" class="contact-fallback__copy-btn">E-Mail-Entwurf kopieren</button>
+              <p class="contact-fallback__address">Empfänger: <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
             </div>
           </form>
           <div class="contact__form-success" id="formSuccess" style="display:none;">
