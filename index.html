@@ -743,6 +743,136 @@
     </div>
   </section>
 
+  <!-- BEFORE VS AFTER AI -->
+  <style>
+    .before-after{padding:6rem 0}
+    .ba-toggle{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:3rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-full);padding:.35rem;max-width:fit-content;margin-left:auto;margin-right:auto;margin-bottom:3rem}
+    .ba-toggle-btn{font-family:var(--f-body);font-size:.875rem;font-weight:600;color:var(--c-text-muted);background:transparent;border:none;cursor:pointer;padding:.55rem 1.4rem;border-radius:var(--r-full);transition:all .2s ease;white-space:nowrap}
+    .ba-toggle-btn--active{background:var(--c-accent);color:#fff;box-shadow:0 0 16px var(--c-accent-glow)}
+    .ba-split{display:grid;grid-template-columns:1fr auto 1fr;gap:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--c-border)}
+    .ba-side{padding:2.5rem 2rem}
+    .ba-side--without{background:rgba(255,255,255,.02)}
+    .ba-side--with{background:rgba(230,57,70,.05)}
+    .ba-side__header{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid var(--c-border)}
+    .ba-side__icon{font-size:1.25rem;line-height:1}
+    .ba-side__label{font-family:var(--f-heading);font-size:1rem;font-weight:700;letter-spacing:-.01em}
+    .ba-side--without .ba-side__label{color:var(--c-text-muted)}
+    .ba-side--with .ba-side__label{color:var(--c-accent)}
+    .ba-steps{display:flex;flex-direction:column;gap:0;position:relative}
+    .ba-step{display:flex;align-items:flex-start;gap:1rem;padding:.875rem 0;position:relative}
+    .ba-step:not(:last-child)::after{content:'';position:absolute;left:14px;top:2.25rem;bottom:0;width:1px;background:var(--c-border)}
+    .ba-side--with .ba-step:not(:last-child)::after{background:rgba(230,57,70,.25)}
+    .ba-step__num{width:29px;height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;font-family:var(--f-heading);flex-shrink:0;position:relative;z-index:1}
+    .ba-side--without .ba-step__num{background:rgba(255,255,255,.06);color:var(--c-text-muted);border:1px solid rgba(255,255,255,.08)}
+    .ba-side--with .ba-step__num{background:var(--c-accent-dim);color:var(--c-accent);border:1px solid rgba(230,57,70,.3)}
+    .ba-step__text{font-size:.9rem;font-weight:500;line-height:1.4;padding-top:.35rem}
+    .ba-side--without .ba-step__text{color:var(--c-text-muted)}
+    .ba-side--with .ba-step__text{color:var(--c-text)}
+    .ba-step__optional{font-size:.72rem;font-weight:400;color:var(--c-text-dim);display:block;margin-top:.1rem}
+    .ba-divider{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 1.5rem;gap:.75rem;background:var(--c-bg-2);border-left:1px solid var(--c-border);border-right:1px solid var(--c-border)}
+    .ba-divider__label{font-family:var(--f-heading);font-size:.7rem;font-weight:800;letter-spacing:.12em;color:var(--c-text-dim);background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-full);padding:.3rem .6rem}
+    .ba-divider__line{width:1px;flex:1;background:var(--c-border)}
+    @media(max-width:768px){.ba-split{grid-template-columns:1fr;grid-template-rows:auto auto auto}.ba-divider{flex-direction:row;padding:1rem 1.5rem;border-left:none;border-right:none;border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)}.ba-divider__line{width:auto;height:1px;flex:1}.ba-side{padding:2rem 1.25rem}.ba-toggle{flex-wrap:wrap;border-radius:var(--r-md);padding:.3rem}}
+  </style>
+
+  <section class="before-after" id="vor-nach">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Before vs. After AI</span>
+        <h2 class="section-title">Same process.<br /><em class="text-accent">Completely different.</em></h2>
+        <p class="section-sub">Pick a use case and see the difference at a glance.</p>
+      </div>
+
+      <div class="ba-toggle reveal" id="baToggle">
+        <button class="ba-toggle-btn ba-toggle-btn--active" data-case="support">Support</button>
+        <button class="ba-toggle-btn" data-case="sales">Sales</button>
+        <button class="ba-toggle-btn" data-case="search">Internal Search</button>
+      </div>
+
+      <div class="ba-split reveal reveal--delay-1">
+        <div class="ba-side ba-side--without">
+          <div class="ba-side__header">
+            <span class="ba-side__icon">⏳</span>
+            <span class="ba-side__label">Without AI</span>
+          </div>
+          <div class="ba-steps" id="baStepsWithout"></div>
+        </div>
+
+        <div class="ba-divider">
+          <div class="ba-divider__line"></div>
+          <span class="ba-divider__label">VS</span>
+          <div class="ba-divider__line"></div>
+        </div>
+
+        <div class="ba-side ba-side--with">
+          <div class="ba-side__header">
+            <span class="ba-side__icon">⚡</span>
+            <span class="ba-side__label">With AI</span>
+          </div>
+          <div class="ba-steps" id="baStepsWith"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var cases = {
+        support: {
+          without: ["Read request", "Search docs", "Write response", "Send reply"],
+          with: [
+            { text: "Request comes in", note: null },
+            { text: "AI retrieves knowledge", note: null },
+            { text: "AI generates response", note: null },
+            { text: "Human reviews", note: "optional" }
+          ]
+        },
+        sales: {
+          without: ["Find lead", "Research manually", "Draft outreach", "Send email"],
+          with: [
+            { text: "Lead enters", note: null },
+            { text: "AI scores & profiles", note: null },
+            { text: "AI drafts outreach", note: null },
+            { text: "Human approves", note: "optional" }
+          ]
+        },
+        search: {
+          without: ["Ask a colleague", "Wait for answer", "Search files manually", "Repeat or give up"],
+          with: [
+            { text: "Ask a question", note: null },
+            { text: "AI searches all docs", note: null },
+            { text: "Answer in seconds", note: null },
+            { text: "Done", note: "instantly" }
+          ]
+        }
+      };
+
+      function renderSteps(container, steps, isAI) {
+        container.innerHTML = steps.map(function (s, i) {
+          var text = typeof s === "string" ? s : s.text;
+          var note = typeof s === "object" && s.note ? '<span class="ba-step__optional">(' + s.note + ')</span>' : '';
+          return '<div class="ba-step"><span class="ba-step__num">' + (i + 1) + '</span><span class="ba-step__text">' + text + note + '</span></div>';
+        }).join('');
+      }
+
+      function setCase(key) {
+        var data = cases[key];
+        renderSteps(document.getElementById('baStepsWithout'), data.without, false);
+        renderSteps(document.getElementById('baStepsWith'), data.with, true);
+        document.querySelectorAll('.ba-toggle-btn').forEach(function (btn) {
+          btn.classList.toggle('ba-toggle-btn--active', btn.dataset.case === key);
+        });
+      }
+
+      document.getElementById('baToggle').addEventListener('click', function (e) {
+        var btn = e.target.closest('.ba-toggle-btn');
+        if (btn) setCase(btn.dataset.case);
+      });
+
+      setCase('support');
+    })();
+  </script>
+
   <!-- RESULTS / CASE STUDIES -->
   <section class="results" id="ergebnisse">
     <div class="container">
