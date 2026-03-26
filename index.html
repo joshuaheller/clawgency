@@ -1390,6 +1390,125 @@
     </div>
   </section>
 
+  <!-- AGENT FINDER -->
+  <section class="agent-finder" id="agent-finder">
+    <div class="agent-finder__bg-grid"></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Decision Tool</span>
+        <h2 class="section-title">Find the right<br /><em class="text-accent">AI Agent Setup</em></h2>
+        <p class="section-sub">Answer 3 quick questions and get an instant recommendation for the right level of automation — no backend, no sign-up.</p>
+      </div>
+
+      <div class="agent-finder__card reveal">
+
+        <!-- Inputs -->
+        <div class="agent-finder__inputs">
+          <p class="agent-finder__inputs-eyebrow">Configure your situation</p>
+
+          <div class="agent-finder__group">
+            <label class="agent-finder__label" for="afUseCase">Describe your use case or process</label>
+            <textarea id="afUseCase" class="agent-finder__textarea" rows="2" placeholder="E.g. We manually process 200 customer emails per day…"></textarea>
+          </div>
+
+          <div class="agent-finder__group">
+            <label class="agent-finder__label" for="afRisk">How much risk are you willing to accept?</label>
+            <div class="agent-finder__slider-wrap">
+              <input type="range" id="afRisk" min="0" max="2" value="1" step="1" class="agent-finder__slider" />
+              <div class="agent-finder__slider-ticks">
+                <span class="agent-finder__tick" data-val="0">Low</span>
+                <span class="agent-finder__tick active" data-val="1">Medium</span>
+                <span class="agent-finder__tick" data-val="2">High</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="agent-finder__group">
+            <label class="agent-finder__label">How complex is your system landscape?</label>
+            <div class="agent-finder__options" id="afComplexity" data-selected="0">
+              <button class="agent-finder__option active" data-val="0">
+                <strong>Simple</strong>
+                <span>e.g. email, single tools</span>
+              </button>
+              <button class="agent-finder__option" data-val="1">
+                <strong>Moderate</strong>
+                <span>multiple connected tools</span>
+              </button>
+              <button class="agent-finder__option" data-val="2">
+                <strong>Complex</strong>
+                <span>many systems, integrations</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="agent-finder__group">
+            <label class="agent-finder__label">How structured is your task?</label>
+            <div class="agent-finder__options" id="afStructure" data-selected="0">
+              <button class="agent-finder__option active" data-val="0">
+                <strong>Very structured</strong>
+                <span>repetitive &amp; predictable</span>
+              </button>
+              <button class="agent-finder__option" data-val="1">
+                <strong>Partially structured</strong>
+                <span>some variability</span>
+              </button>
+              <button class="agent-finder__option" data-val="2">
+                <strong>Complex / unpredictable</strong>
+                <span>many edge cases</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="agent-finder__result">
+          <span class="agent-finder__result-badge">Recommended Setup</span>
+          <h3 class="agent-finder__result-title" id="afResultTitle"></h3>
+
+          <div class="agent-finder__scale">
+            <div class="agent-finder__scale-track-wrap">
+              <div class="agent-finder__scale-track"></div>
+              <div class="agent-finder__scale-dots">
+                <span class="agent-finder__scale-node" data-level="1"></span>
+                <span class="agent-finder__scale-node" data-level="2"></span>
+                <span class="agent-finder__scale-node" data-level="3"></span>
+                <span class="agent-finder__scale-node" data-level="4"></span>
+              </div>
+            </div>
+            <div class="agent-finder__scale-labels">
+              <span>Chatbot</span>
+              <span>Rule-based</span>
+              <span>Semi-auto</span>
+              <span>Autonomous</span>
+            </div>
+            <div class="agent-finder__scale-ends">
+              <span>Low autonomy</span>
+              <span>High autonomy</span>
+            </div>
+          </div>
+
+          <p class="agent-finder__explanation" id="afExplanation"></p>
+
+          <div class="agent-finder__tags">
+            <span class="agent-finder__tag" id="afTagRisk"></span>
+            <span class="agent-finder__tag" id="afTagAutomation"></span>
+            <span class="agent-finder__tag" id="afTagImpl"></span>
+          </div>
+
+          <div class="agent-finder__stack">
+            <span class="agent-finder__stack-label">Suggested stack</span>
+            <div class="agent-finder__stack-items" id="afStack"></div>
+          </div>
+
+          <div class="agent-finder__summary" id="afSummary" style="display:none;"></div>
+
+          <a href="#kontakt" class="btn btn--primary agent-finder__cta">Talk to an expert →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="contact" id="kontakt">
     <div class="container">
@@ -1480,6 +1599,7 @@
               <li><a href="#insights">OpenClaw Insights & Blog</a></li>
               <li><a href="#ergebnisse">Ergebnisse & ROI</a></li>
               <li><a href="#faq">FAQ zu OpenClaw</a></li>
+              <li><a href="#agent-finder">AI Agent Finder</a></li>
               <li><a href="glossar.html">AI Glossary</a></li>
               <li><a href="#kontakt">Kontakt</a></li>
             </ul>
@@ -1501,6 +1621,129 @@
       </div>
     </div>
   </footer>
+
+  <!-- Agent Finder Logic -->
+  <script>
+  (function () {
+    var LEVELS = [null,
+      {
+        name: 'Level 1 – Chatbot / LLM Integration',
+        risk: 'Risk: Very Low', automation: 'Automation: Basic', impl: 'Implementation: Simple',
+        stack: ['Chatbot UI', 'LLM API', 'AI Integration']
+      },
+      {
+        name: 'Level 2 – Rule-based Automation',
+        risk: 'Risk: Low', automation: 'Automation: Moderate', impl: 'Implementation: Manageable',
+        stack: ['n8n', 'Zapier / Make', 'Automation tools']
+      },
+      {
+        name: 'Level 3 – Semi-autonomous System',
+        risk: 'Risk: Medium', automation: 'Automation: High', impl: 'Implementation: Custom',
+        stack: ['Python', 'LangChain', 'Custom Agent System']
+      },
+      {
+        name: 'Level 4 – Fully Autonomous Agent',
+        risk: 'Risk: High', automation: 'Automation: Full', impl: 'Implementation: Enterprise',
+        stack: ['OpenClaw', 'Fully Autonomous Agent System']
+      }
+    ];
+
+    var riskLabels       = ['low', 'moderate', 'high'];
+    var complexityLabels = ['simple', 'moderately complex', 'complex'];
+    var structureLabels  = ['very structured', 'partially structured', 'complex and unpredictable'];
+
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function calcLevel(risk, complexity, structure, total) {
+      if (risk === 0)                          return total <= 1 ? 1 : 2;
+      if (complexity === 0 && structure === 0) return 1;
+      if (total <= 1) return 1;
+      if (total <= 3) return 2;
+      if (total <= 5) return 3;
+      return 4;
+    }
+
+    function getExplanation(level, risk, complexity, structure) {
+      var e = [null,
+        'Your process is ' + structureLabels[structure] + ' and your risk tolerance is ' + riskLabels[risk] + '. A chatbot or LLM integration gives you quick, low-risk automation wins without unnecessary complexity.',
+        'Your process is ' + structureLabels[structure] + ' with a ' + complexityLabels[complexity] + ' system landscape. A rule-based automation setup is the most efficient and safest choice for your situation.',
+        'Your system landscape is ' + complexityLabels[complexity] + ' and your tasks are ' + structureLabels[structure] + '. A semi-autonomous agent gives you the flexibility to handle variability while maintaining human oversight.',
+        'Your environment is ' + complexityLabels[complexity] + ' with ' + structureLabels[structure] + ' tasks and high risk tolerance. A fully autonomous agent like OpenClaw is built exactly for this level of complexity.'
+      ];
+      return e[level];
+    }
+
+    function update() {
+      var risk       = parseInt(document.getElementById('afRisk').value, 10);
+      var complexity = parseInt(document.getElementById('afComplexity').dataset.selected, 10);
+      var structure  = parseInt(document.getElementById('afStructure').dataset.selected, 10);
+      var total      = risk + complexity + structure;
+      var level      = calcLevel(risk, complexity, structure, total);
+      var data       = LEVELS[level];
+
+      document.getElementById('afResultTitle').textContent = data.name;
+
+      document.querySelectorAll('.agent-finder__scale-node').forEach(function (node) {
+        var l = parseInt(node.dataset.level, 10);
+        node.classList.toggle('active', l === level);
+        node.classList.toggle('past', l < level);
+      });
+      var labelEls = document.querySelectorAll('.agent-finder__scale-labels span');
+      labelEls.forEach(function (lbl, i) {
+        lbl.style.color = (i + 1 === level) ? 'var(--c-accent)' : '';
+        lbl.style.fontWeight = (i + 1 === level) ? '700' : '';
+      });
+
+      document.getElementById('afExplanation').textContent = getExplanation(level, risk, complexity, structure);
+
+      var riskTag = document.getElementById('afTagRisk');
+      riskTag.textContent = data.risk;
+      riskTag.className = 'agent-finder__tag';
+      if (risk === 0)      riskTag.classList.add('agent-finder__tag--green');
+      else if (risk === 1) riskTag.classList.add('agent-finder__tag--yellow');
+      else                 riskTag.classList.add('agent-finder__tag--red');
+
+      document.getElementById('afTagAutomation').textContent = data.automation;
+      document.getElementById('afTagImpl').textContent = data.impl;
+
+      document.getElementById('afStack').innerHTML = data.stack
+        .map(function (s) { return '<span class="agent-finder__stack-item">' + escHtml(s) + '</span>'; })
+        .join('');
+
+      var useCase   = document.getElementById('afUseCase').value.trim();
+      var summaryEl = document.getElementById('afSummary');
+      if (useCase) {
+        summaryEl.innerHTML = '<span class="agent-finder__summary-label">Your context:</span> <span class="agent-finder__summary-text">' + escHtml(useCase) + '</span>';
+        summaryEl.style.display = '';
+      } else {
+        summaryEl.style.display = 'none';
+      }
+
+      document.querySelectorAll('.agent-finder__tick').forEach(function (tick) {
+        tick.classList.toggle('active', parseInt(tick.dataset.val, 10) === risk);
+      });
+    }
+
+    document.getElementById('afRisk').addEventListener('input', update);
+    document.getElementById('afUseCase').addEventListener('input', update);
+
+    ['afComplexity', 'afStructure'].forEach(function (groupId) {
+      var group = document.getElementById(groupId);
+      group.addEventListener('click', function (e) {
+        var btn = e.target.closest('.agent-finder__option');
+        if (!btn) return;
+        group.querySelectorAll('.agent-finder__option').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        group.dataset.selected = btn.dataset.val;
+        update();
+      });
+    });
+
+    update();
+  })();
+  </script>
 
   <script src="cookie-banner.js"></script>
   <script src="script.min.js" defer></script>
