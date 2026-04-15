@@ -36,17 +36,22 @@
     "name": "Clawgency",
     "alternateName": "Clawgency – OpenClaw Agentur",
     "url": "https://clawgency.de",
+    "logo": "https://clawgency.de/assets/logo-crab.webp",
     "description": "Spezialisierte OpenClaw Agentur im DACH-Raum. Wir entwickeln, implementieren und betreiben OpenClaw-basierte KI-Agenten für Unternehmen – DSGVO-konform, sicher, mit ROI-Garantie.",
-    "areaServed": ["DE", "AT", "CH"],
-    "knowsAbout": ["OpenClaw", "KI-Agenten", "Clawdbot", "Moltbot", "AI Agent Integration", "Prozessautomatisierung", "DSGVO-konforme KI"],
+    "areaServed": [
+      {"@type": "Country", "name": "Deutschland"},
+      {"@type": "Country", "name": "Österreich"},
+      {"@type": "Country", "name": "Schweiz"}
+    ],
+    "knowsAbout": ["OpenClaw", "KI-Agenten", "Clawdbot", "Moltbot", "AI Agent Integration", "Prozessautomatisierung", "DSGVO-konforme KI", "Agentic AI", "Enterprise KI"],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "OpenClaw Services",
       "itemListElement": [
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Implementierung & Beratung", "description": "Strategische Beratung und technische Implementierung von OpenClaw-Agenten für Unternehmen"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Custom Skill Entwicklung", "description": "Entwicklung maßgeschneiderter OpenClaw Skills und API-Integrationen (SAP, Salesforce, Odoo)"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Enterprise Setup", "description": "On-Premise, Hybrid-Cloud und DSGVO-konformes OpenClaw Enterprise Setup"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Managed Operations", "description": "24/7 Monitoring, Wartung und kontinuierliche Optimierung von OpenClaw-Agenten"}}
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Implementierung & Beratung", "description": "Strategische Beratung und technische Implementierung von OpenClaw-Agenten für Unternehmen", "url": "https://clawgency.de/#openclaw", "provider": {"@type": "Organization", "name": "Clawgency"}}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Custom Skill Entwicklung", "description": "Entwicklung maßgeschneiderter OpenClaw Skills und API-Integrationen (SAP, Salesforce, Odoo)", "url": "https://clawgency.de/#agenten", "provider": {"@type": "Organization", "name": "Clawgency"}}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Enterprise Setup", "description": "On-Premise, Hybrid-Cloud und DSGVO-konformes OpenClaw Enterprise Setup", "url": "https://clawgency.de/blog/openclaw-enterprise-architektur.html", "provider": {"@type": "Organization", "name": "Clawgency"}}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OpenClaw Managed Operations", "description": "24/7 Monitoring, Wartung und kontinuierliche Optimierung von OpenClaw-Agenten", "url": "https://clawgency.de/#prozess", "provider": {"@type": "Organization", "name": "Clawgency"}}}
       ]
     },
     "contactPoint": {
@@ -54,7 +59,8 @@
       "email": "clawgency@theaisoftwarecompany.com",
       "contactType": "customer service",
       "availableLanguage": ["de", "en"]
-    }
+    },
+    "sameAs": ["https://www.linkedin.com/in/heller-joshua"]
   }
   </script>
 
@@ -66,10 +72,18 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Was ist OpenClaw und warum ist es relevant für Unternehmen?",
+        "name": "Was ist OpenClaw und was hat es mit Clawdbot / Moltbot zu tun?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "OpenClaw (ehemals Clawdbot/Moltbot) ist ein Open-Source-Framework für autonome KI-Agenten. Es ermöglicht Unternehmen, KI-Agenten zu erstellen, die eigenständig Aufgaben erledigen – von Kundenservice über Datenverarbeitung bis zur Prozessautomatisierung. Der Open-Source-Ansatz bietet volle Kontrolle über Daten und Sicherheit."
+          "text": "OpenClaw ist ein Open-Source-Framework für autonome KI-Agenten, das ursprünglich unter den Codenamen Clawdbot und Moltbot entwickelt wurde. Es ermöglicht Unternehmen, KI-Agenten zu erstellen, die eigenständig komplexe Aufgaben erledigen – von der Beantwortung von Kundenanfragen über Datenverarbeitung bis zur vollständigen Prozessautomatisierung."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Warum sollte ich OpenClaw statt ChatGPT Enterprise oder n8n nutzen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OpenClaw bietet drei entscheidende Vorteile: Volle Datenkontrolle (On-Premise oder eigene Cloud möglich, keine US-Abhängigkeit wie bei ChatGPT Enterprise), echte Agenten-Fähigkeiten (autonome Entscheidungsfindung, nicht nur einfache Workflows wie bei n8n/Zapier) und kein Vendor Lock-in (Open Source, Sie behalten den Code und die Kontrolle)."
         }
       },
       {
@@ -77,23 +91,47 @@
         "name": "Ist OpenClaw DSGVO-konform einsetzbar?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ja, bei korrekter Implementierung. Clawgency setzt OpenClaw ausschließlich DSGVO-konform ein: Server in Deutschland/EU, Auftragsverarbeitungsvertrag (AVV), verschlüsselte Datenübertragung und optional vollständiges On-Premise-Deployment. Wir haben ein spezielles Sicherheitskonzept für den Enterprise-Einsatz entwickelt."
+          "text": "Ja, bei fachgerechter Implementierung. Clawgency deployt OpenClaw auf Servern in Deutschland oder der EU, schließt einen Auftragsverarbeitungsvertrag (AVV) ab und implementiert Verschlüsselung, Audit-Logging und rollenbasierte Zugriffskontrollen. Auf Wunsch ist auch ein vollständiges On-Premise-Deployment möglich."
         }
       },
       {
         "@type": "Question",
-        "name": "Was kostet eine OpenClaw Implementierung?",
+        "name": "Was kostet eine OpenClaw-Implementierung mit Clawgency?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Typische OpenClaw-Implementierungsprojekte starten bei 3.000–8.000 € für die Ersteinrichtung, gefolgt von einer monatlichen Betriebs- und Optimierungspauschale. Der genaue Preis hängt vom Umfang der Agenten und der Komplexität der Integrationen ab."
+          "text": "OpenClaw-Projekte starten typischerweise bei 3.000–8.000 € für die Implementierung, gefolgt von einer monatlichen Betriebs- und Optimierungspauschale. Der genaue Preis hängt vom Umfang der Agenten, der Anzahl der Integrationen und dem Deployment-Modell ab."
         }
       },
       {
         "@type": "Question",
-        "name": "Wie unterscheidet sich OpenClaw von ChatGPT Enterprise oder n8n?",
+        "name": "Wie schnell ist ein OpenClaw-Agent live?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "OpenClaw ist ein Open-Source-Framework für autonome Agenten mit voller Datenkontrolle und Anpassbarkeit. ChatGPT Enterprise ist ein geschlossenes System von OpenAI. n8n ist ein Workflow-Automatisierungstool ohne native KI-Agenten-Fähigkeiten. OpenClaw bietet die größte Flexibilität für komplexe, unternehmenskritische Automatisierungen."
+          "text": "Typischerweise ist Ihr erster OpenClaw-Agent in 2–4 Wochen live. Die erste Woche nutzen wir für Analyse und Konzeption. In Woche 2–4 entwickeln, integrieren und testen wir den Agenten mit realen Daten. Clawgency bietet eine 90-Tage-ROI-Garantie."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Brauchen wir eigene Entwickler für OpenClaw?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nein. Sie brauchen keine eigenen Entwickler oder KI-Experten. Clawgency übernimmt die gesamte technische OpenClaw-Implementierung, Custom-Skill-Entwicklung, API-Integration und laufende Wartung."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ist OpenClaw sicher?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Clawgency setzt OpenClaw in einer sicheren Sandbox-Umgebung ein, mit rollenbasierten Zugriffskontrollen, Audit-Logging und strikter Netzwerk-Isolation. Die Enterprise-Architektur wurde speziell für den sicheren Einsatz in deutschen Unternehmen konzipiert."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Welche Systeme kann OpenClaw integrieren?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OpenClaw lässt sich in praktisch jedes System mit API integrieren. Häufige Integrationen: SAP, Salesforce, HubSpot, Odoo, DATEV, Lexware, Zendesk, Freshdesk, Shopify, WooCommerce, Personio, Slack und Microsoft Teams."
         }
       }
     ]
@@ -108,6 +146,12 @@
     "name": "OpenClaw Agentur Clawgency – KI-Agenten für Unternehmen",
     "description": "Spezialisierte OpenClaw Agentur für den DACH-Markt. Implementierung, Entwicklung und Betrieb von OpenClaw-basierten KI-Agenten.",
     "url": "https://clawgency.de",
+    "inLanguage": "de",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    },
     "about": {
       "@type": "SoftwareApplication",
       "name": "OpenClaw",
@@ -117,6 +161,12 @@
     "speakable": {
       "@type": "SpeakableSpecification",
       "cssSelector": [".hero__headline", ".hero__sub", ".section-title"]
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://clawgency.de/"}
+      ]
     }
   }
   </script>
@@ -200,7 +250,8 @@
         <li><a href="#ergebnisse" class="nav__link">Ergebnisse</a></li>
         <li><a href="#roi-rechner" class="nav__link">ROI-Rechner</a></li>
         <li><a href="#faq" class="nav__link">FAQ</a></li>
-        <li><a href="glossar.html" class="nav__link">Glossary</a></li>
+        <li><a href="#insights" class="nav__link">Blog</a></li>
+        <li><a href="glossar.html" class="nav__link">Glossar</a></li>
       </ul>
       <a href="#kontakt" class="btn btn--nav">Erstgespräch buchen</a>
       <button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
@@ -216,7 +267,8 @@
         <li><a href="#roi-rechner" class="nav__link">ROI-Rechner</a></li>
         <li><a href="#anwendungsfaelle" class="nav__link">Branchen</a></li>
         <li><a href="#faq" class="nav__link">FAQ</a></li>
-        <li><a href="glossar.html" class="nav__link">Glossary</a></li>
+        <li><a href="#insights" class="nav__link">Blog</a></li>
+        <li><a href="glossar.html" class="nav__link">Glossar</a></li>
         <li><a href="#kontakt" class="btn btn--primary" style="display:inline-block;margin-top:1rem;">OpenClaw-Beratung buchen</a></li>
       </ul>
     </div>
@@ -553,6 +605,7 @@
             <span>Autonome Agenten</span>
             <span>Enterprise-fähig</span>
           </div>
+          <a href="blog/openclaw-fuer-unternehmen.html" style="display:inline-block;margin-top:1rem;font-size:.85rem;color:var(--c-accent);">Mehr erfahren →</a>
         </div>
 
         <div class="pillar__card reveal reveal--delay-1">
@@ -564,6 +617,7 @@
             <span>On-Premise</span>
             <span>Server in DE</span>
           </div>
+          <a href="blog/openclaw-dsgvo-konform.html" style="display:inline-block;margin-top:1rem;font-size:.85rem;color:var(--c-accent);">DSGVO-Leitfaden lesen →</a>
         </div>
 
         <div class="pillar__card reveal reveal--delay-2">
@@ -575,6 +629,7 @@
             <span>Datenhoheit</span>
             <span>Custom Skills</span>
           </div>
+          <a href="blog/openclaw-vs-chatgpt-n8n-zapier.html" style="display:inline-block;margin-top:1rem;font-size:.85rem;color:var(--c-accent);">Ausführlicher Vergleich →</a>
         </div>
 
         <div class="pillar__card reveal reveal--delay-3">
@@ -586,6 +641,7 @@
             <span>Salesforce</span>
             <span>Sandbox-Sicherheit</span>
           </div>
+          <a href="blog/openclaw-enterprise-architektur.html" style="display:inline-block;margin-top:1rem;font-size:.85rem;color:var(--c-accent);">Architektur-Details →</a>
         </div>
       </div>
 
@@ -681,7 +737,10 @@
         <div class="comparison__verdict-card">
           <h3>Unser Fazit für den DACH-Mittelstand</h3>
           <p>OpenClaw bietet die ideale Balance zwischen <strong>Leistung, Kontrolle und Kosten</strong> für Unternehmen, die KI-Agenten ernsthaft einsetzen wollen. Für einfache Workflow-Automatisierung reichen n8n/Zapier. Für komplexe, autonome Agenten mit Datenkontrolle und DSGVO-Compliance ist OpenClaw die klare Empfehlung – besonders mit einem erfahrenen Implementierungspartner wie Clawgency.</p>
-          <a href="#kontakt" class="btn btn--outline">Vergleich für Ihr Unternehmen besprechen →</a>
+          <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <a href="blog/openclaw-vs-chatgpt-n8n-zapier.html" class="btn btn--outline">Ausführlichen Vergleich lesen →</a>
+            <a href="#kontakt" class="btn btn--outline">Vergleich für Ihr Unternehmen besprechen →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1153,28 +1212,28 @@
       </div>
 
       <div class="blog__grid">
-        <article class="blog-card blog-card--featured reveal">
+        <a href="blog/openclaw-fuer-unternehmen.html" class="blog-card blog-card--featured reveal" style="text-decoration:none;">
           <div class="blog-card__tag">Pillar Guide</div>
           <h3 class="blog-card__title">OpenClaw für Unternehmen: Der ultimative Leitfaden für Implementierung, Sicherheit und ROI im DACH-Markt</h3>
           <p class="blog-card__excerpt">Alles, was Entscheider über OpenClaw wissen müssen: Von der Geschichte (Clawdbot → Moltbot → OpenClaw) über technische Architektur bis zu konkreten ROI-Berechnungen und DSGVO-Compliance. Der umfassendste deutschsprachige OpenClaw-Guide.</p>
           <div class="blog-card__meta">
             <span>Lesezeit: 25 Min.</span>
-            <span>Zuletzt aktualisiert: Feb. 2026</span>
+            <span>Zuletzt aktualisiert: Apr. 2026</span>
           </div>
-          <a href="#kontakt" class="btn btn--outline">Leitfaden anfragen →</a>
-        </article>
+          <span class="btn btn--outline">Leitfaden lesen →</span>
+        </a>
 
-        <article class="blog-card reveal reveal--delay-1">
+        <a href="blog/case-study-logistik-openclaw.html" class="blog-card reveal reveal--delay-1" style="text-decoration:none;">
           <div class="blog-card__tag">Case Study</div>
-          <h3 class="blog-card__title">Wie ein deutsches Logistikunternehmen mit OpenClaw die Effizienz um 30% steigerte</h3>
+          <h3 class="blog-card__title">Wie ein deutsches Logistikunternehmen mit OpenClaw 35h/Woche spart</h3>
           <p class="blog-card__excerpt">Detaillierte Fallstudie: Problem, OpenClaw-Lösung, Implementierung und messbare Ergebnisse – von der Analyse bis zum ROI in 8 Wochen.</p>
           <div class="blog-card__meta">
             <span>Lesezeit: 12 Min.</span>
             <span>Branche: Logistik</span>
           </div>
-        </article>
+        </a>
 
-        <article class="blog-card reveal reveal--delay-2">
+        <a href="blog/openclaw-vs-chatgpt-n8n-zapier.html" class="blog-card reveal reveal--delay-2" style="text-decoration:none;">
           <div class="blog-card__tag">Vergleich</div>
           <h3 class="blog-card__title">OpenClaw vs. ChatGPT Enterprise vs. n8n – Was passt zu Ihrem Unternehmen?</h3>
           <p class="blog-card__excerpt">Ein ehrlicher Vergleich der drei wichtigsten Plattformen für KI-Automatisierung. Mit Entscheidungsmatrix und konkreten Empfehlungen für verschiedene Unternehmensgrößen.</p>
@@ -1182,9 +1241,9 @@
             <span>Lesezeit: 15 Min.</span>
             <span>Für: CTOs & IT-Leiter</span>
           </div>
-        </article>
+        </a>
 
-        <article class="blog-card reveal reveal--delay-3">
+        <a href="blog/openclaw-dsgvo-konform.html" class="blog-card reveal reveal--delay-3" style="text-decoration:none;">
           <div class="blog-card__tag">Sicherheit</div>
           <h3 class="blog-card__title">DSGVO-Compliance für OpenClaw: So setzen Sie KI-Agenten datenschutzkonform ein</h3>
           <p class="blog-card__excerpt">Technischer Leitfaden für IT-Abteilungen: AVV, Datenverarbeitung, On-Premise-Setup, Verschlüsselung und Audit-Logging mit OpenClaw im Enterprise-Umfeld.</p>
@@ -1192,19 +1251,19 @@
             <span>Lesezeit: 18 Min.</span>
             <span>Für: IT-Sicherheit & Datenschutz</span>
           </div>
-        </article>
+        </a>
 
-        <article class="blog-card reveal reveal--delay-4">
-          <div class="blog-card__tag">Strategie</div>
-          <h3 class="blog-card__title">KI-Agenten-Strategie 2026: Ein Leitfaden für Geschäftsführer und CTOs</h3>
-          <p class="blog-card__excerpt">Warum der Hype um OpenClaw für den deutschen Mittelstand relevant ist. Strategische Einordnung, Marktanalyse und ein konkreter Fahrplan für die ersten 90 Tage.</p>
+        <a href="blog/openclaw-use-cases-mittelstand.html" class="blog-card reveal reveal--delay-4" style="text-decoration:none;">
+          <div class="blog-card__tag">Use Cases</div>
+          <h3 class="blog-card__title">5 OpenClaw Use Cases für den deutschen Mittelstand</h3>
+          <p class="blog-card__excerpt">Konkrete Anwendungsfälle für Kundenservice, Buchhaltung, Vertrieb, HR und Logistik – mit Zahlen, ROI-Betrachtung und Erfolgsfaktoren.</p>
           <div class="blog-card__meta">
-            <span>Lesezeit: 10 Min.</span>
+            <span>Lesezeit: 15 Min.</span>
             <span>Für: CEO & Geschäftsführer</span>
           </div>
-        </article>
+        </a>
 
-        <article class="blog-card reveal reveal--delay-4">
+        <a href="blog/openclaw-enterprise-architektur.html" class="blog-card reveal reveal--delay-4" style="text-decoration:none;">
           <div class="blog-card__tag">Technik</div>
           <h3 class="blog-card__title">Enterprise-Architektur für OpenClaw: On-Premise, Hybrid-Cloud und sicheres Setup</h3>
           <p class="blog-card__excerpt">Technischer Deep-Dive: Wie Sie OpenClaw in Ihre bestehende IT-Landschaft integrieren. Sandboxing, API-Gateway, Monitoring und Skalierung für den Enterprise-Einsatz.</p>
@@ -1212,11 +1271,11 @@
             <span>Lesezeit: 20 Min.</span>
             <span>Für: Entwickler & Architekten</span>
           </div>
-        </article>
+        </a>
       </div>
 
       <div class="blog__cta reveal">
-        <p>Möchten Sie unsere OpenClaw-Insights als Whitepaper erhalten?</p>
+        <p>Entdecken Sie alle unsere Fachartikel zu OpenClaw – von <a href="blog/openclaw-roi-berechnung.html" style="color:var(--c-accent);">ROI-Berechnung</a> über <a href="blog/openclaw-sap-salesforce-integration.html" style="color:var(--c-accent);">SAP-Integration</a> bis zur <a href="blog/von-clawdbot-zu-openclaw.html" style="color:var(--c-accent);">Geschichte von OpenClaw</a>.</p>
         <a href="#kontakt" class="btn btn--outline">Whitepaper anfragen →</a>
       </div>
     </div>
@@ -1271,6 +1330,7 @@
         <div class="case-study__quote">
           <blockquote>"OpenClaw hat unsere Logistik-Prozesse transformiert. Der Agent überwacht jetzt alle Carrier gleichzeitig und eskaliert nur, wenn wirklich etwas schiefläuft. Unsere Kunden bekommen proaktive Updates, bevor sie überhaupt fragen. Clawgency hat das in 4 Wochen live gebracht."</blockquote>
           <cite>— Geschäftsführer, Logistik-Unternehmen (DACH)</cite>
+          <a href="blog/case-study-logistik-openclaw.html" style="display:inline-block;margin-top:1.5rem;font-size:.9rem;color:var(--c-accent);font-weight:600;">Vollständige Case Study lesen →</a>
         </div>
       </div>
     </div>
@@ -1592,15 +1652,15 @@
             </ul>
           </div>
           <div class="footer__nav-col">
-            <h4>Branchen & Insights</h4>
+            <h4>Wissen & Insights</h4>
             <ul>
-              <li><a href="#anwendungsfaelle">OpenClaw Anwendungsfälle</a></li>
-              <li><a href="#fallstudie">Case Study: Logistik</a></li>
-              <li><a href="#insights">OpenClaw Insights & Blog</a></li>
-              <li><a href="#ergebnisse">Ergebnisse & ROI</a></li>
+              <li><a href="blog/openclaw-fuer-unternehmen.html">OpenClaw Leitfaden</a></li>
+              <li><a href="blog/openclaw-vs-chatgpt-n8n-zapier.html">OpenClaw vs. Alternativen</a></li>
+              <li><a href="blog/openclaw-dsgvo-konform.html">DSGVO-Leitfaden</a></li>
+              <li><a href="blog/openclaw-use-cases-mittelstand.html">Use Cases Mittelstand</a></li>
+              <li><a href="blog/case-study-logistik-openclaw.html">Case Study: Logistik</a></li>
+              <li><a href="glossar.html">KI-Glossar</a></li>
               <li><a href="#faq">FAQ zu OpenClaw</a></li>
-              <li><a href="#agent-finder">AI Agent Finder</a></li>
-              <li><a href="glossar.html">AI Glossary</a></li>
               <li><a href="#kontakt">Kontakt</a></li>
             </ul>
           </div>
@@ -1617,7 +1677,7 @@
       </div>
 
       <div class="footer__bottom">
-        <p>&copy; 2025 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a> · <a href="#" id="cookie-settings-link">Cookie-Einstellungen</a></p>
+        <p>&copy; 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a> · <a href="#" id="cookie-settings-link">Cookie-Einstellungen</a></p>
         <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
       </div>
     </div>
