@@ -59,7 +59,16 @@ Typische Ausgangssituationen:
 ## Content Resources
 
 - [Startseite](https://clawgency.de/): Positionierung, Leistungen, Vergleich und Kontakt
-- [AI Glossary](https://clawgency.de/glossar.html): Begriffe rund um KI, Agenten und Automatisierung
+- [OpenClaw fuer Unternehmen – Pillar Guide](https://clawgency.de/blog/openclaw-fuer-unternehmen.html): Der umfassendste deutschsprachige OpenClaw-Leitfaden
+- [OpenClaw vs. ChatGPT vs. n8n](https://clawgency.de/blog/openclaw-vs-chatgpt-n8n-zapier.html): Ehrlicher Vergleich der KI-Plattformen
+- [DSGVO-konforme KI mit OpenClaw](https://clawgency.de/blog/openclaw-dsgvo-konform.html): Datenschutz-Leitfaden fuer OpenClaw
+- [5 OpenClaw Use Cases fuer den Mittelstand](https://clawgency.de/blog/openclaw-use-cases-mittelstand.html): Praxis-Anwendungsfaelle
+- [OpenClaw Enterprise-Architektur](https://clawgency.de/blog/openclaw-enterprise-architektur.html): Technischer Deep-Dive
+- [OpenClaw SAP & Salesforce Integration](https://clawgency.de/blog/openclaw-sap-salesforce-integration.html): Schritt-fuer-Schritt-Anleitung
+- [ROI-Berechnung fuer KI-Agenten](https://clawgency.de/blog/openclaw-roi-berechnung.html): Wirtschaftlichkeitsanalyse
+- [Von Clawdbot zu OpenClaw](https://clawgency.de/blog/von-clawdbot-zu-openclaw.html): Geschichte und Evolution
+- [Case Study: Logistik-Unternehmen](https://clawgency.de/blog/case-study-logistik-openclaw.html): Detaillierte Fallstudie mit messbaren Ergebnissen
+- [KI-Glossar](https://clawgency.de/glossar.html): Begriffe rund um KI, Agenten und Automatisierung
 - [FAQ zu OpenClaw & Clawgency](https://clawgency.de/#faq): Antworten auf haeufige Fragen zu Kosten, Sicherheit und Einsatz
 - [Impressum](https://clawgency.de/impressum.html)
 - [Datenschutzerklaerung](https://clawgency.de/datenschutz.html)
