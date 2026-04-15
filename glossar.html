@@ -4,17 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AI Glossary | Clawgency</title>
-  <meta name="description" content="Verstehe die wichtigsten Bausteine moderner KI-Systeme – von LLMs über RAG bis zu Embeddings und Agenten. Das AI Glossary von Clawgency erklärt KI-Begriffe einfach und praxisnah." />
+  <title>KI-Glossar fuer OpenClaw, KI-Agenten & Automatisierung | Clawgency</title>
+  <meta name="description" content="Das KI-Glossar von Clawgency erklaert OpenClaw, KI-Agenten, RAG, Embeddings, DSGVO und weitere zentrale Begriffe fuer Unternehmen im DACH-Markt." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://clawgency.de/glossar.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://clawgency.de/glossar.html" />
-  <meta property="og:title" content="AI Glossary | Clawgency" />
-  <meta property="og:description" content="Die wichtigsten KI-Begriffe einfach erklärt. Von LLMs über RAG bis zu Agenten – praxisnah und verständlich." />
+  <meta property="og:title" content="KI-Glossar fuer OpenClaw, KI-Agenten & Automatisierung | Clawgency" />
+  <meta property="og:description" content="Die wichtigsten KI-Begriffe fuer Unternehmen einfach erklaert: OpenClaw, KI-Agenten, RAG, DSGVO, Agentic AI und mehr." />
   <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
   <meta property="og:locale" content="de_DE" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "KI-Glossar fuer OpenClaw und KI-Agenten",
+    "url": "https://clawgency.de/glossar.html",
+    "description": "Glossar mit Definitionen zu OpenClaw, KI-Agenten, RAG, Datenschutz und verwandten Begriffen fuer Unternehmen im DACH-Markt.",
+    "inLanguage": "de-DE",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    }
+  }
+  </script>
 
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-crab-48.png" />
@@ -538,8 +554,8 @@
 
       <div class="glossary-header glossary-reveal glossary-reveal--d1">
         <span class="section-tag">Wissen</span>
-        <h1>AI Glossary</h1>
-        <p>Verstehe die wichtigsten Bausteine moderner KI-Systeme – von LLMs über RAG bis zu Embeddings und Agenten.</p>
+        <h1>KI-Glossar fuer OpenClaw und KI-Agenten</h1>
+        <p>Verstehe die wichtigsten Bausteine moderner KI-Systeme - von OpenClaw ueber Agentic AI und RAG bis zu Embeddings, Governance und DSGVO.</p>
       </div>
 
       <div class="glossary-toolbar glossary-reveal glossary-reveal--d2">
@@ -550,10 +566,10 @@
         </div>
         <div class="glossary-filters" id="glossaryFilters">
           <button class="glossary-filter active" data-filter="all">Alle</button>
-          <button class="glossary-filter" data-filter="concept">Concept</button>
-          <button class="glossary-filter" data-filter="model">Model</button>
-          <button class="glossary-filter" data-filter="workflow">Workflow</button>
-          <button class="glossary-filter" data-filter="infra">Infra</button>
+          <button class="glossary-filter" data-filter="concept">Grundlagen</button>
+          <button class="glossary-filter" data-filter="model">Modelle</button>
+          <button class="glossary-filter" data-filter="workflow">Workflows</button>
+          <button class="glossary-filter" data-filter="infra">Infrastruktur</button>
           <button class="glossary-filter" data-filter="governance">Governance</button>
         </div>
       </div>
@@ -574,7 +590,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__bottom">
-        <p>&copy; 2025 Clawgency · <a href="mailto:hello@clawgency.de">hello@clawgency.de</a></p>
+        <p>&copy; 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
         <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
       </div>
     </div>
@@ -595,11 +611,50 @@
     // ── Glossary data ──
     var terms = [
       {
+        id: 'openclaw',
+        term: 'OpenClaw',
+        short: 'Open-Source-Framework fuer agentische KI-Workflows in Unternehmen.',
+        category: 'workflow',
+        categoryLabel: 'Workflow',
+        letter: 'O',
+        explanation: 'OpenClaw ist ein Framework fuer KI-Agenten, die mit Kontext, Tools und Regeln Aufgaben ueber mehrere Schritte bearbeiten koennen. Es eignet sich besonders fuer Unternehmen, die Datenhoheit, Integrationen und kontrollierte Automatisierung kombinieren wollen.',
+        howItWorks: 'OpenClaw verbindet LLMs, Wissensquellen, Toolnutzung und Freigabelogik zu einem agentischen Ablauf. Ein Agent kann Informationen recherchieren, Regeln anwenden, Aktionen ausloesen und bei Unsicherheit eskalieren.',
+        example: 'Ein OpenClaw-Agent liest Support-Tickets, zieht interne Produktdokumentation heran, entwirft eine Antwort und uebergibt Sonderfaelle an einen Menschen.',
+        whyItMatters: 'OpenClaw ist fuer Unternehmen interessant, weil es sich zwischen klassischer Workflow-Automatisierung und vollstaendig geschlossenen KI-Plattformen positioniert.',
+        related: ['agent', 'tool-function-calling', 'human-in-the-loop', 'dsgvo-datenschutz']
+      },
+      {
+        id: 'agentic-ai',
+        term: 'Agentic AI / Agentische KI',
+        short: 'KI-Systeme, die Ziele verfolgen, Teilschritte planen und Tools einsetzen.',
+        category: 'workflow',
+        categoryLabel: 'Workflow',
+        letter: 'A',
+        explanation: 'Agentische KI beschreibt Systeme, die nicht nur auf eine einzelne Eingabe antworten, sondern aktiv einen mehrstufigen Arbeitsablauf verfolgen. Sie planen Zwischenschritte, holen Informationen ein, nutzen Tools und bewerten Ergebnisse.',
+        howItWorks: 'Ein Ziel wird in Teilaufgaben zerlegt. Das System entscheidet, welche Informationen fehlen, welche Tools genutzt werden muessen und ob ein Ergebnis ausreichend sicher ist oder ein Mensch eingreifen sollte.',
+        example: 'Statt nur eine E-Mail zu formulieren, recherchiert agentische KI den Kontext, erstellt einen Entwurf, aktualisiert das CRM und plant den naechsten Schritt.',
+        whyItMatters: 'Der Begriff hilft, den Unterschied zwischen einem einfachen Chatbot und einem produktiven KI-Agenten mit echter Prozesslogik zu verstehen.',
+        related: ['agent', 'openclaw', 'tool-function-calling']
+      },
+      {
+        id: 'clawdbot-moltbot-openclaw',
+        term: 'Clawdbot / Moltbot / OpenClaw',
+        short: 'Bezeichnungen rund um die Entwicklung und Einordnung von OpenClaw.',
+        category: 'concept',
+        categoryLabel: 'Grundlagen',
+        letter: 'C',
+        explanation: 'Clawdbot und Moltbot tauchen im Markt und in Gespraechen oft als historische oder umgangssprachliche Bezeichnungen im Umfeld von OpenClaw auf. Fuer Unternehmen ist vor allem wichtig, die Begriffe sauber auf das heutige Framework und seinen Einsatzkontext zu beziehen.',
+        howItWorks: 'Im SEO- und Content-Kontext werden verwandte Begriffe gebuendelt, damit Suchanfragen zu frueheren oder alternativen Namen trotzdem auf die richtige Erklaerung und Leistung fuehren.',
+        example: 'Ein IT-Leiter sucht nach "Clawdbot Alternative" und landet auf einem Leitfaden, der OpenClaw, seine Architektur und seine heutige Einordnung erklaert.',
+        whyItMatters: 'Diese Begriffsfamilie ist wichtig fuer Topical Authority, interne Verlinkung und die Abholung unscharfer Suchanfragen im Markt.',
+        related: ['openclaw', 'agentic-ai']
+      },
+      {
         id: 'kuenstliche-intelligenz',
         term: 'Künstliche Intelligenz (KI)',
         short: 'Software, die Aufgaben übernimmt, die normalerweise menschliches Denken erfordern.',
         category: 'concept',
-        categoryLabel: 'Concept',
+        categoryLabel: 'Grundlagen',
         letter: 'K',
         explanation: 'Künstliche Intelligenz beschreibt Systeme, die menschenähnliche Aufgaben wie Verstehen, Entscheiden und Kommunizieren automatisieren. Heute umfasst KI vor allem Machine Learning und generative Modelle.',
         howItWorks: 'KI-Systeme lernen aus Daten, erkennen Muster und treffen darauf basierend Entscheidungen – ohne explizit für jede Situation programmiert zu sein.',
@@ -612,7 +667,7 @@
         term: 'Machine Learning (ML)',
         short: 'Computer lernen aus Daten, statt manuell programmiert zu werden.',
         category: 'concept',
-        categoryLabel: 'Concept',
+        categoryLabel: 'Grundlagen',
         letter: 'M',
         explanation: 'Machine Learning ist ein Teilbereich der KI, bei dem Algorithmen selbstständig aus Daten lernen. Statt Regeln manuell zu definieren, erkennt das System Muster und verbessert sich über die Zeit.',
         howItWorks: 'Ein ML-Modell wird mit großen Datenmengen trainiert. Es findet statistische Zusammenhänge und kann diese auf neue, unbekannte Daten anwenden.',
@@ -625,7 +680,7 @@
         term: 'Generative KI (GenAI)',
         short: 'KI, die neue Inhalte erstellt – Texte, Bilder, Code und mehr.',
         category: 'concept',
-        categoryLabel: 'Concept',
+        categoryLabel: 'Grundlagen',
         letter: 'G',
         explanation: 'Generative KI bezeichnet Systeme, die neue Inhalte erzeugen können, anstatt nur bestehende Daten zu analysieren. Dazu gehören Modelle wie ChatGPT, DALL-E oder Claude.',
         howItWorks: 'GenAI-Modelle lernen die Struktur und Muster aus Trainingsdaten und können dann ähnliche, aber neue Inhalte generieren – Wort für Wort, Pixel für Pixel.',
@@ -638,7 +693,7 @@
         term: 'LLM (Large Language Model)',
         short: 'Große Sprachmodelle, die menschliche Sprache verstehen und erzeugen.',
         category: 'model',
-        categoryLabel: 'Model',
+        categoryLabel: 'Modelle',
         letter: 'L',
         explanation: 'LLMs sind neuronale Netze mit Milliarden von Parametern, die auf riesigen Textmengen trainiert wurden. Sie können Sprache verstehen, generieren, übersetzen und Aufgaben wie Zusammenfassungen oder Code-Erstellung übernehmen.',
         howItWorks: 'Ein LLM sagt Wort für Wort vorher, was als nächstes kommen sollte – basierend auf dem gesamten Kontext (dem Prompt). Durch das Training auf Milliarden von Texten hat es ein breites Wissen aufgebaut.',
@@ -651,7 +706,7 @@
         term: 'Training vs. Inferenz',
         short: 'Training = KI lernt. Inferenz = KI arbeitet.',
         category: 'model',
-        categoryLabel: 'Model',
+        categoryLabel: 'Modelle',
         letter: 'T',
         explanation: 'Beim Training lernt ein Modell aus Daten und baut sein Wissen auf. Bei der Inferenz wendet es dieses Wissen an, um Anfragen zu beantworten. Training passiert einmal (oder selten), Inferenz läuft ständig.',
         howItWorks: 'Training: Millionen von Texten werden verarbeitet, das Modell passt seine Parameter an. Inferenz: Ein Nutzer stellt eine Frage, das Modell generiert eine Antwort in Echtzeit.',
@@ -664,7 +719,7 @@
         term: 'Prompt',
         short: 'Die Eingabe oder Anweisung, die du einem KI-Modell gibst.',
         category: 'concept',
-        categoryLabel: 'Concept',
+        categoryLabel: 'Grundlagen',
         letter: 'P',
         explanation: 'Ein Prompt ist der Text, den du an ein KI-Modell sendest – eine Frage, Anweisung oder ein Kontext. Die Qualität des Prompts bestimmt maßgeblich die Qualität der Antwort.',
         howItWorks: 'Das Modell liest deinen Prompt und generiert die wahrscheinlichste Fortsetzung. Je präziser und strukturierter dein Prompt, desto besser das Ergebnis.',
@@ -677,7 +732,7 @@
         term: 'Token & Kontextfenster',
         short: 'Die Maßeinheit für Text in KI-Modellen und deren Verarbeitungsgrenze.',
         category: 'model',
-        categoryLabel: 'Model',
+        categoryLabel: 'Modelle',
         letter: 'T',
         explanation: 'Tokens sind die kleinsten Texteinheiten, die ein LLM verarbeitet – ungefähr ¾ eines Wortes. Das Kontextfenster definiert, wie viele Tokens das Modell gleichzeitig „sehen" kann.',
         howItWorks: 'Jeder Text wird in Tokens zerlegt. Ein Modell mit 128K Kontextfenster kann ca. 100.000 Wörter gleichzeitig verarbeiten – das entspricht etwa einem ganzen Buch.',
@@ -690,7 +745,7 @@
         term: 'Temperatur (Sampling)',
         short: 'Regelt, wie kreativ oder vorhersagbar die KI-Antworten sind.',
         category: 'model',
-        categoryLabel: 'Model',
+        categoryLabel: 'Modelle',
         letter: 'T',
         explanation: 'Die Temperatur steuert, wie „zufällig" die Textgenerierung ist. Niedrige Temperatur (0) = deterministisch und fokussiert. Hohe Temperatur (1+) = kreativer und variabler.',
         howItWorks: 'Bei jedem generierten Token wählt das Modell aus einer Wahrscheinlichkeitsverteilung. Temperatur 0 nimmt immer das wahrscheinlichste Wort, höhere Werte erhöhen die Chance für überraschende Alternativen.',
@@ -703,7 +758,7 @@
         term: 'Halluzination',
         short: 'Wenn KI überzeugend klingende, aber falsche Informationen generiert.',
         category: 'concept',
-        categoryLabel: 'Concept',
+        categoryLabel: 'Grundlagen',
         letter: 'H',
         explanation: 'Eine Halluzination tritt auf, wenn ein KI-Modell Fakten erfindet, die plausibel klingen, aber nicht stimmen. Das passiert, weil das Modell auf Wahrscheinlichkeiten basiert – nicht auf Wahrheit.',
         howItWorks: 'LLMs generieren immer die „wahrscheinlichste Fortsetzung". Wenn das Modell keine echte Antwort kennt, füllt es die Lücke mit plausibel klingendem Text – ohne zu wissen, dass er falsch ist.',
@@ -716,7 +771,7 @@
         term: 'Grounding',
         short: 'KI-Antworten auf echte, überprüfbare Quellen stützen.',
         category: 'concept',
-        categoryLabel: 'Concept',
+        categoryLabel: 'Grundlagen',
         letter: 'G',
         explanation: 'Grounding bezeichnet die Technik, KI-Antworten an verifizierbare Fakten oder Quellen zu koppeln. Statt frei zu generieren, antwortet das Modell nur auf Basis konkreter Dokumente oder Daten.',
         howItWorks: 'Dem Modell werden relevante Dokumente oder Datenquellen mitgegeben. Es wird angewiesen, nur Informationen aus diesen Quellen zu verwenden und idealerweise Quellenverweise anzugeben.',
@@ -729,7 +784,7 @@
         term: 'RAG (Retrieval Augmented Generation)',
         short: 'KI sucht erst relevante Dokumente, bevor sie antwortet.',
         category: 'workflow',
-        categoryLabel: 'Workflow',
+        categoryLabel: 'Workflows',
         letter: 'R',
         explanation: 'RAG kombiniert Informationssuche mit Textgenerierung. Statt nur aus dem Training zu antworten, durchsucht das System erst eine Wissensbasis und nutzt die gefundenen Dokumente als Grundlage.',
         howItWorks: '1) Nutzer stellt eine Frage → 2) System sucht relevante Dokumente in einer Vektordatenbank → 3) Gefundene Texte werden als Kontext an das LLM übergeben → 4) LLM generiert eine Antwort basierend auf den Dokumenten.',
@@ -742,7 +797,7 @@
         term: 'Embeddings',
         short: 'Numerische Darstellungen von Text, die Bedeutung erfassen.',
         category: 'infra',
-        categoryLabel: 'Infra',
+        categoryLabel: 'Infrastruktur',
         letter: 'E',
         explanation: 'Embeddings wandeln Text in Zahlenvektoren um, die die semantische Bedeutung erfassen. Ähnliche Konzepte liegen im Vektorraum nah beieinander, unabhängig von der exakten Formulierung.',
         howItWorks: 'Ein spezialisiertes Modell liest einen Text und gibt einen Vektor (z.B. 1536 Zahlen) aus. „Hund" und „Welpe" haben ähnliche Vektoren, „Hund" und „Auto" nicht.',
@@ -755,7 +810,7 @@
         term: 'Vektordatenbank',
         short: 'Datenbank, die für die schnelle Suche nach ähnlichen Inhalten optimiert ist.',
         category: 'infra',
-        categoryLabel: 'Infra',
+        categoryLabel: 'Infrastruktur',
         letter: 'V',
         explanation: 'Eine Vektordatenbank speichert Embeddings und ermöglicht extrem schnelle Ähnlichkeitssuchen. Sie ist das zentrale Speichersystem für RAG-Anwendungen und semantische Suche.',
         howItWorks: 'Texte werden als Embedding-Vektoren gespeichert. Bei einer Suchanfrage berechnet die Datenbank, welche gespeicherten Vektoren der Anfrage am ähnlichsten sind – in Millisekunden.',
@@ -768,7 +823,7 @@
         term: 'Chunking',
         short: 'Große Dokumente in kleinere, sinnvolle Abschnitte unterteilen.',
         category: 'workflow',
-        categoryLabel: 'Workflow',
+        categoryLabel: 'Workflows',
         letter: 'C',
         explanation: 'Chunking zerlegt lange Texte in kleinere Teile (Chunks), damit sie als Embeddings gespeichert und effektiv gefunden werden können. Die Chunk-Größe beeinflusst die Qualität der Suche.',
         howItWorks: 'Ein 100-seitiges Handbuch wird z.B. in Absätze oder thematische Blöcke von 200–500 Tokens aufgeteilt. Jeder Chunk wird als eigenes Embedding gespeichert.',
@@ -781,7 +836,7 @@
         term: 'Tool-/Function-Calling',
         short: 'KI kann externe Tools und APIs aufrufen, um Aufgaben zu erledigen.',
         category: 'workflow',
-        categoryLabel: 'Workflow',
+        categoryLabel: 'Workflows',
         letter: 'T',
         explanation: 'Function Calling ermöglicht es LLMs, nicht nur Text zu generieren, sondern strukturierte Aktionen auszulösen – z.B. eine Datenbank abfragen, eine E-Mail senden oder eine Berechnung durchführen.',
         howItWorks: 'Das Modell erhält eine Liste verfügbarer Funktionen mit Beschreibungen. Basierend auf der Nutzeranfrage entscheidet es, welche Funktion mit welchen Parametern aufgerufen werden soll.',
@@ -794,7 +849,7 @@
         term: 'Agent (Agentic Workflow)',
         short: 'KI-Systeme, die selbstständig Aufgaben planen und ausführen.',
         category: 'workflow',
-        categoryLabel: 'Workflow',
+        categoryLabel: 'Workflows',
         letter: 'A',
         explanation: 'Ein KI-Agent ist ein System, das eigenständig Aufgaben in mehreren Schritten bearbeiten kann. Er plant, nutzt Tools, trifft Entscheidungen und korrigiert sich bei Fehlern selbst.',
         howItWorks: 'Ein Agent erhält ein Ziel, zerlegt es in Teilschritte, ruft bei Bedarf Tools auf, evaluiert Zwischenergebnisse und iteriert, bis die Aufgabe erledigt ist.',
@@ -807,7 +862,7 @@
         term: 'Human-in-the-Loop',
         short: 'Menschen überprüfen und steuern KI-Entscheidungen an kritischen Stellen.',
         category: 'workflow',
-        categoryLabel: 'Workflow',
+        categoryLabel: 'Workflows',
         letter: 'H',
         explanation: 'Human-in-the-Loop bedeutet, dass bei wichtigen oder unsicheren Entscheidungen ein Mensch eingebunden wird. Die KI arbeitet autonom, aber an definierten Punkten wird menschliche Freigabe eingeholt.',
         howItWorks: 'Der KI-Agent führt Routineaufgaben selbstständig aus. Bei Fällen, die vordefinierte Schwellenwerte überschreiten (z.B. Kosten > 500 € oder Konfidenz < 80 %), wird an einen Menschen eskaliert.',
@@ -820,7 +875,7 @@
         term: 'Evaluation / Evals',
         short: 'Systematisches Messen und Bewerten der KI-Qualität.',
         category: 'workflow',
-        categoryLabel: 'Workflow',
+        categoryLabel: 'Workflows',
         letter: 'E',
         explanation: 'Evals sind Tests und Metriken, mit denen die Qualität von KI-Outputs gemessen wird. Sie helfen zu erkennen, ob ein System zuverlässig arbeitet und wo Schwächen liegen.',
         howItWorks: 'Man definiert Testfälle mit erwarteten Ergebnissen und lässt die KI diese bearbeiten. Automatische und manuelle Bewertungen zeigen, wie korrekt und hilfreich die Antworten sind.',
@@ -853,6 +908,19 @@
         example: 'Ein KI-Chatbot, der Kundendaten verarbeitet, muss auf DSGVO-konformen Servern (EU) laufen, Daten nach Fristen löschen und eine Datenschutzerklärung bereitstellen.',
         whyItMatters: 'DSGVO-Verstöße können teuer werden (bis 4 % des Jahresumsatzes). Datenschutz muss von Anfang an mitgedacht werden – nicht als Nachgedanke.',
         related: ['ai-governance', 'human-in-the-loop']
+      },
+      {
+        id: 'on-premise-hosting',
+        term: 'On-Premise Hosting',
+        short: 'Betrieb von KI-Komponenten auf eigener Infrastruktur oder im eigenen Rechenzentrum.',
+        category: 'infra',
+        categoryLabel: 'Infrastruktur',
+        letter: 'O',
+        explanation: 'On-Premise Hosting bedeutet, dass zentrale Komponenten eines KI-Systems innerhalb der eigenen Infrastruktur oder in einem kontrollierten Rechenzentrumsumfeld betrieben werden. Das ist besonders relevant fuer sensible Daten und strenge Compliance-Anforderungen.',
+        howItWorks: 'Modelle, Datenquellen, Vektordatenbanken oder Agenten-Orchestrierung laufen nicht in einer fremden Public Cloud, sondern in einer Umgebung mit selbst definierten Netz-, Zugriffs- und Sicherheitsregeln.',
+        example: 'Ein Unternehmen betreibt die Wissensbasis und Agentensteuerung fuer einen internen Support-Agenten ausschliesslich in seiner eigenen Infrastruktur.',
+        whyItMatters: 'On-Premise ist ein zentrales Entscheidungskriterium fuer Unternehmen, die Datensouveraenitaet, geringe Abhaengigkeit und regulatorische Kontrolle brauchen.',
+        related: ['dsgvo-datenschutz', 'openclaw', 'ai-governance']
       }
     ];
 
