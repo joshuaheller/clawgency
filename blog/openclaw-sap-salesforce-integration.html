@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>OpenClaw SAP &amp; Salesforce Integration: Schritt-für-Schritt | Clawgency</title>
+  <meta name="description" content="OpenClaw SAP Integration und OpenClaw Salesforce: Schritt-für-Schritt-Anleitung für KI ERP Integration mit APIs, Idempotenz und Governance. Praxisleitfaden von Clawgency." />
+  <meta name="keywords" content="OpenClaw SAP Integration, OpenClaw Salesforce, KI ERP Integration, OpenClaw API, SAP OData, Salesforce REST" />
+  <meta name="author" content="Clawgency – OpenClaw Experten" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://clawgency.de/blog/openclaw-sap-salesforce-integration.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://clawgency.de/blog/openclaw-sap-salesforce-integration.html" />
+  <meta property="og:title" content="OpenClaw SAP &amp; Salesforce Integration: Schritt-für-Schritt | Clawgency" />
+  <meta property="og:description" content="OpenClaw SAP Integration, OpenClaw Salesforce und KI ERP Integration: Von der Anforderungsanalyse über API-Patterns bis zum produktiven Betrieb mit OpenClaw." />
+  <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="article:published_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:modified_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:section" content="Technik" />
+  <meta property="article:tag" content="OpenClaw" />
+  <meta property="article:tag" content="SAP" />
+  <meta property="article:tag" content="Salesforce" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OpenClaw SAP &amp; Salesforce Integration | Clawgency" />
+  <meta name="twitter:description" content="OpenClaw SAP Integration, OpenClaw Salesforce, KI ERP Integration: API-Patterns, Schritte und Beispiele für den Enterprise-Einsatz." />
+  <meta name="twitter:image" content="https://clawgency.de/assets/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Start",
+        "item": "https://clawgency.de/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://clawgency.de/#blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "OpenClaw SAP &amp; Salesforce Integration",
+        "item": "https://clawgency.de/blog/openclaw-sap-salesforce-integration.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "OpenClaw SAP & Salesforce Integration: Schritt-für-Schritt",
+    "description": "Anleitung zu OpenClaw SAP Integration, OpenClaw Salesforce und KI ERP Integration: API-Integration, Patterns und Beispiele für den produktiven Einsatz.",
+    "image": ["https://clawgency.de/assets/og-image.jpg"],
+    "datePublished": "2026-04-15T08:00:00+02:00",
+    "dateModified": "2026-04-15T08:00:00+02:00",
+    "author": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://clawgency.de/assets/logo-crab.webp"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://clawgency.de/blog/openclaw-sap-salesforce-integration.html"
+    },
+    "articleSection": "Technik",
+    "keywords": ["OpenClaw SAP Integration", "OpenClaw Salesforce", "KI ERP Integration", "OpenClaw", "API"],
+    "inLanguage": "de-DE"
+  }
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-crab-48.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="stylesheet" href="../styles.min.css" />
+
+  <style>
+    .blog-article-page { padding: 7rem 0 4rem; min-height: 100vh; }
+    .blog-article-page article { max-width: 780px; margin: 0 auto; }
+    .blog-article-page h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--c-white); margin-bottom: 1rem; }
+    .blog-article-page h2 { font-size: 1.5rem; color: var(--c-white); margin: 3rem 0 1rem; }
+    .blog-article-page h3 { font-size: 1.15rem; color: var(--c-white); margin: 2rem 0 0.75rem; }
+    .blog-article-page p { color: var(--c-text-muted); line-height: 1.8; margin-bottom: 1.25rem; }
+    .blog-article-page ul, .blog-article-page ol { color: var(--c-text-muted); padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; }
+    .blog-article-page a { color: var(--c-accent); }
+    .blog-article-page a:hover { text-decoration: underline; }
+    .blog-article-page strong { color: var(--c-text); }
+    .blog-article-page blockquote { border-left: 3px solid var(--c-accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--c-surface); border-radius: 0 var(--r-md) var(--r-md) 0; }
+    .blog-article-page blockquote p { margin-bottom: 0; font-style: italic; }
+    .blog-article-page .blog-meta { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--c-text-dim); margin-bottom: 2rem; flex-wrap: wrap; }
+    .blog-article-page .blog-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); background: var(--c-accent-dim); border: 1px solid rgba(230,57,70,0.2); padding: 0.2rem 0.6rem; border-radius: var(--r-full); margin-bottom: 0.75rem; }
+    .blog-article-page .blog-cta { text-align: center; padding: 3rem 2rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); margin-top: 3rem; }
+    .blog-article-page .blog-cta p { color: var(--c-text-muted); margin-bottom: 1.5rem; }
+    .blog-article-page .blog-related { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--c-border); }
+    .blog-article-page .blog-related h3 { margin-top: 0; }
+    .blog-article-page .blog-related ul { list-style: none; padding: 0; }
+    .blog-article-page .blog-related li { padding: 0.5rem 0; }
+    .blog-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+    .blog-back:hover { color: var(--c-accent); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <img src="../assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
+        <span class="nav__logo-text">Clawgency</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+      </ul>
+      <a href="../index.html#kontakt" class="btn btn--nav">Erstgespräch buchen</a>
+      <button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul>
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+        <li><a href="../index.html#kontakt" class="btn btn--primary" style="display:inline-block;margin-top:1rem;">Erstgespräch buchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-article-page">
+    <div class="container">
+      <a href="../index.html" class="blog-back">← Zurück zur Startseite</a>
+
+      <article>
+        <span class="blog-tag">Technik</span>
+        <h1>OpenClaw SAP &amp; Salesforce Integration: Schritt-für-Schritt</h1>
+
+        <div class="blog-meta">
+          <span>Veröffentlicht: 15. April 2026</span>
+          <span>Lesezeit: ca. 10 Min.</span>
+          <span>Autor: Clawgency</span>
+        </div>
+
+        <p><strong>OpenClaw SAP Integration</strong> und <strong>OpenClaw Salesforce</strong> sind für viele mittelständische und große Unternehmen der pragmatische Einstieg in <strong>KI ERP Integration</strong>: Statt isolierter Chat-Oberflächen verbinden Sie autonome Agenten mit den Systemen, in denen Ihre Daten ohnehin „leben“ – vom Auftrag über das CRM bis zur Nachverfolgung im Service. Dieser Leitfaden beschreibt einen wiederholbaren Integrationspfad, typische API-Muster und zwei konkrete Beispiele aus der Praxis. Für den strategischen Überblick lohnt parallel der <a href="openclaw-fuer-unternehmen.html">Pillar-Artikel zu OpenClaw für Unternehmen</a>; technische Querschnittsthemen wie Sandboxing und API-Gateway behandeln wir in der <a href="openclaw-enterprise-architektur.html">Enterprise-Architektur</a>.</p>
+
+        <h2>Schritt 1: Geschäftsfall und Datenflüsse schärfen</h2>
+        <p>Bevor Sie Endpunkte oder Skills bauen, definieren Sie den Prozess in einem Satz: Welches Ergebnis soll der Agent liefern, welche Systeme sind „System of Record“, und wo darf er schreiben? Typische Szenarien sind Angebotserstellung aus SAP-Materialstamm plus Salesforce-Opportunity, Auftragsstatusabfragen über OData, oder Ticket-Anreicherung mit CRM-Kontexthistorie. Dokumentieren Sie personenbezogene Datenfelder früh – das verbindet technische Integration mit <a href="openclaw-dsgvo-konform.html">DSGVO-Anforderungen</a> und vermeidet spätere Refactors.</p>
+        <p>Ein hilfreiches Raster ist die Trennung in <em>lesende</em> und <em>schreibende</em> Fähigkeiten. Lesende Skills (Stammdaten, Reports, Suchlisten) lassen sich schneller absichern. Schreibende Aktionen (Auftrag anlegen, Opportunity-Stage setzen) brauchen Idempotenz-Keys, klare Freigaben und häufig <a href="../glossar.html">Human-in-the-Loop</a> an Schwellenwerten. Wer diese Klassifizierung im Product-Backlog verankert, reduziert sowohl Sicherheitsrisiken als auch Modellhalluzinationen in kritischen Pfaden.</p>
+
+        <h2>Schritt 2: Authentifizierung und API-Gateway</h2>
+        <p>SAP-Umgebungen sprechen häufig OAuth2/OIDC, Basic hinter Reverse-Proxies oder zertifikatsbasierte Vertrauensbeziehungen; Salesforce nutzt standardisiert OAuth mit Refresh-Tokens und Named Credentials in Middleware-Schichten. Für OpenClaw empfiehlt sich ein zentrales API-Gateway oder ein dedizierter Integrationsdienst, der Tokens verwaltet, Rate Limits durchsetzt und Request/Response-Logs strukturiert – statt API-Secrets direkt im Agenten-Prompt-Kontext zu halten.</p>
+        <p>Konkret: Legen Sie pro Zielsystem einen technischen Service-Account mit minimalen Scopes an, mappen Sie Berechtigungen auf Unternehmensrollen und spiegeln Sie das im Agenten als <a href="../glossar.html">Tool-/Function-Calling</a> mit strikt typisierten Parametern. So wird aus einem generischen LLM ein orchestrierter Worker, der nur die HTTP-Operationen ausführen kann, die Sie explizit freigegeben haben. Die gleiche Schicht kann Circuit Breaker und Retry-Policy kapseln, damit temporäre SAP-Wartungsfenster nicht zu inkonsistenten CRM-Einträgen führen.</p>
+
+        <blockquote>
+          <p>Die stabilste KI ERP Integration ist die, die wie ein guter Microservice aussieht: klare Verträge, minimale Rechte, nachvollziehbare Logs.</p>
+        </blockquote>
+
+        <h2>Schritt 3: Integrationsmuster (Read, Write, Event)</h2>
+        <p>Drei Muster decken den Großteil der Produktionsfälle ab:</p>
+        <ol>
+          <li><strong>Read-via-Query:</strong> Der Agent ruft OData oder Salesforce SOQL auf, fasst Ergebnisse zusammen und zitiert Felder explizit. Ideal für Innendienst und Second-Level-Support.</li>
+          <li><strong>Write-via-Command:</strong> Strukturierte POST/PATCH-Calls mit Validierungsschicht (z.&nbsp;B. Prüfung auf Pflichtfelder, Währungslogik) vor dem eigentlichen ERP-Write. Kombinieren Sie mit Idempotenz-Headern oder Geschäftsschlüsseln, damit Retries keine Doppelbelege erzeugen.</li>
+          <li><strong>Event-getrieben:</strong> SAP- oder Salesforce-Events (Change Data Capture, Platform Events, Middleware-Bus) triggern den Agenten selektiv – etwa wenn ein Liefertermin ausfällt und Kundenkommunikation ansteht.</li>
+        </ol>
+        <p>Wer aus dem <a href="../glossar.html">Glossar</a> bereits mit <a href="../glossar.html">RAG</a> und Vektorsuche arbeitet, kann unstrukturierte Dokumente (Lieferbedingungen, Sondervereinbarungen) semantisch anbinden, sollte aber kritische Zahlen immer aus dem ERP lesen, nicht aus embeddings rekonstruieren.</p>
+        <p>Für SAP S/4HANA und klassische Business-Suite-Umgebungen lohnt eine frühe Entscheidung, ob Sie primär OData, BAPI/RFC über eine gesicherte Middleware oder ereignisgestützte Schnittstellen nutzen. OData ist für lesende Szenarien und paginierte Listen oft am schnellsten integrierbar; tiefergehende Buchungen bleiben häufig über regulierte APIs oder feste Service-Benutzer gekoppelt. Bei Salesforce priorisieren Sie REST und Bulk-API für Massenjobs, während Flows oder Apex-Endpunkte dann ins Spiel kommen, wenn Sie Geschäftslogik serverseitig zentralisieren wollen – der Agent sollte keine „Mini-Apex“-Logik im Prompt nachbauen.</p>
+        <p>Denken Sie an Entwicklungs-, Test- und Produktionsmandanten getrennt voneinander: identische Skill-Signaturen, aber unterschiedliche Basis-URLs und Geheimnisse. So verhindern Sie, dass ein Prompt aus der Sandbox versehentlich Produktivdaten beschreibt oder dass Trainingsdaten aus Demoumgebungen in Support-Tickets landen. Eine kurze Übergabe-Checkliste an den Betrieb – Rate Limits, Wartungsfenster, Eskalationskontakte beim ERP-Hersteller – reduziert Reibung nach dem Go-Live spürbar.</p>
+
+        <h2>Schritt 4: OpenClaw-Skills und Tests</h2>
+        <p>Implementieren Sie pro externem System einen oder wenige Skills mit klar benannten Funktionen – z.&nbsp;B. <code>sap.get_order_status</code>, <code>sf.update_opportunity_stage</code>. Jede Funktion erhält Eingabe-JSON-Schema, Timeouts und ein kleines Set an Golden-File-Tests (Fixtures mit anonymisierten Payloads). Für Regression eignen sich Contract-Tests gegen Sandbox-Tenants; für Qualität der KI-Antworten zusätzlich Evals mit typischen Nutzerfragen aus dem Fachbereich.</p>
+        <p>In der Übergangsphase hilft Shadow-Mode: Der Agent schlägt Aktionen vor, führt sie aber nur nach menschlicher Bestätigung aus. So messen Sie Trefferquote und Latenz, bevor Sie Vollautomatisierung aktivieren. Details zu Governance und Skalierung finden Sie in <a href="openclaw-enterprise-architektur.html">OpenClaw Enterprise Architektur</a>.</p>
+        <p>Performance-Tests sollten realistische Lastprofile abbilden: parallele Nutzer, große Kontextfenster und gelegentlich langsame Antworten aus dem ERP. So finden Sie Engpässe im Gateway oder in der Serialisierung großer JSON-Payloads, bevor die Fachabteilung im Tagesgeschäft darauf stößt. Für Fehlerbilder etablieren Sie eine gemeinsame Taxonomie mit SAP-Basis und Salesforce-Administration – „HTTP 500“ reicht intern selten als Ursachenanalyse.</p>
+
+        <h2>Beispiel A: Auftragsklärung zwischen SAP und Salesforce</h2>
+        <p>Ein Industriegüterhersteller lässt einen Agenten offene Opportunities prüfen, sobald SAP einen verspäteten Liefertermin meldet. Der Agent liest per OData die relevanten Auftragspositionen, holt im CRM die letzte Kundenkorrespondenz und erstellt einen Entwurf für die Account-Managerin – inklusive vorgeschlagenes neues Zusage-Datum. Schreibzugriffe auf Salesforce erfolgen erst nach Klick im UI; SAP bleibt read-only in dieser Phase. Ergebnis nach acht Wochen Pilot: rund 30&nbsp;% weniger manuelle Statusmails und spürbar kürzere Reaktionszeit in Stufe-2-Eskalationen.</p>
+
+        <h2>Beispiel B: Service-Ticket mit Materialverfügbarkeit</h2>
+        <p>Ein Maschinenbauer koppelt Service Cloud Cases an ATP-Checks im ERP. Der Agent beantwortet Standardfragen zu Ersatzteilverfügbarkeit, reserviert auf Wunsch Teile über eine gesicherte Schnittstelle und dokumentiert den Vorgang als Task im Case. Wichtig war die Begrenzung der Suchparameter (nur Seriennummern aus dem Case-Kontext) und ein Audit-Log pro Reservierung – damit bleibt die <strong>KI ERP Integration</strong> revisionssicher.</p>
+
+        <h2>Schritt 5: Go-Live, Monitoring, kontinuierliche Verbesserung</h2>
+        <p>Nach dem Rollout sollten Sie Metriken wie Erfolgsquote pro Skill, Latenz p95, Fehlerraten nach HTTP-Status und Eskalationsrate zum Menschen tracken. Verknüpfen Sie Alerts mit Ihrem bestehenden Incident-Tool. Inhalte aus Support-Chats periodisch anonymisieren und in Eval-Sets übernehmen – so bleibt <strong>OpenClaw Salesforce</strong> und <strong>OpenClaw SAP Integration</strong> wartbar, ohne dass jedes Modell-Update ein Blindflug wird.</p>
+        <p>Wenn Sie Branchen-Szenarien vertiefen möchten, liefert <a href="openclaw-use-cases-mittelstand.html">OpenClaw Use Cases im Mittelstand</a> zusätzliche Blaupausen; für den Vergleich mit All-in-One-Automatisierungstools ist <a href="openclaw-vs-chatgpt-n8n-zapier.html">OpenClaw vs. ChatGPT, n8n &amp; Zapier</a> hilfreich.</p>
+        <p>Langfristig sollten Sie Integrationsartefakte wie OpenAPI-Spezifikationen, Mapping-Tabellen für Geschäftsobjekte und Freigabe-Matrizen in derselben Versionskontrolle pflegen wie den Agentencode. Das erleichtert Audits, Onboarding neuer Maintainer und die schrittweise Erweiterung um weitere Module – etwa Warenbewegungen, Qualitätsmeldungen oder Preisfindung – ohne die bestehende <strong>KI ERP Integration</strong> zu destabilisieren.</p>
+
+        <h2>Fazit</h2>
+        <p>Erfolgreiche <strong>OpenClaw SAP Integration</strong> und <strong>OpenClaw Salesforce</strong> sind weniger eine Frage des Modells als von Verträgen, Rechten und sauber gekapselten APIs. Wer den fünf Schritten – Geschäftsfall, Auth/Gateway, Muster, Skills/Tests, Betrieb – folgt, baut <strong>KI ERP Integration</strong>, die IT, Fachbereich und Compliance gemeinsam tragen können.</p>
+        <p>Abschließend lohnt ein gemeinsames Review mit SAP-Basis, CRM-Administration und Security alle drei Monate: Welche neuen Felder sind produktiv geworden, welche APIs haben sich geändert, und welche Skills müssen angepasst werden? Diese Routine kostet wenige Stunden, verhindert aber den typischen Stillstand nach dem ersten Erfolg – wenn sich Datenmodelle weiterentwickeln, der Agent aber noch auf alten Annahmen läuft.</p>
+        <p>Wenn Sie mehrere Märkte bedienen, planen Sie Lokalisierung und Währungslogik bereits in den Skills ein: derselbe API-Call kann je Mandant andere Pflichtfelder erwarten. Einmal sauber parametrisiert, vermeiden Sie teure Sonderfälle im Prompt – und halten die <strong>OpenClaw SAP Integration</strong> wartbar, auch wenn sich Salesforce-Seitenlayouts ändern.</p>
+
+        <div class="blog-cta">
+          <p>Sie möchten SAP, Salesforce oder weitere Systeme mit OpenClaw verbinden? Wir planen Architektur, Skills und Rollout mit festem Scope.</p>
+          <a href="../index.html#kontakt" class="btn btn--primary btn--lg">Erstgespräch vereinbaren</a>
+        </div>
+
+        <div class="blog-related">
+          <h3>Weiterlesen</h3>
+          <ul>
+            <li><a href="openclaw-fuer-unternehmen.html">OpenClaw für Unternehmen (Pillar)</a></li>
+            <li><a href="openclaw-enterprise-architektur.html">OpenClaw Enterprise Architektur</a></li>
+            <li><a href="openclaw-use-cases-mittelstand.html">OpenClaw Use Cases im Mittelstand</a></li>
+            <li><a href="../glossar.html">AI-Glossar</a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2025 Clawgency · <a href="mailto:hello@clawgency.de">hello@clawgency.de</a></p>
+        <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // ── Mobile burger ──
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('navMobile');
+    if (burger && mobileNav) {
+      burger.addEventListener('click', function () {
+        var open = mobileNav.style.display === 'block';
+        mobileNav.style.display = open ? 'none' : 'block';
+      });
+    }
+  })();
+  </script>
+  <script src="../cookie-banner.js"></script>
+</body>
+</html>

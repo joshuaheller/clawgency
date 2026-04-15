@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Case Study: Wie ein Logistikunternehmen mit OpenClaw 35h/Woche spart | Clawgency</title>
+  <meta name="description" content="OpenClaw Case Study: KI Logistik mit messbarem Effekt – Statuskommunikation, Disposition und Dokumentation. OpenClaw Erfahrungen aus Implementierung und Betrieb." />
+  <meta name="keywords" content="OpenClaw Case Study, KI Logistik, OpenClaw Erfahrungen, Prozessautomatisierung Transport" />
+  <meta name="author" content="Clawgency – OpenClaw Experten" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://clawgency.de/blog/case-study-logistik-openclaw.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://clawgency.de/blog/case-study-logistik-openclaw.html" />
+  <meta property="og:title" content="Case Study: Logistikunternehmen spart 35h/Woche mit OpenClaw | Clawgency" />
+  <meta property="og:description" content="OpenClaw Case Study in der Logistik: Problem, Lösung, Rollout und KPIs – inklusive Zeitachse und Kennzahlen." />
+  <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="article:published_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:modified_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:section" content="Case Study" />
+  <meta property="article:tag" content="OpenClaw" />
+  <meta property="article:tag" content="Logistik" />
+  <meta property="article:tag" content="Case Study" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OpenClaw Case Study Logistik | Clawgency" />
+  <meta name="twitter:description" content="KI Logistik mit OpenClaw: 35 Stunden/Woche eingespart – Details zur Umsetzung und Messung." />
+  <meta name="twitter:image" content="https://clawgency.de/assets/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Start",
+        "item": "https://clawgency.de/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://clawgency.de/#blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Case Study Logistik OpenClaw",
+        "item": "https://clawgency.de/blog/case-study-logistik-openclaw.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Case Study: Wie ein Logistikunternehmen mit OpenClaw 35 Stunden pro Woche spart",
+    "description": "Detaillierte OpenClaw Case Study in der Logistik mit Problemstellung, Lösungsarchitektur, Rollout-Zeitachse und Kennzahlen – KI Logistik und OpenClaw Erfahrungen.",
+    "image": ["https://clawgency.de/assets/og-image.jpg"],
+    "datePublished": "2026-04-15T08:00:00+02:00",
+    "dateModified": "2026-04-15T08:00:00+02:00",
+    "author": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://clawgency.de/assets/logo-crab.webp"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://clawgency.de/blog/case-study-logistik-openclaw.html"
+    },
+    "articleSection": "Case Study",
+    "keywords": ["OpenClaw Case Study", "KI Logistik", "OpenClaw Erfahrungen", "Automatisierung", "Transport"],
+    "inLanguage": "de-DE"
+  }
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-crab-48.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="stylesheet" href="../styles.min.css" />
+
+  <style>
+    .blog-article-page { padding: 7rem 0 4rem; min-height: 100vh; }
+    .blog-article-page article { max-width: 780px; margin: 0 auto; }
+    .blog-article-page h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--c-white); margin-bottom: 1rem; }
+    .blog-article-page h2 { font-size: 1.5rem; color: var(--c-white); margin: 3rem 0 1rem; }
+    .blog-article-page h3 { font-size: 1.15rem; color: var(--c-white); margin: 2rem 0 0.75rem; }
+    .blog-article-page p { color: var(--c-text-muted); line-height: 1.8; margin-bottom: 1.25rem; }
+    .blog-article-page ul, .blog-article-page ol { color: var(--c-text-muted); padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; }
+    .blog-article-page a { color: var(--c-accent); }
+    .blog-article-page a:hover { text-decoration: underline; }
+    .blog-article-page strong { color: var(--c-text); }
+    .blog-article-page blockquote { border-left: 3px solid var(--c-accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--c-surface); border-radius: 0 var(--r-md) var(--r-md) 0; }
+    .blog-article-page blockquote p { margin-bottom: 0; font-style: italic; }
+    .blog-article-page .blog-meta { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--c-text-dim); margin-bottom: 2rem; flex-wrap: wrap; }
+    .blog-article-page .blog-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); background: var(--c-accent-dim); border: 1px solid rgba(230,57,70,0.2); padding: 0.2rem 0.6rem; border-radius: var(--r-full); margin-bottom: 0.75rem; }
+    .blog-article-page .blog-cta { text-align: center; padding: 3rem 2rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); margin-top: 3rem; }
+    .blog-article-page .blog-cta p { color: var(--c-text-muted); margin-bottom: 1.5rem; }
+    .blog-article-page .blog-related { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--c-border); }
+    .blog-article-page .blog-related h3 { margin-top: 0; }
+    .blog-article-page .blog-related ul { list-style: none; padding: 0; }
+    .blog-article-page .blog-related li { padding: 0.5rem 0; }
+    .blog-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+    .blog-back:hover { color: var(--c-accent); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <img src="../assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
+        <span class="nav__logo-text">Clawgency</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+      </ul>
+      <a href="../index.html#kontakt" class="btn btn--nav">Erstgespräch buchen</a>
+      <button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul>
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+        <li><a href="../index.html#kontakt" class="btn btn--primary" style="display:inline-block;margin-top:1rem;">Erstgespräch buchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-article-page">
+    <div class="container">
+      <a href="../index.html" class="blog-back">← Zurück zur Startseite</a>
+
+      <article>
+        <span class="blog-tag">Case Study</span>
+        <h1>Case Study: Wie ein Logistikunternehmen mit OpenClaw 35h/Woche spart</h1>
+
+        <div class="blog-meta">
+          <span>Veröffentlicht: 15. April 2026</span>
+          <span>Lesezeit: ca. 10 Min.</span>
+          <span>Autor: Clawgency</span>
+        </div>
+
+        <p>Diese <strong>OpenClaw Case Study</strong> beschreibt ein regionales Transport- und Speditionsunternehmen mit rund 140 Mitarbeitenden, das Auftragsabwicklung, Disposition und Kundenkommunikation weitgehend manuell über E-Mail, Telefon und geteilte Tabellen steuerte. Ziel war es, <strong>KI Logistik</strong> pragmatisch einzusetzen – ohne Fahrer zu ersetzen und ohne sensible Daten unkontrolliert in öffentliche Modelle zu schicken. Die <strong>OpenClaw Erfahrungen</strong> aus diesem Projekt erweitern die Kurz-Fallstudie auf der <a href="../index.html#ergebnisse">Startseite im Bereich Ergebnisse</a> und zeigen, wie sich Stunden-Einsparungen sauber messen lassen.</p>
+        <p>Der Kunde bedient überwiegend Industriekunden mit Just-in-Time-Belieferung; Verzögerungen wirken sich deshalb unmittelbar auf Stillstände in Montagelinien aus. Das erhöht den Druck auf die Zentrale, gleichzeitig aber auch die Bereitschaft, in belastbare Automatisierung zu investieren – vorausgesetzt, Transparenz und Eskalationspfade bleiben erhalten.</p>
+
+        <h2>Ausgangslage und Pain Points</h2>
+        <p>Die Operations-Zentrale bearbeitete täglich hunderte Statusanfragen von Kunden und Partnern: „Wo steht Tour 412?“, „Warum Verzug an Grenzübergang X?“, „Bitte POD bis 17 Uhr“. Parallel mussten Disponentinnen Abweichungen (Ladezeiten, Mautstaus, Ausfallfahrzeuge) dokumentieren und in drei Systeme übertragen – TMS, CRM und ein Shared Drive mit PDF-Lieferscheinen. Die Folge: hohe Context-Switching-Kosten, wiederholte Copy-Paste-Arbeit und Eskalationen, weil Informationen nicht synchron ankamen.</p>
+        <p>Ein internes Zeitlogging über zwei Wochen ergab rund <strong>55 Stunden/Woche</strong> reine Kommunikations- und Dokumentationsarbeit im Kernteam aus sechs Personen – ohne Fahrer-Dispositionskern. Ziel des Projekts war es, mindestens <strong>60&nbsp;% dieser Last</strong> zu automatisieren, ohne Servicequalität zu senken.</p>
+        <p>Neben reinen Zeiten fielen wiederkehrende Qualitätsprobleme auf: unterschiedliche Formulierungen für denselben Sachverhalt, verpasste CC-Zeilen in E-Mails und doppelte CRM-Einträge nach Nachtschichten. Diese Inkonsistenzen waren für Kunden spürbar und für interne Auswertungen schwer auswertbar – ein zweites Motiv neben der bloßen Stundenreduktion.</p>
+
+        <h2>Lösung: OpenClaw-Agent mit kontrollierten Tools</h2>
+        <p>Wir implementierten einen OpenClaw-Agenten mit drei Schichten: (1) Lesende Integrationen ins TMS und ins CRM über ein API-Gateway mit OAuth, (2) schreibende Aktionen nur für standardisierte CRM-Notizen und Task-Erstellung – keine freien Massenmails, (3) <a href="../glossar.html">RAG</a> über freigegebene Playbooks und Tarifzonen-PDFs mit strikter Quellenpflicht für Freitextantworten. Sensible Personenbezüge wurden minimiert; Details zu Hosting und Verträgen finden Sie in <a href="openclaw-dsgvo-konform.html">DSGVO mit OpenClaw</a>.</p>
+        <p>Der Agent übernimmt nun: Erstlage einer Kundenanfrage inklusive Tracking-Link, Zusammenfassung interner TMS-Events in verständlicher Sprache, Vorbefüllung von CRM-Feldern zur späteren Freigabe und Erstellung eines Eskalationsentwurfs an Teamleitung, wenn SLA-Grenzen drohen. Technische Architektur folgte den Mustern aus <a href="openclaw-enterprise-architektur.html">Enterprise-Architektur</a>; ERP-nahe Muster sind in <a href="openclaw-sap-salesforce-integration.html">SAP &amp; Salesforce Integration</a> beschrieben.</p>
+        <p>Die Benutzeroberfläche blieb bewusst im bestehenden CRM: Mitarbeitende sehen KI-Vorschläge als Entwurf mit Quellenlinks zu TMS-Ereignissen und Playbook-Abschnitten. Dadurch entstand kein paralleler „Schatten-Chat“, den niemand pflegt – ein häufiger Grund für gescheiterte KI-Piloten in Operations-Teams.</p>
+
+        <blockquote>
+          <p>In der Logistik gewinnt man keine Minuten im Modell – sondern in der Wiederholrate identischer Statusanfragen.</p>
+        </blockquote>
+
+        <h2>Zeitachse des Rollouts</h2>
+        <ol>
+          <li><strong>Woche 1–2 – Discovery:</strong> Prozess-Workshops, Datenklassifikation, Auswahl der ersten 40 Standardanfragetypen, Definition von KPIs (First Response Time, manuelle Nacharbeit / Antwort).</li>
+          <li><strong>Woche 3–5 – Build:</strong> Skills fürs TMS/CRM, RAG-Index über freigegebene Dokumente, Eval-Sets mit anonymisierten Tickets – siehe <a href="../glossar.html">Evaluation</a>.</li>
+          <li><strong>Woche 6 – Shadow:</strong> Agent lieferte Entwürfe, Menschen blieben Sender. Messung von Qualität und Latenz.</li>
+          <li><strong>Woche 7–8 – Pilot:</strong> 40&nbsp;% des Kundenkanals automatisiert, enge Überwachung, tägliche Review-Runde.</li>
+          <li><strong>Woche 9–10 – Skalierung:</strong> Ausweitung auf 75&nbsp;% der Standardfälle, Feintuning der Eskalationsregeln.</li>
+        </ol>
+        <p>Go-Live für autonomes Antworten erfolgte in <strong>Woche 7</strong> nach erfolgreichem Shadow-Mode; die vollständige Skalierung war in <strong>Woche 10</strong> abgeschlossen.</p>
+        <p>In Woche 6 wurden zusätzlich Lasttests mit synthetischen Nachrichtenstürmen gefahren, um zu prüfen, ob Gateway und TMS unter parallelen Anfragen stabil bleiben. Engpässe an der TMS-Read-API wurden durch Caching kurzlebiger Statusobjekte entschärft – mit klarer TTL, damit keine veralteten Ankunftszeiten nach außen kommuniziert werden.</p>
+
+        <h2>Organisation und Rollen</h2>
+        <p>Ein klarer RACI verhinderte, dass Entscheidungen im Daily stecken blieben: Operations definierte Inhalte und Freigabeschwellen, IT betrieb Gateway und Secrets, der Datenschutz prüfte Kundenkanäle und Aufbewahrung, Clawgency lieferte Architektur und Umsetzung. Ohne diese Schreibweise wäre die <strong>OpenClaw Case Study</strong> vermutlich bei Woche 4 ins Stocken geraten – nicht aus technischen, sondern aus Koordinationsgründen.</p>
+        <p>Schulungen dauerten je Rolle nur etwa 90 Minuten, weil die Oberfläche im CRM verblieb. Wichtiger als Feature-Listen waren Übungen zu Eskalationen: wann darf der Agent autonom antworten, wann muss ein Mensch den Text anpassen, und wie dokumentieren wir das im TMS? Diese Klarheit senkte die Angst vor „KI-Fehlern“ spürbar – ein oft übersehener Faktor in <strong>KI Logistik</strong>-Projekten.</p>
+
+        <h2>Ergebnisse und Kennzahlen</h2>
+        <p>Nach Stabilisierung (Wochen 11–14) ergaben sich folgende Effekte im Kernteam:</p>
+        <ul>
+          <li><strong>35 Stunden/Woche</strong> netto eingesparte manuelle Arbeit (Summe aus sechs Vollzeitäquivalenten, hochgerechnet aus Zeiterfassung und Ticket-Stichprobe).</li>
+          <li><strong>−42&nbsp;%</strong> median First-Response-Time an Kundenanfragen.</li>
+          <li><strong>−28&nbsp;%</strong> Tickets mit menschlicher Eskalation – gezielt bei Sonderfällen und Schadensmeldungen.</li>
+          <li><strong>0</strong> sicherheitsrelevante Vorfälle durch Tool-Missbrauch im Pilotfenster – unterstützt durch strikte Scopes und Audit-Logs.</li>
+        </ul>
+        <p>Die Zahl von 35 Stunden ist konservativ gerechnet: Sie enthält keine indirekten Effekte wie höhere Zufriedenheit der Fahrerinnen durch schnellere Klärung – diese wurden bewusst nicht monetarisiert, um den Business Case nicht aufzuweichen.</p>
+        <p>Die Geschäftsführung nutzte dieselben Kennzahlen für die Budgetplanung 2027: eingesparte Kapazität wurde teils in Ausbildung und teils in proaktive Kundenbetreuung umgeschichtet – ein Effekt, der sich nicht in einer einzelnen ROI-Zahl abbildet, aber strategisch wichtig war.</p>
+        <p>Zusätzlich dokumentierten wir typische Anfragetypen mit durchschnittlicher Bearbeitungszeit vor und nach Einführung des Agenten. Dadurch ließ sich nicht nur die Summe von 35 Stunden erklären, sondern auch zeigen, welche Kundensegmente am stärksten profitierten – ein Argument für die Vertriebsleitung, die Lösung auf weitere Regionen auszurollen.</p>
+
+        <h2>Lessons Learned</h2>
+        <p>Erstens: Ohne sauberes Playbook-<a href="../glossar.html">Grounding</a> steigt Halluzinationsrisiko bei Sonderzuschlägen und Tarifzonen – deshalb wurden Freitextantworten an Quellen gebunden. Zweitens: Disponenten akzeptierten Automation erst, wenn <a href="../glossar.html">Human-in-the-Loop</a> bei Ausnahmen sichtbar blieb. Drittens: ROI sprang sprunghaft, sobald CRM-Notizen automatisch konsistent wurden – weniger Doppelarbeit in Nachtschichten.</p>
+        <p>Für die strategische Einordnung lohnt <a href="openclaw-roi-berechnung.html">ROI-Berechnung für KI-Agenten</a> und der <a href="../index.html#roi-rechner">interaktive ROI-Rechner</a>; Use-Case-Sammlungen finden sich in <a href="openclaw-use-cases-mittelstand.html">OpenClaw Use Cases im Mittelstand</a> und im <a href="openclaw-fuer-unternehmen.html">Pillar-Leitfaden</a>.</p>
+        <p>Stakeholder-Management erwies sich als Erfolgsfaktor: wöchentliche 30-Minuten-Reviews mit Operations, IT und Vertrieb verhinderten, dass Anforderungen stillschweigend wuchsen. Jede Änderung am Tool-Set wurde im Änderungsprotokoll mit Business-Begründung dokumentiert – hilfreich für spätere Audits und für das Training neuer Teamleitungen.</p>
+        <p>Viertens: Sprachliche Einheitlichkeit war für Premiumkunden wichtiger als maximale Kreativität im Wording. Deshalb arbeitete der Agent mit festen Satzbausteinen und geprüften Formulierungen für sensible Themen (Schadensfälle, Grenzverzögerungen). Das reduzierte Nachjustierungen durch Marketing und beschleunigte rechtliche Freigaben.</p>
+        <p>Fünftens: Die Verknüpfung von TMS- und CRM-Daten erforderte abgestimmte Schlüssel (Sendungsnummer, Kundenreferenz). Einmal investierte Datenhygiene sparte später wochenlang manuelle Zuordnung – ein Reminder daran, dass <strong>KI Logistik</strong> immer auch Datenprojekt ist.</p>
+        <p>Sechstens: Nacht- und Wochenend-Schichten profitierten unmittelbar von konsistenten Antwortvorlagen, weil weniger Rückfragen an Tagteams nötig waren. Dieser Effekt war in der ersten Auswertung kaum sichtbar, wurde aber nach vier Wochen stabil – und genau deshalb in der finalen Stundenbilanz berücksichtigt.</p>
+
+        <h2>Fazit</h2>
+        <p>Diese <strong>OpenClaw Case Study</strong> zeigt, wie <strong>KI Logistik</strong> dann funktioniert, wenn man wiederkehrende Kommunikation entkoppelt, Tools eng begrenzt und Qualität messbar macht. Die <strong>OpenClaw Erfahrungen</strong> des Kunden: schnellerer Kundenservice, weniger Nachtarbeit im Backoffice und belastbare Zahlen für die Geschäftsführung – ohne die operative Realität von Straße und Rampe aus dem Blick zu verlieren.</p>
+        <p>Als Nächstes plant der Kunde die Erweiterung auf Schadensmeldungen mit Medienanhängen – ein höheres Risikoprofil, das zusätzliche Freigaben und ein separates Eval-Set erfordert. Die bestehende Architektur bleibt erhalten; es entstehen lediglich neue Skills mit schärferen Sandboxes. So bleibt die Case Study nicht statisches Marketing, sondern ein lebendiges Kapitel im kontinuierlichen Verbesserungsprozess.</p>
+
+        <div class="blog-cta">
+          <p>Ähnliche Potenziale in Ihrer Transport- oder Fulfillment-Steuerung? Wir analysieren Prozesse und liefern einen klaren Rollout-Plan mit KPIs.</p>
+          <a href="../index.html#kontakt" class="btn btn--primary btn--lg">Erstgespräch vereinbaren</a>
+        </div>
+
+        <div class="blog-related">
+          <h3>Weiterlesen</h3>
+          <ul>
+            <li><a href="openclaw-fuer-unternehmen.html">OpenClaw für Unternehmen (Pillar)</a></li>
+            <li><a href="openclaw-use-cases-mittelstand.html">OpenClaw Use Cases im Mittelstand</a></li>
+            <li><a href="openclaw-roi-berechnung.html">ROI-Berechnung für KI-Agenten</a></li>
+            <li><a href="../glossar.html">AI-Glossar</a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2025 Clawgency · <a href="mailto:hello@clawgency.de">hello@clawgency.de</a></p>
+        <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // ── Mobile burger ──
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('navMobile');
+    if (burger && mobileNav) {
+      burger.addEventListener('click', function () {
+        var open = mobileNav.style.display === 'block';
+        mobileNav.style.display = open ? 'none' : 'block';
+      });
+    }
+  })();
+  </script>
+  <script src="../cookie-banner.js"></script>
+</body>
+</html>

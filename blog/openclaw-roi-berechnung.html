@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ROI-Berechnung: Ab wann sich ein KI-Agent im Unternehmen rechnet | Clawgency</title>
+  <meta name="description" content="KI ROI Berechnung, OpenClaw ROI und KI-Agent Kosten: Implementierung, Betrieb, Einsparungen, Break-even und Branchenbeispiele – strukturiert erklärt von Clawgency." />
+  <meta name="keywords" content="KI ROI Berechnung, OpenClaw ROI, KI-Agent Kosten, KI Business Case, Automatisierung ROI" />
+  <meta name="author" content="Clawgency – OpenClaw Experten" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://clawgency.de/blog/openclaw-roi-berechnung.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://clawgency.de/blog/openclaw-roi-berechnung.html" />
+  <meta property="og:title" content="ROI-Berechnung: Ab wann sich ein KI-Agent im Unternehmen rechnet | Clawgency" />
+  <meta property="og:description" content="KI ROI Berechnung mit OpenClaw ROI und KI-Agent Kosten: Kostenblöcke, typischer Break-even und Beispiele aus Service, Vertrieb und Operations." />
+  <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="article:published_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:modified_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:section" content="Strategie" />
+  <meta property="article:tag" content="OpenClaw" />
+  <meta property="article:tag" content="ROI" />
+  <meta property="article:tag" content="KI-Agent" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KI ROI Berechnung &amp; OpenClaw ROI | Clawgency" />
+  <meta name="twitter:description" content="KI ROI Berechnung, OpenClaw ROI, KI-Agent Kosten: So ermitteln Sie Break-even und Geschäftsnutzen seriös." />
+  <meta name="twitter:image" content="https://clawgency.de/assets/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Start",
+        "item": "https://clawgency.de/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://clawgency.de/#blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ROI-Berechnung KI-Agent",
+        "item": "https://clawgency.de/blog/openclaw-roi-berechnung.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ROI-Berechnung: Ab wann sich ein KI-Agent im Unternehmen rechnet",
+    "description": "Leitfaden zu KI ROI Berechnung, OpenClaw ROI und KI-Agent Kosten mit Kostentreibern, Einsparungen, Break-even und Branchenbeispielen.",
+    "image": ["https://clawgency.de/assets/og-image.jpg"],
+    "datePublished": "2026-04-15T08:00:00+02:00",
+    "dateModified": "2026-04-15T08:00:00+02:00",
+    "author": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://clawgency.de/assets/logo-crab.webp"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://clawgency.de/blog/openclaw-roi-berechnung.html"
+    },
+    "articleSection": "Strategie",
+    "keywords": ["KI ROI Berechnung", "OpenClaw ROI", "KI-Agent Kosten", "Business Case", "Break-even"],
+    "inLanguage": "de-DE"
+  }
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-crab-48.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="stylesheet" href="../styles.min.css" />
+
+  <style>
+    .blog-article-page { padding: 7rem 0 4rem; min-height: 100vh; }
+    .blog-article-page article { max-width: 780px; margin: 0 auto; }
+    .blog-article-page h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--c-white); margin-bottom: 1rem; }
+    .blog-article-page h2 { font-size: 1.5rem; color: var(--c-white); margin: 3rem 0 1rem; }
+    .blog-article-page h3 { font-size: 1.15rem; color: var(--c-white); margin: 2rem 0 0.75rem; }
+    .blog-article-page p { color: var(--c-text-muted); line-height: 1.8; margin-bottom: 1.25rem; }
+    .blog-article-page ul, .blog-article-page ol { color: var(--c-text-muted); padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; }
+    .blog-article-page a { color: var(--c-accent); }
+    .blog-article-page a:hover { text-decoration: underline; }
+    .blog-article-page strong { color: var(--c-text); }
+    .blog-article-page blockquote { border-left: 3px solid var(--c-accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--c-surface); border-radius: 0 var(--r-md) var(--r-md) 0; }
+    .blog-article-page blockquote p { margin-bottom: 0; font-style: italic; }
+    .blog-article-page .blog-meta { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--c-text-dim); margin-bottom: 2rem; flex-wrap: wrap; }
+    .blog-article-page .blog-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); background: var(--c-accent-dim); border: 1px solid rgba(230,57,70,0.2); padding: 0.2rem 0.6rem; border-radius: var(--r-full); margin-bottom: 0.75rem; }
+    .blog-article-page .blog-cta { text-align: center; padding: 3rem 2rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); margin-top: 3rem; }
+    .blog-article-page .blog-cta p { color: var(--c-text-muted); margin-bottom: 1.5rem; }
+    .blog-article-page .blog-related { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--c-border); }
+    .blog-article-page .blog-related h3 { margin-top: 0; }
+    .blog-article-page .blog-related ul { list-style: none; padding: 0; }
+    .blog-article-page .blog-related li { padding: 0.5rem 0; }
+    .blog-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+    .blog-back:hover { color: var(--c-accent); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <img src="../assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
+        <span class="nav__logo-text">Clawgency</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+      </ul>
+      <a href="../index.html#kontakt" class="btn btn--nav">Erstgespräch buchen</a>
+      <button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul>
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+        <li><a href="../index.html#kontakt" class="btn btn--primary" style="display:inline-block;margin-top:1rem;">Erstgespräch buchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-article-page">
+    <div class="container">
+      <a href="../index.html" class="blog-back">← Zurück zur Startseite</a>
+
+      <article>
+        <span class="blog-tag">Strategie</span>
+        <h1>ROI-Berechnung: Ab wann sich ein KI-Agent im Unternehmen rechnet</h1>
+
+        <div class="blog-meta">
+          <span>Veröffentlicht: 15. April 2026</span>
+          <span>Lesezeit: ca. 10 Min.</span>
+          <span>Autor: Clawgency</span>
+        </div>
+
+        <p>Entscheider fragen zu Recht nach belastbaren Zahlen: Lohnt sich ein autonomer Assistent wirklich – oder ist er nur ein teures Laborprojekt? Eine saubere <strong>KI ROI Berechnung</strong> verbindet <strong>KI-Agent Kosten</strong> mit messbaren Effekten: eingesparte Stunden, schnellere Durchlaufzeiten, höhere Conversion oder weniger Fehlbuchungen. Für OpenClaw-Projekte sprechen wir bewusst von <strong>OpenClaw ROI</strong> als Gesamtbild aus Implementierung, Betrieb und Risikoreduktion – nicht nur aus API-Rechnungen. Den schnellen Rechner finden Sie auf der Startseite im Abschnitt <a href="../index.html#roi-rechner">OpenClaw ROI-Rechner</a>; dieser Artikel erklärt die zugrunde liegende Logik und typische Break-even-Punkte.</p>
+
+        <h2>Die drei Säulen des Business Case</h2>
+        <p>Zuerst sollten Sie Nutzen, Kosten und Risiko getrennt führen – sonst vermischen sich Einmalinvestition und laufender Betrieb, und das Controlling verliert die Spur. Nutzen umfasst direkte Zeiteinsparungen (FTE-Stunden), indirekte Effekte (z.&nbsp;B. höhere Abschlussquote im Vertrieb) und Qualitätsgewinne (weniger Retouren). Kosten umfassen Projekt, Infrastruktur, Modellnutzung, Wartung und interne Steuerungsaufwände. Risiko adressieren Sie über Reduktion von Fehlern, Compliance-Verstößen oder SLA-Verletzungen – das lässt sich konservativ monetarisieren.</p>
+        <p>Ein praktikables Minimum ist ein 12-Monats-Horizont mit konservativer Automatisierungsquote und einem Szenario „Pessimistisch / Basis / Optimistisch“. So bleibt die <strong>KI ROI Berechnung</strong> diskutierbar, ohne dass ein einzelner Schätzwert die ganze Story tragen muss.</p>
+        <p>Verankern Sie die Rechnung beim richtigen Kostenträger: einzelne Fachbereiche, Shared-Service-Center oder IT als interner Dienstleister. Unterschiedliche Träger führen zu unterschiedlichen Vollkostensätzen – und damit zu unterschiedlichem Break-even, selbst wenn die Rohstunden gleich bleiben. Dokumentieren Sie, ob Sie Opportunitätskosten (z.&nbsp;B. ausgelastete Spezialisten) oder nur direkte Lohnnebenkosten einbeziehen; beides ist legitim, sollte aber einheitlich kommuniziert werden.</p>
+        <p>Ein weiterer Hebel ist die Wahl der Pilotpopulation: Teams mit hoher Ticket- oder Vorgangsähnlichkeit liefern schneller belastbare Kurven als Early Adopters mit Sonderfällen. Kombinieren Sie deshalb quantitative Zeiterfassung mit qualitativen Interviews – sonst unterschätzen Sie versteckte Koordinationsaufwände zwischen Linien und IT.</p>
+
+        <h2>Kostenblöcke: Was in KI-Agent Kosten hineingehört</h2>
+        <p>Die häufigsten Kostenpositionen in OpenClaw-Projekten:</p>
+        <ul>
+          <li><strong>Analyse &amp; Konzeption:</strong> Prozessmapping, Datenklassifikation, Auswahl der Tools und Freigabeprozesse – oft unterschätzt, aber entscheidend für spätere Stabilität.</li>
+          <li><strong>Implementierung:</strong> Skills, Integrationen, UI-Anbindungen, Tests und Evals – siehe <a href="../glossar.html">Evaluation</a> im Glossar.</li>
+          <li><strong>Infrastruktur:</strong> Compute für Inferenz, Vektorspeicher, Logging/SIEM, Backups – besonders relevant bei <a href="openclaw-enterprise-architektur.html">Enterprise-Architektur</a> und dediziertem Hosting in der EU.</li>
+          <li><strong>Modell- und Tokenkosten:</strong> Abhängig von Volumen, Kontextlänge und Caching-Strategie; lassen sich durch Routing auf kleinere Modelle für Routineaufgaben drosseln.</li>
+          <li><strong>Change Management:</strong> Schulungen, Playbooks, Eskalationsketten – ohne diese Position unterschätzen viele Teams die Adoption.</li>
+        </ul>
+        <p>Wer Integrationsaufwand realistisch einschätzt, sollte <a href="openclaw-sap-salesforce-integration.html">SAP- und Salesforce-Szenarien</a> als Referenz heranziehen: Dort zeigt sich schnell, ob der ROI eher aus hohem Transaktionsvolumen oder aus wenigen, aber sehr teuren Expertenstunden kommt.</p>
+        <p>Vergessen Sie nicht Folgekosten wie Lizenzprüfungen für zusätzliche API-Nutzung, erweiterte Monitoring-Lizenzen oder höhere Speicherkosten für längere Audit-Logs. Diese Posten sind oft klein im Vergleich zur Personalkostenreduktion, werden aber im internen Abrechnungsmodell schnell zum politischen Streitpunkt, wenn sie erst nach Go-Live auftauchen.</p>
+
+        <blockquote>
+          <p>ROI entsteht nicht im Modell, sondern im Prozess: Wiederholrate × Zeiteinsparung pro Fall − Fehlerkosten.</p>
+        </blockquote>
+
+        <h2>Einsparungen quantifizieren</h2>
+        <p>Der einfachste Kern ist: <code>Automatisierte Fälle pro Woche × Minuten pro Fall × Vollkosten Satz / 60</code>. Achten Sie auf Netto-Automatisierung: Was der Agent erledigt, muss vorher wirklich manuell war – nicht bereits durch Macros erledigt. Für Service-Teams lohnt eine Stichprobe aus Tickets der letzten 90 Tage; für Vertrieb eine Pipeline-Analyse mit Stufenzeiten.</p>
+        <p>Qualitative Effekte lassen sich vorsichtig bewerten: z.&nbsp;B. 0,5&nbsp;% höhere Win-Rate aufgrund schnellerer Follow-ups. Markieren Sie solche Annahmen explizit als „weich“ und führen Sie sie getrennt von harten Stundeneinsparungen – das erhöht Glaubwürdigkeit bei CFO und Aufsichtsrat.</p>
+        <p>Segmentieren Sie den Nutzen nach Kanal und Sprache, wenn Ihr Unternehmen international aufgestellt ist. Manchmal trägt nur ein Teilmarkt den ROI, während Übersetzungs- und Lokalisierungskosten initial alle Sprachen belasten. Frühzeitige Fokussierung verhindert, dass ein breiter Rollout die Kennzahlen verwässert, bevor das Modell überhaupt stabil genug ist.</p>
+        <p>Verknüpfen Sie Einsparungen mit Qualitätsmetriken: kürzere Bearbeitungszeit nützt wenig, wenn sich gleichzeitig die Reklamationsrate erhöht. Ein einfaches Dashboard aus Kundenzufriedenheit (CSAT), Nacharbeit („reopened tickets“) und First-Contact-Resolution ergänzt jede Stunden-Bilanz um die Schutzseite der Marke.</p>
+
+        <h2>Typischer Break-even und Zeitachse</h2>
+        <p>In B2B-Service-Piloten sehen wir häufig Break-even zwischen drei und neun Monaten, sobald mindestens 40–60&nbsp;% der anvisierten Fälle stabil automatisiert sind und keine Parallelorganisation mehr nötig ist. Kürzer wird es bei hohem Ticketvolumen und klar begrenzten Tools; länger bei stark regulierten Freigaben oder tiefer SAP-Individualisierung. Der <a href="../index.html#roi-rechner">ROI-Rechner</a> auf der Startseite visualisiert diese Zusammenhänge interaktiv – ideal für Workshops mit Fachbereich und IT.</p>
+        <p>Planen Sie bewusst eine „Lernphase“: In den ersten Wochen nach Go-Live steigen Qualitätskosten (Nacharbeit, Prompt-Tuning). Ihre <strong>OpenClaw ROI</strong>-Kurve startet deshalb selten linear – das ist normal, solange Sie Metriken wie First-Contact-Resolution und menschliche Eskalationsrate tracken.</p>
+        <p>Break-even hängt auch von Finanzierungslogik ab: CapEx für eigene GPU-Knoten versus OpEx für API-Tokens verändert Cashflow und Amortisationsdauer, selbst wenn die technische Lösung identisch ist. Entscheiden Sie gemeinsam mit Finance, ob Sie den Agenten als Projekt, Produktlinie oder internen Service behandeln – die steuerliche und budgetäre Einordnung beeinflusst häufig die Akzeptanz von Cloud-Kosten.</p>
+
+        <h2>Branchenbeispiele (illustrativ)</h2>
+        <p><strong>Logistik &amp; Dispatch:</strong> Ein Agent übernimmt Statuskommunikation und Disponenten-Vorprüfung – hohe Fallzahl, moderate Komplexität. Hier dominieren Zeiteinsparungen; Details finden Sie auch in der <a href="case-study-logistik-openclaw.html">Logistik-Case-Study</a>.</p>
+        <p><strong>Industriegüter-Vertrieb:</strong> Weniger Fälle, aber hoher Stundenwert pro Opportunity. Schon wenige zusätzlich qualifizierte Meetings pro Quartal können den Business Case tragen – kombiniert mit schnellerer Angebotserstellung aus CRM- und ERP-Daten.</p>
+        <p><strong>Interner IT-Service:</strong> Hohe Wiederholrate, klare Wissensbasen. ROI kommt aus First-Level-Deflektion und kürzerer MTTR, wenn der Agent Runbooks und Known-Errors zuverlässig vorsortiert.</p>
+        <p><strong>Finanz- und Rechnungswesen:</strong> Mittlere Fallzahl, aber hohe Genauigkeitsanforderungen. Der Business Case lebt von Fehlervermeidung (Storno, Mahngebühren) und beschleunigter Monatsabschluss-Vorbereitung – monetarisieren Sie deshalb Konsequenzen aus verspäteten Buchungen explizit, statt nur „schneller“ zu argumentieren.</p>
+
+        <h2>Risiken und versteckte Kosten</h2>
+        <p>Ohne Governance steigen Nacharbeit und Compliance-Risiko – das frisst ROI. Investieren Sie parallel in Logging, Zugriffsrechte und rechtssichere Datenflüsse (<a href="openclaw-dsgvo-konform.html">DSGVO mit OpenClaw</a>). Technisch günstige Cloud-Inferenz kann teuer werden, wenn sensible Daten nicht hätten exportiert werden dürfen – hier zahlt sich <a href="openclaw-enterprise-architektur.html">Enterprise-Architektur</a> aus, weil sie Fehlkonfigurationen früh verhindert.</p>
+        <p>Für Use-Case-Ideen jenseits der klassischen Service-Automation liefert <a href="openclaw-use-cases-mittelstand.html">OpenClaw Use Cases im Mittelstand</a> zusätzliche Ankerpunkte; der strategische Rahmen steht im <a href="openclaw-fuer-unternehmen.html">Pillar-Leitfaden</a>.</p>
+        <p>Schließlich sollten Sie politische Kosten einplanen: Gremienarbeit, Information der Beschäftigten und ggf. Mitbestimmung je nach Rechtsraum. Technischer ROI nützt wenig, wenn ein Rollout monatelang auf Freigaben wartet. Frühzeitige Transparenz über Datenflüsse und Kontrollmechanismen – etwa über <a href="openclaw-enterprise-architektur.html">Enterprise-Architektur</a> – verkürzt diese Phase häufig spürbar.</p>
+
+        <h2>Dashboard und Steuerungsrhythmus</h2>
+        <p>Die beste <strong>KI ROI Berechnung</strong> nutzt nichts, wenn niemand die Zahlen anschaut. Wir empfehlen ein schlankes monatliches Review: Ist die Automatisierungsquote stabil, steigen Nacharbeitsminuten, haben sich externe Kosten (Tokens, APIs) bewegt, und welche drei Tickets verursachen noch manuelle Eskalationen? Aus diesen Fragen entstehen gezielte Backlog-Items – oft schneller umsetzbar als ein weiteres großes Modell-Upgrade.</p>
+        <p>Verknüpfen Sie das Dashboard mit dem <a href="../index.html#roi-rechner">ROI-Rechner</a> auf der Startseite: dieselben Parameter (Mitarbeitende, Stunden, Stundenlohn, Automatisierungsgrad) können als „Plan“-Linie eingezeichnet werden, während Ist-Werte aus Zeiterfassung und Ticketsystem kommen. So bleibt <strong>OpenClaw ROI</strong> ein Führungsinstrument statt einer einmaligen PowerPoint-Slide.</p>
+
+        <h2>Fazit</h2>
+        <p>Eine belastbare <strong>KI ROI Berechnung</strong> listet <strong>KI-Agent Kosten</strong> vollständig, bewertet Nutzen konservativ und macht Annahmen transparent. <strong>OpenClaw ROI</strong> entsteht, wenn Sie hohe Wiederholrate mit sicheren Tools und messbaren KPIs verbinden – und den Rechner auf der Startseite als lebendes Planungsinstrument nutzen, nicht nur als Marketingwidget.</p>
+
+        <div class="blog-cta">
+          <p>Möchten Sie Ihre Zahlen gemeinsam validieren oder den ROI-Rechner auf Ihre Organisation kalibrieren? Melden Sie sich – wir liefern eine belastbare Business-Case-Datei.</p>
+          <a href="../index.html#kontakt" class="btn btn--primary btn--lg">Erstgespräch vereinbaren</a>
+        </div>
+
+        <div class="blog-related">
+          <h3>Weiterlesen</h3>
+          <ul>
+            <li><a href="../index.html#roi-rechner">OpenClaw ROI-Rechner (Startseite)</a></li>
+            <li><a href="openclaw-use-cases-mittelstand.html">OpenClaw Use Cases im Mittelstand</a></li>
+            <li><a href="openclaw-fuer-unternehmen.html">OpenClaw für Unternehmen (Pillar)</a></li>
+            <li><a href="../glossar.html">AI-Glossar</a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2025 Clawgency · <a href="mailto:hello@clawgency.de">hello@clawgency.de</a></p>
+        <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // ── Mobile burger ──
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('navMobile');
+    if (burger && mobileNav) {
+      burger.addEventListener('click', function () {
+        var open = mobileNav.style.display === 'block';
+        mobileNav.style.display = open ? 'none' : 'block';
+      });
+    }
+  })();
+  </script>
+  <script src="../cookie-banner.js"></script>
+</body>
+</html>

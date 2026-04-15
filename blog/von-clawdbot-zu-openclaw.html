@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Von Clawdbot zu OpenClaw: Die Evolution der KI-Agenten | Clawgency</title>
+  <meta name="description" content="Clawdbot, Moltbot und OpenClaw Geschichte: Wie sich das Agenten-Framework entwickelt hat, was sich technisch geändert hat und warum Open Source die Zukunft prägt." />
+  <meta name="keywords" content="Clawdbot, Moltbot, OpenClaw Geschichte, OpenClaw Open Source, KI-Agent Framework" />
+  <meta name="author" content="Clawgency – OpenClaw Experten" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://clawgency.de/blog/von-clawdbot-zu-openclaw.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://clawgency.de/blog/von-clawdbot-zu-openclaw.html" />
+  <meta property="og:title" content="Von Clawdbot zu OpenClaw: Die Evolution der KI-Agenten | Clawgency" />
+  <meta property="og:description" content="Clawdbot und Moltbot als Vorläufer, OpenClaw als offenes Framework: Geschichte, Umbenennung und technische Fortschritte im Überblick." />
+  <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="article:published_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:modified_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:section" content="Vergleich" />
+  <meta property="article:tag" content="OpenClaw" />
+  <meta property="article:tag" content="Clawdbot" />
+  <meta property="article:tag" content="Moltbot" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Clawdbot, Moltbot, OpenClaw | Clawgency" />
+  <meta name="twitter:description" content="OpenClaw Geschichte: Von Clawdbot und Moltbot zum offenen Agenten-Framework – was sich geändert hat und warum." />
+  <meta name="twitter:image" content="https://clawgency.de/assets/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Start",
+        "item": "https://clawgency.de/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://clawgency.de/#blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Von Clawdbot zu OpenClaw",
+        "item": "https://clawgency.de/blog/von-clawdbot-zu-openclaw.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Von Clawdbot zu OpenClaw: Die Evolution der KI-Agenten",
+    "description": "Einordnung zu Clawdbot, Moltbot und der OpenClaw Geschichte: technische Weiterentwicklung, Umbenennung und Bedeutung der Open-Source-Entscheidung.",
+    "image": ["https://clawgency.de/assets/og-image.jpg"],
+    "datePublished": "2026-04-15T08:00:00+02:00",
+    "dateModified": "2026-04-15T08:00:00+02:00",
+    "author": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://clawgency.de/assets/logo-crab.webp"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://clawgency.de/blog/von-clawdbot-zu-openclaw.html"
+    },
+    "articleSection": "Vergleich",
+    "keywords": ["Clawdbot", "Moltbot", "OpenClaw Geschichte", "Open Source", "KI-Agent"],
+    "inLanguage": "de-DE"
+  }
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-crab-48.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="stylesheet" href="../styles.min.css" />
+
+  <style>
+    .blog-article-page { padding: 7rem 0 4rem; min-height: 100vh; }
+    .blog-article-page article { max-width: 780px; margin: 0 auto; }
+    .blog-article-page h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--c-white); margin-bottom: 1rem; }
+    .blog-article-page h2 { font-size: 1.5rem; color: var(--c-white); margin: 3rem 0 1rem; }
+    .blog-article-page h3 { font-size: 1.15rem; color: var(--c-white); margin: 2rem 0 0.75rem; }
+    .blog-article-page p { color: var(--c-text-muted); line-height: 1.8; margin-bottom: 1.25rem; }
+    .blog-article-page ul, .blog-article-page ol { color: var(--c-text-muted); padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; }
+    .blog-article-page a { color: var(--c-accent); }
+    .blog-article-page a:hover { text-decoration: underline; }
+    .blog-article-page strong { color: var(--c-text); }
+    .blog-article-page blockquote { border-left: 3px solid var(--c-accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--c-surface); border-radius: 0 var(--r-md) var(--r-md) 0; }
+    .blog-article-page blockquote p { margin-bottom: 0; font-style: italic; }
+    .blog-article-page .blog-meta { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--c-text-dim); margin-bottom: 2rem; flex-wrap: wrap; }
+    .blog-article-page .blog-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); background: var(--c-accent-dim); border: 1px solid rgba(230,57,70,0.2); padding: 0.2rem 0.6rem; border-radius: var(--r-full); margin-bottom: 0.75rem; }
+    .blog-article-page .blog-cta { text-align: center; padding: 3rem 2rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); margin-top: 3rem; }
+    .blog-article-page .blog-cta p { color: var(--c-text-muted); margin-bottom: 1.5rem; }
+    .blog-article-page .blog-related { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--c-border); }
+    .blog-article-page .blog-related h3 { margin-top: 0; }
+    .blog-article-page .blog-related ul { list-style: none; padding: 0; }
+    .blog-article-page .blog-related li { padding: 0.5rem 0; }
+    .blog-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+    .blog-back:hover { color: var(--c-accent); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <img src="../assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
+        <span class="nav__logo-text">Clawgency</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+      </ul>
+      <a href="../index.html#kontakt" class="btn btn--nav">Erstgespräch buchen</a>
+      <button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul>
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+        <li><a href="../index.html#kontakt" class="btn btn--primary" style="display:inline-block;margin-top:1rem;">Erstgespräch buchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-article-page">
+    <div class="container">
+      <a href="../index.html" class="blog-back">← Zurück zur Startseite</a>
+
+      <article>
+        <span class="blog-tag">Vergleich</span>
+        <h1>Von Clawdbot zu OpenClaw: Die Evolution der KI-Agenten</h1>
+
+        <div class="blog-meta">
+          <span>Veröffentlicht: 15. April 2026</span>
+          <span>Lesezeit: ca. 10 Min.</span>
+          <span>Autor: Clawgency</span>
+        </div>
+
+        <p>Die <strong>OpenClaw Geschichte</strong> ist untrennbar mit früheren Namen verbunden: <strong>Clawdbot</strong> und <strong>Moltbot</strong> stehen für Experimentierfreude, schnelle Iteration und eine Community, die autonome Hilfen jenseits statischer Chatbots wollte. Heute steht OpenClaw für ein ausdrücklich offenes Agenten-Framework, das sich an Unternehmensanforderungen wie Sicherheit, Integration und Beobachtbarkeit ausrichtet. Dieser Artikel ordnet die Stationen der Entwicklung ein, erklärt, warum Umbenennungen in schnell wachsenden Ökosystemen normal sind, und warum die <strong>Open-Source-Entscheidung</strong> strategisch wie technisch Sinn ergibt. Für Begriffe wie <a href="../glossar.html">Agent</a>, <a href="../glossar.html">RAG</a> oder <a href="../glossar.html">LLM</a> lohnt ein Blick ins Glossar.</p>
+
+        <h2>Clawdbot: Ursprung und Fokus</h2>
+        <p><strong>Clawdbot</strong> markierte die Phase, in der sich ein Kreis von Builderinnen und Buildern darauf konzentrierte, KI nicht nur zu „befragen“, sondern an Tools und kleine Workflows anzubinden. Typisch war der Fokus auf Geschwindigkeit: Prototypen entstanden über Nacht, Integrationen waren pragmatisch, Dokumentation wuchs organisch. Für Unternehmen war das spannend, aber oft zu wenig formalisiert – gerade wenn es um Rollenmodelle, revisionssichere Logs oder EU-Hosting ging.</p>
+        <p>Was blieb, war die Kernidee: Ein Assistent, der nicht nur Text generiert, sondern Pläne macht, APIs aufruft und sich an wiederkehrende Aufgaben herantastet – heute sauberer gefasst als <a href="../glossar.html">Tool-/Function-Calling</a> plus Orchestrierung. Diese DNA findet sich in aktuellen Skills und Eval-Pipelines wieder, auch wenn die Oberflächen gereifter sind.</p>
+        <p>In dieser frühen Phase entstanden viele „Glue“-Skripte zwischen Chat-UI und internen REST-Endpunkten. Das war für Machbarkeitsnachweise ideal, erschwerte aber spätere Zertifizierungen: Versionsstände drifteten auseinander, Konfigurationen lagen verstreut, und Onboarding neuer Entwickler dauerte. Genau diese Erfahrung treibt heute die Modularisierung voran, die wir in <a href="openclaw-sap-salesforce-integration.html">Integrationsleitfäden</a> beschreiben.</p>
+        <p>Community-Feedback drehte sich damals stark um Geschwindigkeit und Demos – weniger um Langzeit-KPIs. Für Unternehmen heißt das: Die frühe Enthusiasmuskurve ist kein Maßstab für Produktionsreife; sie zeigt höchstens Innovationsbereitschaft im Team.</p>
+
+        <h2>Moltbot: Zwischenname, größere Ambition</h2>
+        <p><strong>Moltbot</strong> steht symbolisch für den Wachstumsschmerz erfolgreicher Open-Projekte: mehr Beitragende, mehr Erwartungen, mehr Diskussion über Markenidentität und Lizenzierung. In dieser Phase wurden häufig Architekturthemen lauter, die Enterprise-Kunden kennen: Trennung von Kontextspeicher und Ausführungsumgebung, klarere Schnittstellen zu Modellanbietern, härtere Defaults bei Sicherheit. Kurz: Die Community wollte nicht nur Demos, sondern Betriebsfestigkeit.</p>
+        <p>Für IT-Leitungen war das der Moment, in dem „Open Source“ nicht mehr nur „kostenlos“, sondern „prüfbar und anpassbar“ bedeutete – ein Argument, das wir in <a href="openclaw-enterprise-architektur.html">Enterprise-Architektur</a> und <a href="openclaw-dsgvo-konform.html">DSGVO-Leitfäden</a> immer wieder heranziehen.</p>
+        <p>Parallel wuchs die Erwartungshaltung an Dokumentation und Release-Disziplin: Breaking Changes mussten kommuniziert werden, Migrationspfade skizziert und Beispielprojekte gepflegt werden – Aufgaben, die früher „nebenbei“ erledigt wurden. Das spiegelt eine allgemeine Reifephase im Markt für <a href="../glossar.html">Agent</a>-Systeme wider: von Spielzeug zu Infrastruktur.</p>
+
+        <blockquote>
+          <p>Ein Framework reift, wenn es nicht mehr nur beeindruckt – sondern wenn es versagt, ohne dass niemand merkt, wer was getan hat.</p>
+        </blockquote>
+
+        <h2>OpenClaw: Reifegrad, Klarheit, Ökosystem</h2>
+        <p>Mit OpenClaw wird die Linie geschärft: klarer Name, klarere Positionierung als offene Basis für <a href="../glossar.html">Agentic Workflows</a>, stärkere Betonung von Integrationen in ERP, CRM und Ticketsysteme. Technisch zeigt sich das in modularen Skills, besserer Testbarkeit und den Bausteinen, die wir für <a href="openclaw-sap-salesforce-integration.html">SAP &amp; Salesforce</a> beschreiben: Gateway, Schemas, Idempotenz, Monitoring.</p>
+        <p>Was sich für Praktiker konkret verbessert hat, lässt sich in vier Punkten bündeln:</p>
+        <ul>
+          <li><strong>Operabilisierung:</strong> Healthchecks, Metriken und Runbooks rücken in den Vordergrund – weniger „Notebook-Charme“, mehr SRE-Denken.</li>
+          <li><strong>Sicherheit by Design:</strong> Least-Privilege-Tooling, Sandboxing und Audit-Trails werden zur Erstklass-Thematik statt Add-on.</li>
+          <li><strong>Integrationsreife:</strong> Standardmuster für OAuth, Webhooks und Batch-Jobs ersetzen Ad-hoc-Skripte.</li>
+          <li><strong>Qualitätssicherung:</strong> Eval-Sets und Regressionstests werden zum festen Bestandteil des Release-Zyklus.</li>
+        </ul>
+        <p>Ökonomisch betrachtet zieht ein gereifter Stack auch neue Partner an: Systemhäuser, Integratoren und spezialisierte Agenturen wie Clawgency können auf stabile Schnittstellen setzen, statt jede Kundeninstallation als Fork zu behandeln. Das beschleunigt wiederum den Wissensaustausch in der Community, weil Best Practices portierbar werden – ein Kreislauf, der proprietären Closed-Stacks oft fehlt.</p>
+
+        <h2>Warum überhaupt umbenennen?</h2>
+        <p>Namen sind bei Community-Projekten mehr als Marketing: Sie signalisieren Lizenzmodelle, Governance und internationale Ansprache. Umbenennungen reduzieren Kollisionen mit anderen Marken, vermeiden Verwechslungen in Paketregistern und helfen Unternehmen, interne Freigaben zu fahren – „Wir rollen Moltbot aus“ klingt für manche Gremien nun einmal anders als „Wir standardisieren auf OpenClaw“. Zugleich bleibt die Kontinuität im Code und in den Maintainerinnen erhalten.</p>
+        <p>Wer die Einordnung gegenüber geschlossenen Plattformen sucht, findet sie in <a href="openclaw-vs-chatgpt-n8n-zapier.html">OpenClaw vs. ChatGPT, n8n &amp; Zapier</a>; wer den Business Case braucht, in <a href="openclaw-roi-berechnung.html">ROI-Berechnung für KI-Agenten</a> und im <a href="../index.html#roi-rechner">ROI-Rechner</a> auf der Startseite.</p>
+        <p>Marketingseitig hilft ein einheitlicher Name auch der Suche: SEO, Paketmanager und Support-Tickets verweisen auf dieselbe Quelle. Intern vermeidet das Doppelarbeit in Schulungsunterlagen – ein Punkt, den Fachbereiche oft zu spät merken, wenn noch drei Begriffe für dasselbe System kursieren.</p>
+
+        <h2>Die Open-Source-Entscheidung</h2>
+        <p>Open Source ist für Agentenframeworks kein Luxus, sondern ein Kontrollinstrument: Sie sehen, welche Daten wohin fließen, können Air-Gaps fahren und langfristig nicht von einem einzelnen Anbieter-Pfad abhängig werden. Das ist besonders relevant, wenn <a href="openclaw-dsgvo-konform.html">DSGVO</a> und Branchenregulatorik eine Rolle spielen. Gleichzeitig bedeutet Open Source nicht „ohne Kosten“ – professioneller Betrieb, Patches und Support bleiben wirtschaftliche Faktoren, die wir im <a href="openclaw-fuer-unternehmen.html">Pillar-Artikel</a> transparent machen.</p>
+        <p>Community und kommerzielle Dienstleister ergänzen sich: Die einen liefern Innovation und Review-Tiefe, die anderen Implementierungsgeschwindigkeit und SLA. Genau dort positioniert sich Clawgency – ohne die offene Basis zu verschließen.</p>
+        <p>Langfristig gewinnt Open Source an Boden, weil Regulatorik Transparenz belohnt: Sie können nachweisen, welche Komponente welche Daten verarbeitet, statt auf Black-Box-Zusicherungen zu vertrauen. Das ist kein Garant für automatische Compliance – aber ein solider Ausgangspunkt für Reviews mit Datenschutz und Informationssicherheit.</p>
+        <p>Für Teams, die heute noch alte Artefakte pflegen, lohnt eine bewusste Migrationsgeschichte: Archivieren Sie veraltete Repositories klar als „deprecated“, verlinken Sie auf aktuelle OpenClaw-Dokumentation und synchronisieren Sie interne Wikis. So vermeiden Sie, dass neue Mitarbeitende aus Versehen veraltete <strong>Clawdbot</strong>-Snippets kopieren.</p>
+
+        <h2>Fazit</h2>
+        <p>Die Reise von <strong>Clawdbot</strong> über <strong>Moltbot</strong> zu <strong>OpenClaw</strong> ist mehr als eine Namensfolge: Sie spiegelt den Reifegrad autonomer Systeme wider, die heute im Mittelstand produktiv laufen müssen. Die <strong>OpenClaw Geschichte</strong> ist damit auch eine Geschichte über Verantwortung – für Daten, für Erklärbarkeit und für nachhaltigen Betrieb. Wer tiefer einsteigen will, kombiniere diesen Artikel mit dem <a href="openclaw-fuer-unternehmen.html">umfassenden Unternehmensleitfaden</a> und dem <a href="../glossar.html">Glossar</a>.</p>
+        <p>Für bestehende Installationen empfehlen wir einen kurzen „Heritage-Check“: Welche Skripte stammen noch aus Experimentierphasen, welche Skills sind produktiv, und wo fehlen Tests? Solche Inventuren sind unromantisch, verhindern aber, dass technische Schulden unter dem Label KI weiterwachsen. Sie sind zugleich der sanfteste Einstieg in eine Modernisierung – ohne Big-Bang-Rewrite.</p>
+        <p>Wenn Sie OpenClaw heute neu evaluieren, bewerten Sie bewusst drei Zeithorizonte: 30 Tage bis Pilot, 90 Tage bis messbare KPIs, 12 Monate bis stabiler Betrieb mit zweiter Iteration. Genau diese Erwartungsklärung hilft Management und Community gleichermaßen, Frustration zu vermeiden – unabhängig davon, ob der Einstieg historisch über <strong>Clawdbot</strong>, <strong>Moltbot</strong> oder direkt über <strong>OpenClaw</strong> erfolgte.</p>
+        <p>Ein weiterer Kulturpunkt ist Wissensweitergabe: frühe Projekte liefen oft über Einzelpersonen, die „im Kopf“ wussten, welche API-Workarounds nötig waren. Heute gehören README-Dateien, Architekturentscheidungen (ADRs) und kurze interne Walkthroughs zum Standard – nicht aus Bürokratie, sondern damit <strong>Moltbot</strong>-Erfahrungen nicht jedes Team von vorn beginnen muss.</p>
+        <p>Schauen Sie abschließend auf Ihre Tool-Landschaft: Wenn dieselbe Aufgabe in n8n, Skripten und einem Agenten parallel existiert, steigen Wartungskosten. Die Evolution zu OpenClaw ist auch eine Chance, solche Redundanzen bewusst abzubauen und Verantwortlichkeiten klar zuzuweisen – ähnlich wie in klassischen Integrationsplattformen, nur mit stärkerem Fokus auf sprachliche Flexibilität und <a href="../glossar.html">Halluzination</a>-Kontrolle.</p>
+
+        <div class="blog-cta">
+          <p>Sie möchten OpenClaw strategisch einführen oder eine bestehende Installation professionalisieren? Wir begleiten Migration, Architektur und Go-Live.</p>
+          <a href="../index.html#kontakt" class="btn btn--primary btn--lg">Erstgespräch vereinbaren</a>
+        </div>
+
+        <div class="blog-related">
+          <h3>Weiterlesen</h3>
+          <ul>
+            <li><a href="openclaw-fuer-unternehmen.html">OpenClaw für Unternehmen (Pillar)</a></li>
+            <li><a href="openclaw-vs-chatgpt-n8n-zapier.html">OpenClaw vs. ChatGPT, n8n &amp; Zapier</a></li>
+            <li><a href="openclaw-enterprise-architektur.html">OpenClaw Enterprise Architektur</a></li>
+            <li><a href="../glossar.html">AI-Glossar</a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2025 Clawgency · <a href="mailto:hello@clawgency.de">hello@clawgency.de</a></p>
+        <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // ── Mobile burger ──
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('navMobile');
+    if (burger && mobileNav) {
+      burger.addEventListener('click', function () {
+        var open = mobileNav.style.display === 'block';
+        mobileNav.style.display = open ? 'none' : 'block';
+      });
+    }
+  })();
+  </script>
+  <script src="../cookie-banner.js"></script>
+</body>
+</html>

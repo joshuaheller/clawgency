@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>OpenClaw Enterprise Architektur: Sicherheit &amp; Skalierbarkeit | Clawgency</title>
+  <meta name="description" content="OpenClaw Enterprise, KI Enterprise Architektur und OpenClaw On-Premise: Sandboxing, RBAC, Audit-Logging, API-Gateway, Monitoring und Skalierung im Überblick." />
+  <meta name="keywords" content="OpenClaw Enterprise, KI Enterprise Architektur, OpenClaw On-Premise, OpenClaw Sicherheit, API Gateway KI" />
+  <meta name="author" content="Clawgency – OpenClaw Experten" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://clawgency.de/blog/openclaw-enterprise-architektur.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://clawgency.de/blog/openclaw-enterprise-architektur.html" />
+  <meta property="og:title" content="OpenClaw Enterprise Architektur: Sicherheit &amp; Skalierbarkeit | Clawgency" />
+  <meta property="og:description" content="OpenClaw Enterprise und KI Enterprise Architektur: Skalierung, On-Premise-Deployment, RBAC, Logging und Betrieb für regulierte Umgebungen." />
+  <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="article:published_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:modified_time" content="2026-04-15T08:00:00+02:00" />
+  <meta property="article:section" content="Technik" />
+  <meta property="article:tag" content="OpenClaw" />
+  <meta property="article:tag" content="Enterprise" />
+  <meta property="article:tag" content="Sicherheit" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OpenClaw Enterprise Architektur | Clawgency" />
+  <meta name="twitter:description" content="OpenClaw Enterprise, KI Enterprise Architektur, OpenClaw On-Premise: Deep-Dive zu Sicherheit und Skalierung." />
+  <meta name="twitter:image" content="https://clawgency.de/assets/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Start",
+        "item": "https://clawgency.de/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://clawgency.de/#blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "OpenClaw Enterprise Architektur",
+        "item": "https://clawgency.de/blog/openclaw-enterprise-architektur.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "OpenClaw Enterprise Architektur: Sicherheit und Skalierbarkeit",
+    "description": "Deep-Dive zu OpenClaw Enterprise, KI Enterprise Architektur und OpenClaw On-Premise: Sandboxing, RBAC, Audit-Logging, API-Gateway, Monitoring und Skalierung.",
+    "image": ["https://clawgency.de/assets/og-image.jpg"],
+    "datePublished": "2026-04-15T08:00:00+02:00",
+    "dateModified": "2026-04-15T08:00:00+02:00",
+    "author": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clawgency",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://clawgency.de/assets/logo-crab.webp"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://clawgency.de/blog/openclaw-enterprise-architektur.html"
+    },
+    "articleSection": "Technik",
+    "keywords": ["OpenClaw Enterprise", "KI Enterprise Architektur", "OpenClaw On-Premise", "RBAC", "Audit Logging"],
+    "inLanguage": "de-DE"
+  }
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-crab-48.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="stylesheet" href="../styles.min.css" />
+
+  <style>
+    .blog-article-page { padding: 7rem 0 4rem; min-height: 100vh; }
+    .blog-article-page article { max-width: 780px; margin: 0 auto; }
+    .blog-article-page h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--c-white); margin-bottom: 1rem; }
+    .blog-article-page h2 { font-size: 1.5rem; color: var(--c-white); margin: 3rem 0 1rem; }
+    .blog-article-page h3 { font-size: 1.15rem; color: var(--c-white); margin: 2rem 0 0.75rem; }
+    .blog-article-page p { color: var(--c-text-muted); line-height: 1.8; margin-bottom: 1.25rem; }
+    .blog-article-page ul, .blog-article-page ol { color: var(--c-text-muted); padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; }
+    .blog-article-page a { color: var(--c-accent); }
+    .blog-article-page a:hover { text-decoration: underline; }
+    .blog-article-page strong { color: var(--c-text); }
+    .blog-article-page blockquote { border-left: 3px solid var(--c-accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--c-surface); border-radius: 0 var(--r-md) var(--r-md) 0; }
+    .blog-article-page blockquote p { margin-bottom: 0; font-style: italic; }
+    .blog-article-page .blog-meta { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--c-text-dim); margin-bottom: 2rem; flex-wrap: wrap; }
+    .blog-article-page .blog-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); background: var(--c-accent-dim); border: 1px solid rgba(230,57,70,0.2); padding: 0.2rem 0.6rem; border-radius: var(--r-full); margin-bottom: 0.75rem; }
+    .blog-article-page .blog-cta { text-align: center; padding: 3rem 2rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); margin-top: 3rem; }
+    .blog-article-page .blog-cta p { color: var(--c-text-muted); margin-bottom: 1.5rem; }
+    .blog-article-page .blog-related { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--c-border); }
+    .blog-article-page .blog-related h3 { margin-top: 0; }
+    .blog-article-page .blog-related ul { list-style: none; padding: 0; }
+    .blog-article-page .blog-related li { padding: 0.5rem 0; }
+    .blog-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+    .blog-back:hover { color: var(--c-accent); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <img src="../assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
+        <span class="nav__logo-text">Clawgency</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+      </ul>
+      <a href="../index.html#kontakt" class="btn btn--nav">Erstgespräch buchen</a>
+      <button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul>
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#prozess" class="nav__link">Prozess</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+        <li><a href="../index.html#kontakt" class="btn btn--primary" style="display:inline-block;margin-top:1rem;">Erstgespräch buchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-article-page">
+    <div class="container">
+      <a href="../index.html" class="blog-back">← Zurück zur Startseite</a>
+
+      <article>
+        <span class="blog-tag">Technik</span>
+        <h1>OpenClaw Enterprise Architektur: Sicherheit &amp; Skalierbarkeit</h1>
+
+        <div class="blog-meta">
+          <span>Veröffentlicht: 15. April 2026</span>
+          <span>Lesezeit: ca. 10 Min.</span>
+          <span>Autor: Clawgency</span>
+        </div>
+
+        <p><strong>OpenClaw Enterprise</strong> meint mehr als ein größeres Kontingent an Tokens: Es geht um eine <strong>KI Enterprise Architektur</strong>, die denselben Qualitätsmaßstäben genügt wie Ihre ERP- oder Banking-Plattformen – Verfügbarkeit, Least Privilege, revisionssichere Nachverfolgbarkeit und klare Datenresidenzen. <strong>OpenClaw On-Premise</strong> oder Hybrid-Setups sind dabei oft die natürliche Wahl, wenn sensible Verarbeitungen nicht die Grenze Ihres Rechenzentrums verlassen dürfen. Dieser Artikel ordnet Bausteine wie Sandboxing, RBAC, Audit-Logging, API-Gateway, Monitoring und horizontale Skalierung in ein zusammenhängendes Bild und verlinkt zu vertiefenden Themen wie <a href="openclaw-dsgvo-konform.html">DSGVO-konformem OpenClaw-Einsatz</a> sowie dem <a href="openclaw-fuer-unternehmen.html">Pillar-Leitfaden</a>.</p>
+
+        <h2>Referenzarchitektur: Schichten statt „ein großer Agent“</h2>
+        <p>Eine belastbare Produktionsinstallation trennt mindestens vier Schichten: (1) Präsentation und Policy für Nutzer, (2) Orchestrierung des Agenten inklusive Tool-Routing, (3) Integrations- und Datenplane mit Geheimnissen und Rate Limits, (4) Beobachtbarkeit und Sicherheitsüberwachung. Jede Schicht erhält eigene Deployments, eigene Skalierungskurven und eigene Blast-Radius-Grenzen. So können Sie z.&nbsp;B. den Inferenz-Worker skalieren, ohne gleichzeitig die Datenbank mit Credential-Metadaten zu überfrachten.</p>
+        <p>Die Orchestrierungsschicht kapselt außerdem Modellwahl, Fallback-Modelle und Qualitätsgates – etwa wenn ein <a href="../glossar.html">LLM</a>-Output gegen ein Schema validiert werden muss, bevor ein Schreib-Tool ausgeführt wird. Wer diese Validierung in die Nähe der Tools legt, reduziert sowohl Halluzinationen als auch teure Retries.</p>
+        <p>Praktisch bedeutet Schichtentrennung auch, dass Sie „schnelle“ Änderungen (Prompt-Tuning, neue Tool-Parameter) separat von „langsamen“ Änderungen (Netzsegmentierung, Zertifikatsrotation) ausrollen können. Für Release-Management empfiehlt sich Blue/Green oder Canary-Deployments auf der Orchestrierungsebene, während Integrations-Adapter semver-getrieben bleiben. So vermeiden Sie, dass ein kleines Wording-Update unbeabsichtigt das Verhalten sicherheitskritischer Schreibpfade verschiebt.</p>
+        <p>Datenklassifikation sollte bereits in der Architektur sichtbar sein: öffentlich, intern, vertraulich, personenbezogen. Jede Schicht kennt nur die Klassen, die sie zwingend braucht – ein Prinzip, das sich direkt in Firewall-Regeln, Speicher-Verschlüsselung und Backup-Richtlinien übersetzt und spätere <a href="openclaw-dsgvo-konform.html">DSGVO-Reviews</a> spürbar verkürzt.</p>
+
+        <h2>Sandboxing und Least Privilege</h2>
+        <p>Sandboxing bedeutet praktisch: Jeder Agentenlauf erhält eine klar begrenzte Umgebung – feste Netzwerkziele, erlaubte Dateisystem-Pfade, CPU-/RAM-Limits und optional temporäre Identitäten. Kombinieren Sie das mit <strong>rollenbasierter Zugriffskontrolle (RBAC)</strong>, die nicht nur Menschen, sondern auch Service-Accounts und Tool-Scopes abbildet. Ein Support-Agent darf Tickets lesen, aber keine Gehaltsstammdaten; ein Finance-Agent darf Reporting ausführen, aber keine Massenexporte ohne Freigabe.</p>
+        <p>Für <a href="../glossar.html">Tool-/Function-Calling</a> heißt das: Jede Funktion wird explizit freigegeben, versioniert und mit Eingabe- und Ausgabeschema dokumentiert. Prompt-Injection wird zum Risikomanagement-Thema: Sie minimieren Schaden durch enge Scopes und menschliche Freigaben an kritischen Stellen – siehe <a href="../glossar.html">Human-in-the-Loop</a> im Glossar.</p>
+        <p>Erweitern Sie RBAC um attributbasierte Regeln, sobald Mandantenfähigkeit oder Landesgesellschaften ins Spiel kommen: derselbe Skill-Name, aber unterschiedliche erlaubte Buchungskreise oder CRM-Org-IDs je nach Nutzergruppe. In Kombination mit kurzlebigen Tokens pro Agentenlauf verhindern Sie, dass ein kompromittierter Langzeit-Secret gleich das gesamte Unternehmensnetz öffnet.</p>
+        <p>Für Supply-Chain-Sicherheit gehören signierte Container-Images, Dependency-Pinning und regelmäßige Schwachstellenscans in die CI-Pipeline – analog zu anderen geschäftskritischen Services. OpenClaw profitiert davon, dass Build-Artefakte transparent sind; die Verantwortung für zeitnahe Patches liegt jedoch beim Betriebsteam.</p>
+
+        <blockquote>
+          <p>Skalierbarkeit ohne Sandboxing skaliert auch Ihr Sicherheitsrisiko – oft schneller als Ihre Einsparungen.</p>
+        </blockquote>
+
+        <h2>Audit-Logging und Nachweisbarkeit</h2>
+        <p>Ein <strong>OpenClaw Enterprise</strong>-Setup protokolliert strukturiert: wer (Identität), was (Tool/Skill), wann (UTC-Zeitstempel), mit welchem Kontext (Hash oder Referenz-ID statt Rohdaten), mit welchem Ergebnis (HTTP-Status, Business-Code) und ob eine menschliche Freigabe erfolgte. Logs sollten unveränderlich oder append-only in einem SIEM landen und getrennt von Anwendungs-Debug-Logs geführt werden, damit Compliance-Reviews nicht im Stack-Trace versinken.</p>
+        <p>Verknüpfen Sie Logging mit <a href="../glossar.html">AI Governance</a>-Prozessen: definierte Aufbewahrungsfristen, Zugriff nur über break-glass-Rollen und regelmäßige Stichproben auf „gefährliche“ Tool-Kombinationen. Das unterstützt Sie neben der DSGVO auch beim EU AI Act, sobald Systeme in höhere Risikokategorien rutschen könnten.</p>
+        <p>Definieren Sie für Logs einheitliche Korrelation-IDs über Nutzer, Agenten-Run und Backend-Call. So lässt sich ein Vorfall aus dem SIEM in Minuten – nicht in Tagen – auf einen konkreten Skill und eine konkrete Systemantwort zurückführen. Redaktionelle Maskierung (z.&nbsp;B. nur letzte vier Ziffern einer Kundennummer) schützt die Privatsphäre, ohne die technische Nachvollziehbarkeit vollständig zu verlieren.</p>
+
+        <h2>API-Gateway und Zero-Trust-Zugriff</h2>
+        <p>Das API-Gateway wird zum Policy-Enforcement-Point: Authentifizierung (mTLS, OAuth2), Quoten, IP-Allowlists, Request-Größenlimits und WAF-Regeln greifen vor dem Agenten. Interne Backends sehen nur Gateway-Identitäten – nicht den Endnutzer-Prompt. Für hybride Modelle routet das Gateway sensible Pfade zu <strong>OpenClaw On-Premise</strong>-Endpunkten und weniger kritische Zusammenfassungen zu EU-Cloud-Regionen.</p>
+        <p>Vertiefung zu konkreten ERP- und CRM-Anbindungen finden Sie in <a href="openclaw-sap-salesforce-integration.html">OpenClaw SAP &amp; Salesforce Integration</a>; für ROI-orientierte Priorisierung lohnt <a href="openclaw-roi-berechnung.html">ROI-Berechnung für KI-Agenten</a>.</p>
+        <p>Zero Trust heißt im KI-Kontext auch: kein implizites Vertrauen in Prompt-Inhalte. Jede Tool-Antwort wird wie untrusted Input behandelt – mit Schema-Validierung, Größenlimits und optionaler Signatur serverseitig generierter Tokens für Folgeschritte. So erschweren Sie „Prompt-to-SQL“-Ketten, die über scheinbar harmlose Zwischenantworten kaskadieren.</p>
+
+        <h2>Monitoring, SLOs und Incident Response</h2>
+        <p>Operativ gehören Latenz und Fehlerquote je Skill zu den ersten SLOs. Ergänzen Sie „Business-SLOs“: Anteil automatisch gelöster Tickets, durchschnittliche Bearbeitungszeit, Eskalationsrate. Bei Abweichungen sollten Runbooks greifen – z.&nbsp;B. Abschalten einzelner Tools statt kompletten Shutdowns. Chaos-Tests (simulierte SAP-Timeouts) gehören zum Reifegrad, den Enterprise-Kunden erwarten.</p>
+        <p>Skalierung horizontal: Worker für Inferenz und Tool-Ausführung getrennt skalieren; Queue-basierte Aufträge für Batch-Jobs; Backpressure wenn externe APIs drosseln. Stateful Sessions (Konversationen) lagern Sie in einem kontrollierten Store mit Verschlüsselung zu Ruhe – nicht im flüchtigen Pod-Dateisystem.</p>
+        <p>Autoscaling-Regeln sollten nicht nur CPU, sondern auch Queue-Tiefe und externe Fehlerquoten berücksichtigen. Wenn ein ERP in Wartung ist, hilft es wenig, zusätzliche Inferenz-Nodes hochzufahren – besser ist ein kontrollierter Degradationsmodus mit klarer Nutzeransage und automatischer Umstellung auf lesende Skills. Dokumentieren Sie diese Modi im Runbook genauso ausführlich wie Happy-Path-Szenarien.</p>
+
+        <h2>On-Premise vs. Hybrid: Entscheidungsmatrix</h2>
+        <p><strong>OpenClaw On-Premise</strong> lohnt sich, wenn Datenklassifikation, Luftbrücken oder regulatorische Vorgaben Cloud-Inferenz ausschließen oder wenn Sie eigene oder fein justierte Modelle betreiben. Hybrid ist stark, wenn nur Teilmengen (z.&nbsp;B. öffentliche Produktbeschreibungen) extern inferiert werden dürfen, Kernstammdaten aber im Haus bleiben. In beiden Fällen sind Patch-Zykel, Secret-Rotation und Härtungs-Baselines (CIS, BSI) Pflichtprogramm – Open Source ersetzt nicht den Betrieb.</p>
+        <p>Wer die Evolution der Plattform nachvollziehen will, findet Kontext in <a href="von-clawdbot-zu-openclaw.html">Von Clawdbot zu OpenClaw</a>; Begriffe wie RAG und Embeddings erklärt das <a href="../glossar.html">Glossar</a> verständlich.</p>
+        <p>Hybrid-Deployments profitieren von klarer Daten-Triage: Was darf kurz in eine EU-Cloud zur Zusammenfassung, welche Felder müssen vor dem Export maskiert werden, und welche Pfade bleiben zu 100&nbsp;% im eigenen Rechenzentrum? Legen Sie diese Entscheidungen schriftlich fest und wiederholen Sie sie bei jedem Modell- oder Provider-Wechsel – sonst wandert aus Bequemlichkeit doch wieder mehr Kontext als erlaubt über öffentliche Endpunkte.</p>
+
+        <h2>Disaster Recovery und Business Continuity</h2>
+        <p>Für <strong>OpenClaw Enterprise</strong> gehören KI-Workloads in dieselben Continuity-Überlegungen wie andere kritische Anwendungen: definierte RTO/RPO, getestete Backups für Konfiguration, Skills und Vektorspeicher sowie ein dokumentierter Kaltstart-Pfad, wenn der primäre Modellanbieter ausfällt. Viele Teams vergessen, dass Prompt-Vorlagen und Eval-Datensätze genauso wichtig sind wie Container-Images – ohne sie starten Sie den Dienst zwar, verlieren aber Qualität und Compliance-Nachweise.</p>
+        <p>Ein pragmatischer Drill ist der „Blackout-Test“: simulieren Sie den Wegfall eines zentralen Secrets oder DNS-Eintrags und messen Sie, wie lange es dauert, bis der Agent sicher abgeschaltet oder auf einen Ersatzpfad umgestellt ist. Die Ergebnisse fließen in die gleichen Gremien wie klassische IT-Notfallübungen – das stärkt Vertrauen bei Aufsicht und interner Revision.</p>
+
+        <h2>Fazit</h2>
+        <p><strong>OpenClaw Enterprise</strong> ist die Summe aus disziplinierter <strong>KI Enterprise Architektur</strong> und sauberem Betrieb. Sandboxing, RBAC, Audit-Logging, Gateway, Monitoring und durchdachte Skalierung machen aus einem leistungsfähigen Framework ein System, das Auditoren, IT-Betrieb und Fachbereiche gemeinsam tragen können – ob rein <strong>OpenClaw On-Premise</strong> oder hybrid.</p>
+        <p>Investieren Sie früh in Architekturdiagramme, die wirklich gepflegt werden: dieselben Zeichnungen, die Onboarding beschleunigen, dienen später als Nachweis in Sicherheitsaudits. OpenClaw bleibt damit nicht nur ein Produktname, sondern ein klar umrissenes System in Ihrer Landschaft – mit verantwortlichen Ownern je Schicht und messbaren Zielen pro Quartal.</p>
+
+        <div class="blog-cta">
+          <p>Sie planen Enterprise-Rollout oder ein Security-Review Ihrer Agenten-Architektur? Wir unterstützen von der Architektur bis zum Betrieb.</p>
+          <a href="../index.html#kontakt" class="btn btn--primary btn--lg">Erstgespräch vereinbaren</a>
+        </div>
+
+        <div class="blog-related">
+          <h3>Weiterlesen</h3>
+          <ul>
+            <li><a href="openclaw-dsgvo-konform.html">OpenClaw DSGVO-konform</a></li>
+            <li><a href="openclaw-fuer-unternehmen.html">OpenClaw für Unternehmen (Pillar)</a></li>
+            <li><a href="openclaw-sap-salesforce-integration.html">SAP &amp; Salesforce Integration</a></li>
+            <li><a href="../glossar.html">AI-Glossar</a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2025 Clawgency · <a href="mailto:hello@clawgency.de">hello@clawgency.de</a></p>
+        <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // ── Mobile burger ──
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('navMobile');
+    if (burger && mobileNav) {
+      burger.addEventListener('click', function () {
+        var open = mobileNav.style.display === 'block';
+        mobileNav.style.display = open ? 'none' : 'block';
+      });
+    }
+  })();
+  </script>
+  <script src="../cookie-banner.js"></script>
+</body>
+</html>
