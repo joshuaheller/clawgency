@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clawgency.de/sitemap.xml
+
+# Legal pages excluded from indexing via meta robots noindex

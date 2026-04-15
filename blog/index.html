@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>OpenClaw Blog & Insights – Fachwissen für Entscheider | Clawgency</title>
+  <meta name="description" content="OpenClaw Fachartikel, Leitfäden und Case Studies für den DACH-Markt. Von DSGVO-Compliance über Enterprise-Architektur bis zu konkreten Use Cases und ROI-Berechnungen." />
+  <meta name="keywords" content="OpenClaw Blog, KI-Agenten Wissen, OpenClaw Artikel, KI für Unternehmen, OpenClaw DACH" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://clawgency.de/blog/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://clawgency.de/blog/" />
+  <meta property="og:title" content="OpenClaw Blog & Insights | Clawgency" />
+  <meta property="og:description" content="Fachartikel, Leitfäden und Case Studies rund um OpenClaw und KI-Agenten im DACH-Markt." />
+  <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
+  <meta property="og:locale" content="de_DE" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OpenClaw Blog & Insights | Clawgency" />
+  <meta name="twitter:description" content="Fachartikel, Leitfäden und Case Studies rund um OpenClaw und KI-Agenten." />
+  <meta name="twitter:image" content="https://clawgency.de/assets/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "OpenClaw Blog & Insights",
+    "description": "Fachartikel, Leitfäden und Case Studies rund um OpenClaw und KI-Agenten im DACH-Markt.",
+    "url": "https://clawgency.de/blog/",
+    "inLanguage": "de",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Clawgency",
+      "url": "https://clawgency.de"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://clawgency.de/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://clawgency.de/blog/"}
+      ]
+    }
+  }
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-crab-48.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="stylesheet" href="../styles.min.css" />
+
+  <style>
+    .blog-index { padding: 7rem 0 4rem; min-height: 100vh; }
+    .blog-index__header { text-align: center; margin-bottom: 3rem; }
+    .blog-index__header h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--c-white); margin-bottom: 1rem; }
+    .blog-index__header p { font-size: 1.1rem; color: var(--c-text-muted); max-width: 640px; margin: 0 auto; line-height: 1.7; }
+    .blog-index__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+    .blog-index__card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); padding: 2rem; transition: border-color var(--t-base), transform var(--t-base); display: flex; flex-direction: column; text-decoration: none; }
+    .blog-index__card:hover { border-color: var(--c-accent); transform: translateY(-4px); }
+    .blog-index__card--featured { grid-column: 1 / -1; background: linear-gradient(135deg, var(--c-surface), var(--c-accent-dim)); border-color: rgba(230,57,70,0.2); }
+    .blog-index__tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); background: var(--c-accent-dim); border: 1px solid rgba(230,57,70,0.2); padding: 0.2rem 0.6rem; border-radius: var(--r-full); margin-bottom: 0.75rem; align-self: flex-start; }
+    .blog-index__title { font-family: var(--f-heading); font-size: 1.1rem; font-weight: 700; color: var(--c-white); line-height: 1.3; margin-bottom: 0.75rem; }
+    .blog-index__card--featured .blog-index__title { font-size: 1.4rem; }
+    .blog-index__excerpt { font-size: 0.88rem; color: var(--c-text-muted); line-height: 1.65; flex: 1; }
+    .blog-index__meta { display: flex; gap: 1.5rem; font-size: 0.75rem; color: var(--c-text-dim); margin-top: 1rem; }
+    .blog-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+    .blog-back:hover { color: var(--c-accent); }
+    @media (max-width: 768px) { .blog-index__grid { grid-template-columns: 1fr; } .blog-index__card--featured { grid-column: 1; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <img src="../assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
+        <span class="nav__logo-text">Clawgency</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html#openclaw" class="nav__link">OpenClaw</a></li>
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#vergleich" class="nav__link">Vergleich</a></li>
+        <li><a href="../index.html#ergebnisse" class="nav__link">Ergebnisse</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+        <li><a href="../glossar.html" class="nav__link">Glossar</a></li>
+      </ul>
+      <a href="../index.html#kontakt" class="btn btn--nav">Erstgespräch buchen</a>
+      <button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul>
+        <li><a href="../index.html#openclaw" class="nav__link">OpenClaw</a></li>
+        <li><a href="../index.html#agenten" class="nav__link">Agenten</a></li>
+        <li><a href="../index.html#vergleich" class="nav__link">Vergleich</a></li>
+        <li><a href="../index.html#faq" class="nav__link">FAQ</a></li>
+        <li><a href="../glossar.html" class="nav__link">Glossar</a></li>
+        <li><a href="../index.html#kontakt" class="btn btn--primary" style="display:inline-block;margin-top:1rem;">Erstgespräch buchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-index">
+    <div class="container">
+
+      <a href="../index.html" class="blog-back">← Zurück zur Startseite</a>
+
+      <div class="blog-index__header">
+        <span class="section-tag">OpenClaw Insights</span>
+        <h1>OpenClaw Wissen <em class="text-accent">für Entscheider</em></h1>
+        <p>Fachartikel, Leitfäden und Case Studies rund um OpenClaw und KI-Agenten im DACH-Markt.</p>
+      </div>
+
+      <div class="blog-index__grid">
+
+        <a href="openclaw-fuer-unternehmen.html" class="blog-index__card blog-index__card--featured">
+          <span class="blog-index__tag">Pillar Guide</span>
+          <h2 class="blog-index__title">OpenClaw für Unternehmen: Der ultimative Leitfaden für Implementierung, Sicherheit und ROI</h2>
+          <p class="blog-index__excerpt">Alles, was Entscheider über OpenClaw wissen müssen: Von der Geschichte über technische Architektur bis zu konkreten ROI-Berechnungen und DSGVO-Compliance.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 25 Min.</span><span>Apr. 2026</span></div>
+        </a>
+
+        <a href="openclaw-vs-chatgpt-n8n-zapier.html" class="blog-index__card">
+          <span class="blog-index__tag">Vergleich</span>
+          <h2 class="blog-index__title">OpenClaw vs. ChatGPT Enterprise vs. n8n: Der ehrliche Vergleich 2026</h2>
+          <p class="blog-index__excerpt">Ein ehrlicher Vergleich der drei wichtigsten Plattformen für KI-Automatisierung mit Entscheidungsmatrix.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 15 Min.</span><span>Für: CTOs & IT-Leiter</span></div>
+        </a>
+
+        <a href="openclaw-dsgvo-konform.html" class="blog-index__card">
+          <span class="blog-index__tag">Sicherheit</span>
+          <h2 class="blog-index__title">DSGVO-konforme KI: So setzen Sie OpenClaw datenschutzkonform ein</h2>
+          <p class="blog-index__excerpt">Technischer Leitfaden: AVV, On-Premise-Setup, Verschlüsselung und Audit-Logging mit OpenClaw.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 18 Min.</span><span>Für: IT-Sicherheit</span></div>
+        </a>
+
+        <a href="openclaw-use-cases-mittelstand.html" class="blog-index__card">
+          <span class="blog-index__tag">Use Cases</span>
+          <h2 class="blog-index__title">5 OpenClaw Use Cases für den deutschen Mittelstand</h2>
+          <p class="blog-index__excerpt">Konkrete Anwendungsfälle mit Zahlen, ROI-Betrachtung und Erfolgsfaktoren.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 15 Min.</span><span>Für: Geschäftsführer</span></div>
+        </a>
+
+        <a href="openclaw-enterprise-architektur.html" class="blog-index__card">
+          <span class="blog-index__tag">Technik</span>
+          <h2 class="blog-index__title">OpenClaw Enterprise Architektur: Sicherheit & Skalierbarkeit</h2>
+          <p class="blog-index__excerpt">Sandboxing, RBAC, Audit-Logging, API-Gateway und Monitoring für den Enterprise-Einsatz.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 20 Min.</span><span>Für: Architekten</span></div>
+        </a>
+
+        <a href="openclaw-sap-salesforce-integration.html" class="blog-index__card">
+          <span class="blog-index__tag">Technik</span>
+          <h2 class="blog-index__title">OpenClaw SAP & Salesforce Integration: Schritt-für-Schritt</h2>
+          <p class="blog-index__excerpt">Wie Sie OpenClaw in Ihre bestehende ERP- und CRM-Landschaft integrieren.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 12 Min.</span><span>Für: IT-Leiter</span></div>
+        </a>
+
+        <a href="openclaw-roi-berechnung.html" class="blog-index__card">
+          <span class="blog-index__tag">Strategie</span>
+          <h2 class="blog-index__title">ROI-Berechnung: Ab wann sich ein KI-Agent rechnet</h2>
+          <p class="blog-index__excerpt">Kostenkomponenten, Break-even-Analyse und Branchenbeispiele für KI-Agenten.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 10 Min.</span><span>Für: CFOs</span></div>
+        </a>
+
+        <a href="von-clawdbot-zu-openclaw.html" class="blog-index__card">
+          <span class="blog-index__tag">Geschichte</span>
+          <h2 class="blog-index__title">Von Clawdbot zu OpenClaw: Die Evolution der KI-Agenten</h2>
+          <p class="blog-index__excerpt">Die Geschichte hinter OpenClaw – von den Anfängen als Clawdbot über Moltbot bis heute.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 10 Min.</span><span>Hintergrund</span></div>
+        </a>
+
+        <a href="case-study-logistik-openclaw.html" class="blog-index__card">
+          <span class="blog-index__tag">Case Study</span>
+          <h2 class="blog-index__title">Case Study: Logistikunternehmen spart 35h/Woche mit OpenClaw</h2>
+          <p class="blog-index__excerpt">Detaillierte Fallstudie: Problem, Lösung, Implementierung und messbare Ergebnisse.</p>
+          <div class="blog-index__meta"><span>Lesezeit: 12 Min.</span><span>Logistik</span></div>
+        </a>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2025 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
+        <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('navMobile');
+    if (burger && mobileNav) {
+      burger.addEventListener('click', function () {
+        var open = mobileNav.style.display === 'block';
+        mobileNav.style.display = open ? 'none' : 'block';
+      });
+    }
+  </script>
+  <script src="../cookie-banner.js"></script>
+</body>
+</html>
