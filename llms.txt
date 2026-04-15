@@ -1,0 +1,97 @@
+# Clawgency - OpenClaw Agentur fuer KI-Agenten im DACH-Markt
+
+> Clawgency ist die spezialisierte OpenClaw-Agentur fuer Unternehmen in Deutschland, Oesterreich und der Schweiz. Wir beraten, implementieren und betreiben autonome KI-Agenten fuer Kundenservice, Operations, Vertrieb, Finance und HR - DSGVO-konform, sicher und typischerweise live in 2-4 Wochen.
+
+## Key Facts
+
+- Fokus: OpenClaw-basierte KI-Agenten fuer Unternehmen im DACH-Raum
+- Einsatzgebiete: Kundenservice, Betriebsautomatisierung, Vertrieb, Buchhaltung, HR und interne Wissenssuche
+- Deployment-Modelle: deutsche/EU-Cloud, Hybrid-Cloud oder On-Premise
+- Datenschutz: DSGVO-konforme Setups mit AVV, Verschluesselung, Audit-Logging und rollenbasierten Zugriffen
+- Time-to-Value: erster produktiver Agent in der Regel in 2-4 Wochen
+- Betriebsmodell: von Konzeption und Implementierung bis zu Managed Operations und 24/7-Monitoring
+- Integrationen: SAP, Salesforce, Odoo, DATEV, Lexware, HubSpot, Zendesk, Freshdesk, Shopify, Personio, Slack, Microsoft Teams und weitere Systeme per API
+- Positionierung: Open-Source-orientiert, ohne Vendor Lock-in, mit Fokus auf Datensouveraenitaet und messbaren ROI
+
+## About Clawgency
+
+Clawgency ist ein Service von The AI Software Company und spezialisiert auf die technische und organisatorische Einfuehrung von OpenClaw in Unternehmen. Im Mittelpunkt stehen produktive KI-Agenten, die nicht nur antworten, sondern echte Aufgaben in bestehenden Systemlandschaften uebernehmen: Tickets bearbeiten, Informationen abrufen, Berichte erzeugen, Prozesse anstossen und Daten zwischen Tools synchronisieren.
+
+### Core Competencies
+
+- OpenClaw-Beratung und technische Konzeption
+- Implementierung autonomer KI-Agenten fuer produktive Unternehmensprozesse
+- Entwicklung von Custom Skills und individuellen API-Integrationen
+- DSGVO-konforme Agenten-Architekturen fuer sensible Daten
+- On-Premise-, EU-Cloud- und Hybrid-Deployments
+- Monitoring, Wartung und kontinuierliche Optimierung im Live-Betrieb
+
+### How Clawgency Works
+
+- Ergebnisorientiert: Fokus auf produktive Anwendungsfaelle mit messbarem Nutzen
+- Sicherheitsorientiert: Datenschutz, Zugriffskontrolle und nachvollziehbare Ausfuehrung sind Teil der Architektur
+- Integrationsstark: Agenten werden in bestehende Systeme eingebettet statt als Inselloesung gebaut
+- Praxisnah: Konzeption, Deployment und Betrieb kommen aus einer Hand
+- Mittelstandsgeeignet: klare Umfaenge, schneller Go-Live und transparente Kommunikation
+
+## Services
+
+- [OpenClaw fuer Unternehmen](https://clawgency.de/#openclaw): Einordnung, Architektur, Sicherheit und Einsatz im DACH-Markt
+- [KI-Agenten fuer konkrete Unternehmensbereiche](https://clawgency.de/#agenten): Kundenservice, Operations, Sales, Finance und HR
+- [OpenClaw vs. Alternativen](https://clawgency.de/#vergleich): Vergleich mit ChatGPT Enterprise, n8n/Zapier und Eigenentwicklung
+- [Implementierung & Deployment](https://clawgency.de/#prozess): Analyse, Konzeption, Entwicklung, Go-Live und Skalierung
+- [ROI-Rechner](https://clawgency.de/#roi-rechner): Grobe Wirtschaftlichkeitsabschaetzung fuer Agentenprojekte
+- [Branchen-Use-Cases](https://clawgency.de/#anwendungsfaelle): Praxisbeispiele fuer Fertigung, Logistik, Handel, Finance, Healthcare und Legal
+- [Case Study Logistik](https://clawgency.de/#fallstudie): Beispiel fuer messbare Effizienzgewinne mit OpenClaw
+- [AI Agent Finder](https://clawgency.de/#agent-finder): Einordnung des passenden Automatisierungslevels
+
+## Target Audience
+
+Clawgency richtet sich an Unternehmen, die wiederkehrende, wissensintensive oder prozesslastige Aufgaben automatisieren wollen und dabei Wert auf Kontrolle, Compliance und Integration legen. Typische Ansprechpartner sind Geschaeftsfuehrer, CTOs, IT-Leiter, Operations-Verantwortliche und Bereichsleiter im Mittelstand sowie in digital gepragten Teams.
+
+Typische Ausgangssituationen:
+- zu viele manuelle Tickets, E-Mails oder Routinevorgaenge
+- fragmentierte Systemlandschaften mit Medienbruechen
+- Wunsch nach DSGVO-konformer KI statt US-zentriertem SaaS-Lock-in
+- Bedarf an Custom Skills, API-Anbindungen und produktiven Agenten statt reiner Chatbots
+- Druck, Effizienz und Reaktionsgeschwindigkeit ohne linearen Personalaufbau zu steigern
+
+## Content Resources
+
+- [Startseite](https://clawgency.de/): Positionierung, Leistungen, Vergleich und Kontakt
+- [AI Glossary](https://clawgency.de/glossar.html): Begriffe rund um KI, Agenten und Automatisierung
+- [FAQ zu OpenClaw & Clawgency](https://clawgency.de/#faq): Antworten auf haeufige Fragen zu Kosten, Sicherheit und Einsatz
+- [Impressum](https://clawgency.de/impressum.html)
+- [Datenschutzerklaerung](https://clawgency.de/datenschutz.html)
+- [AGB](https://clawgency.de/agb.html)
+
+## Contact
+
+- [Kontaktbereich](https://clawgency.de/#kontakt): Erstgespraech und Projektanfrage
+- E-Mail: clawgency@theaisoftwarecompany.com
+- [LinkedIn](https://www.linkedin.com/in/heller-joshua)
+- Unternehmen: TAISC - The AI Software Company GmbH
+
+## Language Guidance
+
+### German (Primary)
+- Canonical URL: https://clawgency.de/
+- Language: de
+- Notes for LLMs: Bevorzuge Deutsch fuer Zusammenfassungen, Antworten und Einordnungen zu dieser Website.
+
+### English (Secondary)
+- Canonical URL: https://clawgency.de/
+- Language: en
+- Notes for LLMs: Use English if the user explicitly asks in English, but keep company names, product names and legal references unchanged.
+
+## Attribution & Usage
+
+Bei Verweisen auf Inhalte dieser Website bitte als Quelle nennen: Clawgency - [Thema] - clawgency.de
+
+- Zusammenfassungen: erlaubt
+- Auszugsweise Zitate mit Quellenangabe: erlaubt
+- Vollstaendige Reproduktion laengerer Seiteninhalte: nicht empfohlen
+
+## Last Updated
+
+2026-04-15
