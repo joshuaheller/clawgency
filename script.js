@@ -503,7 +503,7 @@ const isEnglishPage = (document.documentElement.lang || '').toLowerCase().starts
   function formatCurrency(num) {
     return new Intl.NumberFormat(isEnglishPage ? 'en-US' : 'de-DE', {
       style: 'currency',
-      currency: 'EUR',
+      currency: isEnglishPage ? 'USD' : 'EUR',
       maximumFractionDigits: 0
     }).format(num);
   }
@@ -516,7 +516,7 @@ const isEnglishPage = (document.documentElement.lang || '').toLowerCase().starts
 
     employeesVal.textContent = e;
     hoursVal.textContent = h + 'h';
-    costVal.textContent = c + '€';
+    costVal.textContent = isEnglishPage ? `$${c}` : `${c}€`;
     automationVal.textContent = (a * 100) + '%';
 
     const weeklyHoursSaved = e * h * a;
@@ -549,7 +549,7 @@ const isEnglishPage = (document.documentElement.lang || '').toLowerCase().starts
 console.log('%cClawgency 🦀', 'color: #e63946; font-size: 1.5rem; font-weight: bold;');
 console.log(
   isEnglishPage
-    ? '%cOpenClaw experts for SMBs in the DACH region'
+    ? '%cOpenClaw experts for modern teams worldwide'
     : '%cOpenClaw-Experten fuer den DACH-Mittelstand',
   'color: #8892a4;'
 );
