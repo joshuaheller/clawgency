@@ -526,16 +526,23 @@ const isEnglishPage = (document.documentElement.lang || '').toLowerCase().starts
     const implCost = Math.max(5000, e * 500);
     const monthlyOpsCost = Math.max(500, e * 80);
     const firstYearCost = implCost + (monthlyOpsCost * 12);
-    const paybackMonths = monthlySaving > 0 ? Math.ceil(implCost / (monthlySaving - monthlyOpsCost)) : 99;
+    const netMonthlyValue = monthlySaving - monthlyOpsCost;
+    const paybackMonths = netMonthlyValue > 0 ? Math.ceil(implCost / netMonthlyValue) : Infinity;
 
     savedHoursEl.textContent = Math.round(weeklyHoursSaved);
     savedMonthlyEl.textContent = formatCurrency(Math.round(monthlySaving));
     savedYearlyEl.textContent = formatCurrency(Math.round(yearlySaving));
-    paybackEl.textContent = paybackMonths > 0 && paybackMonths < 24
-      ? paybackMonths
-      : (isEnglishPage ? '<1' : '<1');
+    if (!Number.isFinite(paybackMonths)) {
+      paybackEl.textContent = isEnglishPage ? 'n/a' : 'k.A.';
+    } else if (paybackMonths >= 24) {
+      paybackEl.textContent = '24+';
+    } else {
+      paybackEl.textContent = Math.max(1, paybackMonths);
+    }
 
-    const barPct = Math.min(100, Math.round((yearlySaving / Math.max(firstYearCost, 1)) * 100));
+    // Use a diminishing-scale mapping to avoid the bar being pinned near 100% too often.
+    const annualRatio = yearlySaving / Math.max(firstYearCost, 1);
+    const barPct = Math.max(0, Math.min(100, Math.round((annualRatio / (1 + annualRatio)) * 100)));
     barFill.style.width = barPct + '%';
   }
 
