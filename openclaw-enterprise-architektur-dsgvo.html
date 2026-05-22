@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenClaw Enterprise Architektur: Sicherheit, Skalierung &amp; DSGVO | Clawgency</title>
-  <meta name="description" content="Technischer Leitfaden fuer OpenClaw Enterprise: Architektur, Guardrails, Rollen, On-Premise, EU-Hosting, Audit-Logging und DSGVO fuer produktive KI-Agenten." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://clawgency.de/openclaw-enterprise-architektur-dsgvo.html" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://clawgency.de/openclaw-enterprise-architektur-dsgvo.html" />
-  <meta property="og:title" content="OpenClaw Enterprise Architektur: Sicherheit, Skalierung &amp; DSGVO" />
-  <meta property="og:description" content="Wie Unternehmen OpenClaw sicher produktiv betreiben: Hosting, Rollen, Audit-Logs, Wissensbasis und Human-in-the-Loop." />
-  <meta property="og:image" content="https://clawgency.de/assets/og-image.jpg" />
-  <meta property="og:locale" content="de_DE" />
-
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenClaw Enterprise Architektur: Sicherheit, Skalierung &amp; DSGVO | Clawgency</title>
+<meta content="Technischer Leitfaden fuer OpenClaw Enterprise: Architektur, Guardrails, Rollen, On-Premise, EU-Hosting, Audit-Logging und DSGVO fuer produktive KI-Agenten." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://clawgency.de/openclaw-enterprise-architektur-dsgvo.html" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="https://clawgency.de/openclaw-enterprise-architektur-dsgvo.html" property="og:url"/>
+<meta content="OpenClaw Enterprise Architektur: Sicherheit, Skalierung &amp; DSGVO" property="og:title"/>
+<meta content="Wie Unternehmen OpenClaw sicher produktiv betreiben: Hosting, Rollen, Audit-Logs, Wissensbasis und Human-in-the-Loop." property="og:description"/>
+<meta content="https://clawgency.de/assets/og-image.jpg" property="og:image"/>
+<meta content="de_DE" property="og:locale"/>
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -36,17 +34,15 @@
     }
   }
   </script>
-
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-crab-48.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="styles.min.css" />
-
-  <style>
+<link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="assets/favicon-crab-48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="styles.min.css" rel="stylesheet"/>
+<style>
     .tech-page { padding: 7rem 0 4rem; min-height: 100vh; background: var(--c-bg); }
     .tech-back { display: inline-flex; gap: 0.5rem; margin-bottom: 2rem; color: var(--c-text-muted); }
     .tech-back:hover { color: var(--c-accent); }
@@ -63,142 +59,137 @@
     .tech-note { margin-top: 1rem; padding: 1rem 1.1rem; border-left: 3px solid var(--c-accent); background: var(--c-accent-dim); border-radius: 0 var(--r-md) var(--r-md) 0; color: var(--c-text); }
     @media (max-width: 960px) { .tech-grid { grid-template-columns: 1fr; } }
   </style>
-  <script defer data-domain="clawgency.de" src="https://analytics.taisc.de/js/script.js"></script>
-</head>
+<script data-domain="clawgency.de" defer="" src="https://analytics.taisc.de/js/script.js"></script>
+
+
+
+<link href="https://clawgency.de/openclaw-enterprise-architektur-dsgvo.html" hreflang="de" rel="alternate"/>
+<link href="https://clawgency.de/en/openclaw-enterprise-architektur-dsgvo.html" hreflang="en" rel="alternate"/>
+<link href="https://clawgency.de/openclaw-enterprise-architektur-dsgvo.html" hreflang="x-default" rel="alternate"/></head>
 <body>
-  <nav class="nav scrolled" id="nav">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__logo">
-        <img src="assets/logo-crab.webp" alt="Clawgency Crab" class="nav__logo-img" width="64" height="64" />
-        <span class="nav__logo-text">Clawgency</span>
-      </a>
-      <ul class="nav__links">
-        <li><a href="blog.html" class="nav__link">Blog</a></li>
-        <li><a href="openclaw-fuer-unternehmen.html" class="nav__link">Leitfaden</a></li>
-        <li><a href="glossar.html" class="nav__link">Glossar</a></li>
-      </ul>
-      <a href="index.html#kontakt" class="btn btn--nav">Erstgespraech buchen</a>
-      <button class="nav__burger" id="navBurger" aria-label="Menue oeffnen">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <main class="tech-page">
-    <div class="container">
-      <a href="blog.html" class="tech-back">← Zurueck zum Content-Hub</a>
-
-      <section class="tech-hero">
-        <span class="section-tag">Technik &amp; DSGVO</span>
-        <h1>OpenClaw Enterprise Architektur: Sicherheit, Skalierung und Datenschutz fuer produktive KI-Agenten</h1>
-        <p>
+<nav class="nav scrolled" id="nav">
+<div class="nav__inner">
+<a class="nav__logo" href="index.html">
+<img alt="Clawgency Crab" class="nav__logo-img" height="64" src="assets/logo-crab.webp" width="64"/>
+<span class="nav__logo-text">Clawgency</span>
+</a>
+<ul class="nav__links">
+<li><a class="nav__link" href="blog.html">Blog</a></li>
+<li><a class="nav__link" href="openclaw-fuer-unternehmen.html">Leitfaden</a></li>
+<li><a class="nav__link" href="glossar.html">Glossar</a></li>
+</ul>
+<a class="btn btn--nav" href="index.html#kontakt">Erstgespraech buchen</a>
+<button aria-label="Menue oeffnen" class="nav__burger" id="navBurger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<main class="tech-page">
+<div class="container">
+<a class="tech-back" href="blog.html">← Zurueck zum Content-Hub</a>
+<section class="tech-hero">
+<span class="section-tag">Technik &amp; DSGVO</span>
+<h1>OpenClaw Enterprise Architektur: Sicherheit, Skalierung und Datenschutz fuer produktive KI-Agenten</h1>
+<p>
           Unternehmen scheitern selten an der Idee eines KI-Agenten, sondern an Architekturfragen: Wer darf was?
           Welche Daten werden wo verarbeitet? Wie werden Entscheidungen protokolliert? Und wann wird ein Mensch
           eingebunden? Genau diese Punkte muessen vor dem Rollout sauber modelliert werden.
         </p>
-      </section>
-
-      <section class="tech-section">
-        <h2>1. Die Grundarchitektur</h2>
-        <p>
+</section>
+<section class="tech-section">
+<h2>1. Die Grundarchitektur</h2>
+<p>
           Ein belastbares Enterprise-Setup trennt mindestens vier Ebenen: Nutzereingaben, Wissens- und Kontextzugriff,
           Modellaufruf sowie Aktionsrechte in Zielsystemen. So vermeiden Unternehmen, dass ein Agent gleichzeitig alles
           lesen, entscheiden und veraendern darf.
         </p>
-        <div class="tech-grid">
-          <div class="tech-block">
-            <h3>Eingangs- und Governance-Schicht</h3>
-            <p>Authentifizierung, Rollen, Prompt-Policies, Logging und Freigaberegeln.</p>
-          </div>
-          <div class="tech-block">
-            <h3>Wissens- und Kontextschicht</h3>
-            <p>RAG, Wissensdatenbanken, SOPs, Produktdaten und Zugriff auf strukturierte Datenquellen.</p>
-          </div>
-          <div class="tech-block">
-            <h3>Agenten- und Modellschicht</h3>
-            <p>Modellrouter, Agentenlogik, Toolnutzung, Evaluationspunkte und Konfidenzsignale.</p>
-          </div>
-          <div class="tech-block">
-            <h3>Aktionsschicht</h3>
-            <p>API-Aufrufe in CRM, ERP, Ticketing, DMS oder Messaging-Systeme mit klaren Rechten.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="tech-section">
-        <h2>2. Sicherheit entsteht durch Begrenzung, nicht durch Vertrauen</h2>
-        <ul>
-          <li>Toolrechte pro Agent und nicht global fuer alle Workflows vergeben.</li>
-          <li>Schreibrechte strikt von Leserechten trennen.</li>
-          <li>Kritische Aktionen nur nach Freigabe oder Schwellenwertpruefung ausfuehren.</li>
-          <li>Jeden Modellaufruf, jede Quelle und jede Aktion revisionssicher protokollieren.</li>
-          <li>Fallbacks definieren, wenn Quellen fehlen, Unsicherheit hoch ist oder externe APIs scheitern.</li>
-        </ul>
-        <div class="tech-note">
+<div class="tech-grid">
+<div class="tech-block">
+<h3>Eingangs- und Governance-Schicht</h3>
+<p>Authentifizierung, Rollen, Prompt-Policies, Logging und Freigaberegeln.</p>
+</div>
+<div class="tech-block">
+<h3>Wissens- und Kontextschicht</h3>
+<p>RAG, Wissensdatenbanken, SOPs, Produktdaten und Zugriff auf strukturierte Datenquellen.</p>
+</div>
+<div class="tech-block">
+<h3>Agenten- und Modellschicht</h3>
+<p>Modellrouter, Agentenlogik, Toolnutzung, Evaluationspunkte und Konfidenzsignale.</p>
+</div>
+<div class="tech-block">
+<h3>Aktionsschicht</h3>
+<p>API-Aufrufe in CRM, ERP, Ticketing, DMS oder Messaging-Systeme mit klaren Rechten.</p>
+</div>
+</div>
+</section>
+<section class="tech-section">
+<h2>2. Sicherheit entsteht durch Begrenzung, nicht durch Vertrauen</h2>
+<ul>
+<li>Toolrechte pro Agent und nicht global fuer alle Workflows vergeben.</li>
+<li>Schreibrechte strikt von Leserechten trennen.</li>
+<li>Kritische Aktionen nur nach Freigabe oder Schwellenwertpruefung ausfuehren.</li>
+<li>Jeden Modellaufruf, jede Quelle und jede Aktion revisionssicher protokollieren.</li>
+<li>Fallbacks definieren, wenn Quellen fehlen, Unsicherheit hoch ist oder externe APIs scheitern.</li>
+</ul>
+<div class="tech-note">
           Die wichtigste Regel: Ein Agent darf nie mehr koennen als der Prozess organisatorisch tragen kann.
         </div>
-      </section>
-
-      <section class="tech-section">
-        <h2>3. DSGVO: welche Architekturfragen frueh geklaert werden muessen</h2>
-        <p>
+</section>
+<section class="tech-section">
+<h2>3. DSGVO: welche Architekturfragen frueh geklaert werden muessen</h2>
+<p>
           Datenschutz ist kein Add-on. Bereits vor dem Go-Live muessen Datenkategorien, Speicherorte, Aufbewahrungsfristen,
           Loeschkonzepte und Rollen geklaert werden. Typische Fragen im Projektstart sind:
         </p>
-        <ul>
-          <li>Welche personenbezogenen Daten sieht der Agent?</li>
-          <li>Wer ist Verantwortlicher und wo liegt die Auftragsverarbeitung?</li>
-          <li>Wer darf Outputs einsehen und wie lange werden Logs gespeichert?</li>
-          <li>Welche Modelle duerfen fuer sensible Daten ueberhaupt verwendet werden?</li>
-          <li>Ist EU-Hosting ausreichend oder ist On-Premise fachlich und rechtlich notwendig?</li>
-        </ul>
-      </section>
-
-      <section class="tech-section">
-        <h2>4. On-Premise, EU-Cloud oder Hybrid?</h2>
-        <p>
+<ul>
+<li>Welche personenbezogenen Daten sieht der Agent?</li>
+<li>Wer ist Verantwortlicher und wo liegt die Auftragsverarbeitung?</li>
+<li>Wer darf Outputs einsehen und wie lange werden Logs gespeichert?</li>
+<li>Welche Modelle duerfen fuer sensible Daten ueberhaupt verwendet werden?</li>
+<li>Ist EU-Hosting ausreichend oder ist On-Premise fachlich und rechtlich notwendig?</li>
+</ul>
+</section>
+<section class="tech-section">
+<h2>4. On-Premise, EU-Cloud oder Hybrid?</h2>
+<p>
           Es gibt kein pauschal richtiges Hosting-Modell. Ein hybrider Aufbau ist fuer viele Mittelstaendler am
           praktikabelsten: sensible Datenquellen bleiben nahe am Unternehmen, weniger kritische Komponenten laufen in
           einer EU-Cloud. Vollstaendiges On-Premise ist sinnvoll, wenn regulatorische oder vertragliche Anforderungen
           es verlangen oder wenn Daten das Unternehmen nicht verlassen duerfen.
         </p>
-        <p>
+<p>
           Wichtiger als das Label ist die operative Umsetzbarkeit: Monitoring, Updates, Secrets-Management,
           Zugriffstrennung und Auditierbarkeit muessen im gewaehlten Modell robust funktionieren.
         </p>
-      </section>
-
-      <section class="tech-section">
-        <h2>5. Skalierung heisst nicht nur mehr Last, sondern mehr Verantwortung</h2>
-        <p>
+</section>
+<section class="tech-section">
+<h2>5. Skalierung heisst nicht nur mehr Last, sondern mehr Verantwortung</h2>
+<p>
           Sobald mehrere Agenten produktiv laufen, steigen die Anforderungen an Versionierung, Prompt-Management,
           Testfaelle, Kostenkontrolle und Change-Freigaben. Deshalb sollte ein produktives Setup von Beginn an eine
           Evaluations- und Release-Logik vorsehen: Welche Version eines Agenten laeuft wo? Wie werden Verschlechterungen
           erkannt? Und wer entscheidet ueber neue Rechte oder neue Datenquellen?
         </p>
-      </section>
-
-      <section class="tech-cta">
-        <h2>Sie brauchen ein belastbares OpenClaw-Setup fuer sensible Daten?</h2>
-        <p>
+</section>
+<section class="tech-cta">
+<h2>Sie brauchen ein belastbares OpenClaw-Setup fuer sensible Daten?</h2>
+<p>
           Wir entwerfen Architekturen, die nicht nur beeindruckend aussehen, sondern unter Datenschutz-, Sicherheits-
           und Betriebsanforderungen auch wirklich bestehen.
         </p>
-        <a href="index.html#kontakt" class="btn btn--primary" style="margin-top:1rem;">Architekturgespraech anfragen</a>
-      </section>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__bottom">
-        <p>&copy; 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
-        <p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener">The AI Software Company</a></p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
+<a class="btn btn--primary" href="index.html#kontakt" style="margin-top:1rem;">Architekturgespraech anfragen</a>
+</section>
+</div>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="footer__bottom">
+<p>© 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
+<p class="footer__credit">Ein Service von <a href="https://theaisoftwarecompany.com" rel="noopener" target="_blank">The AI Software Company</a></p>
+</div>
+</div>
+</footer>
+<script>
     (function () {
       var nav = document.getElementById('nav');
       var burger = document.getElementById('navBurger');
@@ -207,5 +198,5 @@
       });
     })();
   </script>
-</body>
+<script src="language-switcher.js"></script></body>
 </html>

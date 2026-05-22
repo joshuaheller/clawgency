@@ -2,6 +2,7 @@
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+const isEnglishPage = (document.documentElement.lang || '').toLowerCase().startsWith('en');
 
 // NAV: SCROLL EFFECT & MOBILE MENU
 (function initNav() {
@@ -17,7 +18,9 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   burger?.addEventListener('click', () => {
     nav.classList.toggle('mobile-open');
     burger.setAttribute('aria-label',
-      nav.classList.contains('mobile-open') ? 'Menü schließen' : 'Menü öffnen'
+      nav.classList.contains('mobile-open')
+        ? (isEnglishPage ? 'Close menu' : 'Menue schliessen')
+        : (isEnglishPage ? 'Open menu' : 'Menue oeffnen')
     );
   });
 
@@ -90,13 +93,21 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const infoItems = $$('.agent-info');
   const headlineText = $('#agentTypeText');
 
-  const agentLabels = [
-    'Ihren Kundenservice',
-    'Ihre Betriebsprozesse',
-    'Ihren Vertrieb',
-    'Ihre Buchhaltung',
-    'Ihr HR-Team'
-  ];
+  const agentLabels = isEnglishPage
+    ? [
+      'your customer support',
+      'your operations',
+      'your sales',
+      'your accounting',
+      'your HR team'
+    ]
+    : [
+      'Ihren Kundenservice',
+      'Ihre Betriebsprozesse',
+      'Ihren Vertrieb',
+      'Ihre Buchhaltung',
+      'Ihr HR-Team'
+    ];
 
   function switchAgent(index) {
     tabs.forEach((t, i) => t.classList.toggle('agents__tab--active', i === index));
@@ -189,7 +200,36 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const submitBtn = form.querySelector('button[type="submit"]');
   const fallbackWrap = form.querySelector('#contactFallback');
   const fallbackCopy = form.querySelector('#contactFallbackCopy');
-  const copyBtnDefault = fallbackCopy?.textContent || 'E-Mail-Entwurf kopieren';
+  const i18n = isEnglishPage
+    ? {
+      copyBtnDefault: 'Copy email draft',
+      missingFields: 'Please fill all required fields',
+      fallbackCta: 'Almost done - copy the draft now',
+      copied: 'Draft copied',
+      copyFailed: 'Copy failed',
+      to: 'To',
+      subject: 'Subject',
+      subjectTemplate: (name, company) => `Contact request from ${name} (${company})`,
+      name: 'Name',
+      company: 'Company',
+      email: 'Email',
+      challenge: 'Biggest challenge'
+    }
+    : {
+      copyBtnDefault: 'E-Mail-Entwurf kopieren',
+      missingFields: 'Bitte alle Pflichtfelder ausfuellen',
+      fallbackCta: 'Fast geschafft - Entwurf jetzt kopieren',
+      copied: 'Entwurf kopiert',
+      copyFailed: 'Kopieren fehlgeschlagen',
+      to: 'An',
+      subject: 'Betreff',
+      subjectTemplate: (name, company) => `Kontaktanfrage von ${name} (${company})`,
+      name: 'Name',
+      company: 'Unternehmen',
+      email: 'E-Mail',
+      challenge: 'Groesste Herausforderung'
+    };
+  const copyBtnDefault = fallbackCopy?.textContent || i18n.copyBtnDefault;
   let fallbackDraftText = '';
 
   function showSubmitFeedback(message, delay = 2000) {
@@ -204,12 +244,12 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   }
 
   function buildComposeData(name, company, email, challenge) {
-    const subjectText = `Kontaktanfrage von ${name} (${company})`;
+    const subjectText = i18n.subjectTemplate(name, company);
     const bodyLines = [
-      `Name: ${name}`,
-      `Unternehmen: ${company}`,
-      `E-Mail: ${email}`,
-      challenge ? `\nGrößte Herausforderung:\n${challenge}` : ''
+      `${i18n.name}: ${name}`,
+      `${i18n.company}: ${company}`,
+      `${i18n.email}: ${email}`,
+      challenge ? `\n${i18n.challenge}:\n${challenge}` : ''
     ].filter(Boolean);
     const bodyText = bodyLines.join('\n');
     const subject = encodeURIComponent(subjectText);
@@ -217,7 +257,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
     return {
       mailto: `mailto:${EMAIL_TO}?subject=${subject}&body=${body}`,
-      draftText: `An: ${EMAIL_TO}\nBetreff: ${subjectText}\n\n${bodyText}`
+      draftText: `${i18n.to}: ${EMAIL_TO}\n${i18n.subject}: ${subjectText}\n\n${bodyText}`
     };
   }
 
@@ -255,8 +295,8 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   }
 
   fallbackCopy?.addEventListener('click', async () => {
-    const copied = await copyToClipboard(fallbackDraftText || `An: ${EMAIL_TO}\nBetreff:\n\n`);
-    fallbackCopy.textContent = copied ? 'Entwurf kopiert' : 'Kopieren fehlgeschlagen';
+    const copied = await copyToClipboard(fallbackDraftText || `${i18n.to}: ${EMAIL_TO}\n${i18n.subject}:\n\n`);
+    fallbackCopy.textContent = copied ? i18n.copied : i18n.copyFailed;
     setTimeout(() => {
       fallbackCopy.textContent = copyBtnDefault;
     }, 1800);
@@ -272,7 +312,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     const challenge = (form.querySelector('#challenge')?.value || '').trim();
 
     if (!name || !company || !email) {
-      showSubmitFeedback('Bitte alle Pflichtfelder ausfüllen');
+      showSubmitFeedback(i18n.missingFields);
       return;
     }
 
@@ -300,7 +340,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       cleanupListeners();
       if (switchedContext) return;
       showFallback(composeData);
-      showSubmitFeedback('Fast geschafft - Entwurf jetzt kopieren', 2600);
+      showSubmitFeedback(i18n.fallbackCta, 2600);
     }, MAIL_APP_TIMEOUT_MS);
   });
 })();
@@ -461,7 +501,11 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const barFill = $('#roiBarFill');
 
   function formatCurrency(num) {
-    return num.toLocaleString('de-DE') + '€';
+    return new Intl.NumberFormat(isEnglishPage ? 'en-US' : 'de-DE', {
+      style: 'currency',
+      currency: 'EUR',
+      maximumFractionDigits: 0
+    }).format(num);
   }
 
   function calculate() {
@@ -487,7 +531,9 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     savedHoursEl.textContent = Math.round(weeklyHoursSaved);
     savedMonthlyEl.textContent = formatCurrency(Math.round(monthlySaving));
     savedYearlyEl.textContent = formatCurrency(Math.round(yearlySaving));
-    paybackEl.textContent = paybackMonths > 0 && paybackMonths < 24 ? paybackMonths : '<1';
+    paybackEl.textContent = paybackMonths > 0 && paybackMonths < 24
+      ? paybackMonths
+      : (isEnglishPage ? '<1' : '<1');
 
     const barPct = Math.min(100, Math.round((yearlySaving / Math.max(firstYearCost, 1)) * 100));
     barFill.style.width = barPct + '%';
@@ -501,4 +547,9 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 })();
 
 console.log('%cClawgency 🦀', 'color: #e63946; font-size: 1.5rem; font-weight: bold;');
-console.log('%cOpenClaw-Experten für den DACH-Mittelstand', 'color: #8892a4;');
+console.log(
+  isEnglishPage
+    ? '%cOpenClaw experts for SMBs in the DACH region'
+    : '%cOpenClaw-Experten fuer den DACH-Mittelstand',
+  'color: #8892a4;'
+);

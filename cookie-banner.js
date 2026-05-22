@@ -2,6 +2,22 @@
 (function() {
   var STORAGE_KEY = 'clawgency_cookies';
   var GA_ID = 'G-0YEV7C2NF1';
+  var isEnglishPage = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+  var TEXT = isEnglishPage ? {
+    ariaLabel: 'Cookie settings',
+    message: 'We use cookies - required ones plus optional Google Analytics. Is that okay? 🦀',
+    decline: 'Required only',
+    accept: 'Allow all',
+    learnMore: 'Learn more',
+    privacyHref: '/en/datenschutz.html'
+  } : {
+    ariaLabel: 'Cookie-Einstellungen',
+    message: 'Wir nutzen Cookies - nur essenzielle, plus optional Google Analytics. Alles klar? 🦀',
+    decline: 'Nur notwendige',
+    accept: 'Alle erlauben',
+    learnMore: 'Mehr erfahren',
+    privacyHref: '/datenschutz.html'
+  };
 
   function getConsent() {
     try {
@@ -51,13 +67,13 @@
     var existing = document.getElementById('cookie-banner');
     if (existing) return;
 
-    var html = '<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie-Einstellungen" aria-live="polite">' +
-      '<p class="cookie-banner__text">Wir nutzen Cookies – nur essenzielle, plus optional Google Analytics. Alles klar? 🦀</p>' +
+    var html = '<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="' + TEXT.ariaLabel + '" aria-live="polite">' +
+      '<p class="cookie-banner__text">' + TEXT.message + '</p>' +
       '<div class="cookie-banner__actions">' +
-        '<button type="button" class="cookie-banner__btn cookie-banner__btn--decline" data-action="decline">Nur notwendige</button>' +
-        '<button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-action="accept">Alle erlauben</button>' +
+        '<button type="button" class="cookie-banner__btn cookie-banner__btn--decline" data-action="decline">' + TEXT.decline + '</button>' +
+        '<button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-action="accept">' + TEXT.accept + '</button>' +
       '</div>' +
-      '<a href="/datenschutz.html" class="cookie-banner__link">Mehr erfahren</a>' +
+      '<a href="' + TEXT.privacyHref + '" class="cookie-banner__link">' + TEXT.learnMore + '</a>' +
     '</div>';
 
     var wrap = document.createElement('div');
