@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Peter Steinberger: The story behind OpenClaw - from PSPDFKit to Burnout to OpenAI | Clawgency</title>
+<meta content="Peter Steinberger – Austrian developer, PSPDFKit founder, OpenClaw creator and now OpenAI engineer. The full story: 13 years of bootstrapping, burnout, comeback and how a WhatsApp experiment changed the AI ​​world." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://clawgency.de/en/blog/peter-steinberger-story.html" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="https://clawgency.de/en/blog/peter-steinberger-story.html" property="og:url"/>
+<meta content="Peter Steinberger: From PPSDFKit to Burnout to OpenAI – the complete story" property="og:title"/>
+<meta content="Peter Steinberger – Austrian developer, PSPDFKit founder, OpenClaw creator and now OpenAI engineer. The full story: 13 years of bootstrapping, burnout, comeback and how a WhatsApp experiment changed the AI ​​world." property="og:description"/>
+<meta content="https://clawgency.de/assets/og-image.jpg" property="og:image"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Clawgency" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Peter Steinberger: The story behind OpenClaw - from PSPDFKit to Burnout to OpenAI", "description": "The complete biography of the OpenClaw creator: 13 years of PSPDFKit, burnout, AI comeback and switching to OpenAI.", "datePublished": "2026-04-01", "dateModified": "2026-04-01", "author": {"@type": "Person", "name": "Joshua Heller"}, "publisher": {"@type": "Organization", "name": "Clawgency", "url": "https://clawgency.de", "logo": {"@type": "ImageObject", "url": "https://clawgency.de/assets/logo-crab.webp"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://clawgency.de/en/blog/peter-steinberger-story.html"}, "about": {"@type": "Person", "name": "Peter Steinberger", "alternateName": "steipete", "nationality": "Austrian", "birthDate": "1986-05-22", "sameAs": ["https://en.wikipedia.org/wiki/Peter_Steinberger_(programmer)", "https://steipete.me", "https://twitter.com/steipete"]}, "keywords": ["Peter Steinberger", "PSPDFKit", "OpenClaw", "OpenAI", "Vibe Coding"], "inLanguage": "en-US"}</script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Wer ist Peter Steinberger?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Peter Steinberger (* 22. Mai 1986, Oberösterreich) ist ein österreichischer Softwareentwickler und Unternehmer. Er ist der Gründer von PSPDFKit (heute Nutrient) und der Creator von OpenClaw, dem viralen Open-Source-KI-Agenten. Seit Februar 2026 arbeitet er bei OpenAI." }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist PSPDFKit?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PSPDFKit ist ein PDF-SDK (Software Development Kit), das Peter Steinberger 2011 in Wien gründete. Es wurde auf über einer Milliarde Geräten eingesetzt und 2021 durch eine $116-Millionen-Investition von Insight Partners teilweise verkauft. 2024 wurde PSPDFKit in Nutrient umbenannt." }
+      },
+      {
+        "@type": "Question",
+        "name": "Warum wechselte Peter Steinberger zu OpenAI?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nach dem viralen Erfolg von OpenClaw (247.000+ GitHub-Stars in 3 Monaten) erhielt Steinberger Angebote von OpenAI, Meta und Anthropic. Er entschied sich für OpenAI, um dort die nächste Generation persönlicher KI-Agenten zu entwickeln. Sam Altman bezeichnete ihn öffentlich als „genius"." }
+      },
+      {
+        "@type": "Question",
+        "name": "Was bedeutet 'Vibe Coding'?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Vibe Coding beschreibt einen Entwicklungsansatz, bei dem KI-Modelle den Großteil des Codes schreiben. Der Entwickler definiert primär Outcomes und Architektur, während Agenten Implementation, Tests und Iterationen übernehmen. Steinberger erzielte damit 6.600+ Commits in einem einzigen Monat." }
+      }
+    ]
+  }
+  </script>
+<link href="../../assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../../assets/favicon-crab-48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="../../styles.min.css" rel="stylesheet"/>
+<link href="../../blog-article.css" rel="stylesheet"/>
+<script data-domain="clawgency.de" defer="" src="https://analytics.taisc.de/js/script.js"></script>
+
+<link href="https://clawgency.de/blog/peter-steinberger-story.html" hreflang="de" rel="alternate"/>
+<link href="https://clawgency.de/en/blog/peter-steinberger-story.html" hreflang="en" rel="alternate"/>
+<link href="https://clawgency.de/blog/peter-steinberger-story.html" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav class="nav scrolled" id="nav">
+<div class="nav__inner">
+<a class="nav__logo" href="../index.html">
+<img alt="Clawgency Crab" class="nav__logo-img" height="64" src="../../assets/logo-crab.webp" width="64"/>
+<span class="nav__logo-text">Clawgency</span>
+</a>
+<ul class="nav__links">
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case studies</a></li>
+<li><a class="nav__link" href="../glossar.html">glossary</a></li>
+</ul>
+<a class="btn btn--nav" href="../index.html#kontakt">Book an initial consultation</a>
+<button aria-label="Open menu" class="nav__burger" id="navBurger">
+<span></span><span></span><span></span>
+</button>
+</div>
+<div class="nav__mobile" id="navMobile">
+<ul>
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case studies</a></li>
+<li><a class="nav__link" href="../glossar.html">glossary</a></li>
+<li><a class="btn btn--primary" href="../index.html#kontakt" style="display:inline-block;margin-top:1rem;">Book an initial consultation</a></li>
+</ul>
+</div>
+</nav>
+<main class="blog-article-page">
+<div class="container">
+<a class="blog-back" href="../blog.html">← Back to content hub</a>
+<nav aria-label="Breadcrumbs" class="blog-breadcrumb">
+<a href="../index.html">Home page</a>
+<span aria-hidden="true">›</span>
+<a href="../blog.html">Blog</a>
+<span aria-hidden="true">›</span>
+        Peter Steinberger – The Story
+      </nav>
+<header class="blog-header">
+<span class="section-tag">OpenClaw · People &amp; Backgrounds</span>
+<h1><span class="accent">Peter Steinberger:</span><br/>From PSPDFKit about Burnout<br/>to OpenAI</h1>
+<p class="blog-deck">How an Austrian developer built a PDF SDK on a billion devices, burned out after 13 years, didn't write a line of code for three years - and then shook the AI ​​world with a WhatsApp experiment.</p>
+<div class="blog-meta">
+<div><strong>Author:</strong> Joshua Heller</div>
+<div><strong>Published:</strong> April 2026</div>
+<div><strong>Reading time:</strong> approx. 14 minutes</div>
+<div><strong>Category:</strong> People &amp; background</div>
+</div>
+</header>
+<article class="blog-body">
+<nav aria-label="Chapter" class="blog-chapter-nav">
+<a class="blog-ch-item" href="#anfang">
+<div class="blog-ch-num">01</div>
+<div class="blog-ch-label">Start in Austria</div>
+</a>
+<a class="blog-ch-item" href="#pspdfkit">
+<div class="blog-ch-num">02</div>
+<div class="blog-ch-label">PSPDFKit – 13 years</div>
+</a>
+<a class="blog-ch-item" href="#burnout">
+<div class="blog-ch-num">03</div>
+<div class="blog-ch-label">Exit &amp; Burnout</div>
+</a>
+<a class="blog-ch-item" href="#comeback">
+<div class="blog-ch-num">04</div>
+<div class="blog-ch-label">AI comeback</div>
+</a>
+<a class="blog-ch-item" href="#openclaw">
+<div class="blog-ch-num">05</div>
+<div class="blog-ch-label">OpenClaw explodes</div>
+</a>
+<a class="blog-ch-item" href="#openai">
+<div class="blog-ch-num">06</div>
+<div class="blog-ch-label">The OpenAI deal</div>
+</a>
+</nav>
+<!-- Intro -->
+<p>
+          It was a Tuesday evening in November 2025. Peter Steinberger was sitting at his computer
+          in Vienna and carried out an experiment that he himself described as "completely unspectacular"
+          describes. He connected WhatsApp to the Claude API. Sent a test message.
+          The AI ​​responded. <strong>The first version was ready in an hour.</strong>
+</p>
+<p>
+          He couldn't have predicted what happened next. In less than three months
+          This weekend project would collect 247,000 GitHub stars, the AI community of
+          Employ Silicon Valley to Beijing and get Sam Altman to hire him
+          to publicly describe him as a “genius”.
+        </p>
+<p>
+          This is the story of the man whose name has long been bigger
+          than any of the projects that made him famous.
+        </p>
+<div class="blog-stats">
+<div class="blog-stat-cell">
+<div class="blog-stat-num">1986</div>
+<div class="blog-stat-label">Year of birth, Upper Austria</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">1 billion+</div>
+<div class="blog-stat-label">Devices with PSPDFKit</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">3 years</div>
+<div class="blog-stat-label">Burnout break</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">247K</div>
+<div class="blog-stat-label">GitHub Stars in 3 months</div>
+</div>
+</div>
+<!-- Kapitel 1 -->
+<div class="blog-chapter-block" id="anfang">
+<div class="blog-chapter-num">01 —</div>
+<h2>The beginning in Austria</h2>
+</div>
+<p>
+          Peter Steinberger was born on May 22, 1986 in Upper Austria. He grew up in the region
+          on, visited the <strong>HTL Braunau</strong> – a technical college –
+          and then moved to Vienna, where he attended the
+          <strong>Vienna University of Technology</strong> studied.
+        </p>
+<p>
+          At the TU Vienna, Steinberger discovered his passion for Apple platforms.
+          He was one of the earliest iOS developers in Austria and worked as a freelancer
+          and taught iOS and Mac development at university.
+          To this day, his online alias is: <strong>steeped</strong> – a name,
+          which has almost more weight in the developer community than its commoner.
+        </p>
+<p>
+          In 2011, he received a job offer at the WWDC party in San Francisco.
+          The temptation was great: Silicon Valley, startup culture, elite developers.
+          He accepted. And waited over six months for his work visa.
+        </p>
+<p>
+          Those six months changed everything. Instead of waiting idly, he built something.
+        </p>
+<!-- Kapitel 2 -->
+<div class="blog-chapter-block" id="pspdfkit">
+<div class="blog-chapter-num">02 —</div>
+<h2>PSPDFKit: 13 years, a billion devices</h2>
+</div>
+<p>
+          What Steinberger built in this waiting period was <strong>PSPDFKit</strong> –
+          a software development kit for displaying and processing PDF documents
+          on mobile devices. The idea was simple: PDF handling was solved on iOS
+          Problem, but a poorly solved one. Steinberger wanted to do better.
+        </p>
+<div class="blog-callout gold">
+<div class="blog-callout-hl">💡 The unique selling point</div>
+<p>
+            From the start, PSPDFKit wasn't a tool for end users - it was a tool
+            for <strong>other developers</strong>. B2B, deep in the infrastructure,
+            largely invisible to the public. And that's exactly why it's so valuable.
+          </p>
+</div>
+<p>
+          The growth was organic and uncompromising. Steinberger optimized obsessively
+          on Developer Experience – fast integration, excellent documentation,
+          immediate support. Companies that once integrated PSPDFKit stayed.
+          The market grew with smartphone adoption.
+        </p>
+<p>
+<strong>Thirteen years.</strong> No external investor, no venture capital,
+          no growth rounds. PSPDFKit was fully bootstrapped – one of the
+          rare examples where a software product in the B2B sector without
+          Borrowed capital grew to global market leadership.
+        </p>
+<div class="blog-compact-tl">
+<div class="blog-cblog-tl-item">
+<div class="blog-cblog-tl-date">2011</div>
+<div class="blog-ctl-body">
+<div class="blog-ctl-title">PSPDFKit is founded</div>
+<div class="blog-cblog-tl-text">Solo project during the WWDC waiting period. First paying customer within weeks.</div>
+</div>
+</div>
+<div class="blog-cblog-tl-item">
+<div class="blog-cblog-tl-date">2013–18</div>
+<div class="blog-ctl-body">
+<div class="blog-ctl-title">Global expansion</div>
+<div class="blog-cblog-tl-text">70+ employees, offices in Vienna and New York, customers on every continent.</div>
+</div>
+</div>
+<div class="blog-cblog-tl-item">
+<div class="blog-cblog-tl-date">Oct 2021</div>
+<div class="blog-ctl-body">
+<div class="blog-ctl-title">$116 million from Insight Partners</div>
+<div class="blog-cblog-tl-text">First and only round of financing after 10 years. Steinberger and co-founder Martin Schürrer are stepping down from operational management.</div>
+</div>
+</div>
+<div class="blog-cblog-tl-item">
+<div class="blog-cblog-tl-date">2024</div>
+<div class="blog-ctl-body">
+<div class="blog-ctl-title">PSPDFKit becomes Nutrient</div>
+<div class="blog-cblog-tl-text">Rebranding under new CEO Jonathan Rhyne. The product runs on over one billion devices worldwide.</div>
+</div>
+</div>
+</div>
+<p>
+          What looked like a glamorous exit on the outside was on the inside
+          another story. Steinberger has spoken openly in interviews about
+          what thirteen years of bootstrapping really means: working almost every weekend,
+          up to <strong>100 hours per week</strong>, a permanent burden on your shoulders
+          of the founder, who is ultimately responsible for everything.
+        </p>
+<!-- Kapitel 3 -->
+<div class="blog-chapter-block" id="burnout">
+<div class="blog-chapter-num">03 —</div>
+<h2>Exit, exhaustion and three years of silence</h2>
+</div>
+<p>
+          After withdrawing from PSPDFKit, what followed was what many successful founders know:
+          but only a few publicly name: <strong>Burnout</strong>. Difficult.
+          Persistent. Existential.
+        </p>
+<div class="blog-pull-quote">
+<blockquote>
+            “In late 2024, the man who built the PDF framework was able to
+            that runs on a billion Apple devices, not writing a single line of code."
+          </blockquote>
+<cite>— Spark Agents, profile on Peter Steinberger, Feb. 2026</cite>
+</div>
+<p>
+          Steinberger largely disappeared from public view.
+          For three years. No products. No talks. No GitHub activity.
+          He moved several times - Vienna, London, San Francisco - and tried
+          to find his place in a world in which he suddenly no longer belongs
+          was a CEO with a thousand responsibilities.
+        </p>
+<p>
+          The emptiness that remains after a decades-long hustle,
+          is well documented in founder biographies. At Steinberger
+          It was particularly deep because PSPDFKit wasn't just his company -
+          it was his core identity.
+        </p>
+<div class="blog-callout">
+<div class="blog-callout-hl">📖 What Steinberger himself says</div>
+<p>
+            He has spoken openly about the exhaustion in several interviews:
+            <strong>"Slow down!"</strong> – that was the headline in WirtschaftsWoche
+            an article about Steinberger in February 2026 - be the fatal advice,
+            which he heard after the exit and which drove him on.
+            Rest was not relaxation, but freefall.
+          </p>
+</div>
+<!-- Kapitel 4 -->
+<div class="blog-chapter-block" id="comeback">
+<div class="blog-chapter-num">04 —</div>
+<h2>The AI ​​comeback: Vibe coding and a new self-image</h2>
+</div>
+<p>
+          In 2024, Steinberger began trying out AI-powered development.
+          What he found fundamentally changed his relationship with programming.
+          For the first time in years, coding was fun again.
+        </p>
+<p>
+          The term that became established for his approach: <strong>Vibe coding</strong>.
+          Not debugging stack traces for hours. Not manual writing
+          from Boilerplate. Instead: communicate the outcome to the agent,
+          keep the architecture in mind and let the AI do the rest.
+        </p>
+<div class="blog-callout blue">
+<div class="blog-callout-hl">🔁 What Vibe Coding means for Steinberger</div>
+<p>
+            He operated at the same time <strong>5 to 10 agents in parallel</strong>,
+            who each worked on their own tasks - implementation, testing, reviews,
+            Documentation. Instead of reviewing code, he discussed architecture.
+            In January 2026 he scored like this <strong>6,600 commits in a single month</strong>.
+            No team behind it. Only Steinberger and his agents.
+          </p>
+</div>
+<p>
+          In the Pragmatic Engineer Podcast he talked about his philosophy in one sentence,
+          which polarized the developer community:
+        </p>
+<div class="blog-pull-quote">
+<blockquote>
+            "I ship code I don't read."
+          </blockquote>
+<cite>— Peter Steinberger, Pragmatic Engineer, Jan. 2026</cite>
+</div>
+<p>
+          The sentence sounds provocative. But the explanation behind it is nuanced:
+          Steinberger had learned to deal with code in 13 years of PSPDFKit,
+          which did not meet his own expectations - because 70 employees
+          just write differently. This ability to let go of perfection
+          and focusing on function made it the ideal one
+          “<em>agentic engineer</em>": someone who doesn't fight with AI,
+          but dances.
+        </p>
+<p>
+          He began sharing his findings publicly – on steipete.me,
+          in podcasts, in GitHub repositories for AI workflows, prompt engineering
+          and developer productivity.
+        </p>
+<!-- Kapitel 5 -->
+<div class="blog-chapter-block" id="openclaw">
+<div class="blog-chapter-num">05 —</div>
+<h2>OpenClaw: When an experiment shakes the world</h2>
+</div>
+<p>
+          In November 2025, Steinberger published a small project on GitHub.
+          Not a big announcement. No launch video. Simply code.
+          <strong>Clawdbot</strong> – a connection between WhatsApp and Anthropics
+          Claude API – was online.
+        </p>
+<p>
+          The project initially lay dormant unnoticed. Steinberger continued to build,
+          added features, integrated more messaging platforms.
+          The agent could read emails, manage calendars, organize files,
+          Execute commands on the local machine - all privately,
+          on your own hardware, without cloud dependency.
+        </p>
+<div class="blog-milestone-cards">
+<div class="blog-mc">
+<div class="blog-mc-icon">🚀</div>
+<div class="blog-mc-label">Official launch</div>
+<div class="blog-mc-value">Jan 25, 2026</div>
+<div class="blog-mc-desc">9,000 GitHub Stars in 24 hours. The community is exploding.</div>
+</div>
+<div class="blog-mc">
+<div class="blog-mc-icon">⭐</div>
+<div class="blog-mc-label">growth</div>
+<div class="blog-mc-value">100K stars</div>
+<div class="blog-mc-desc">Less than 8 days after launch. Fastest growth in GitHub history.</div>
+</div>
+<div class="blog-mc">
+<div class="blog-mc-icon">🤯</div>
+<div class="blog-mc-label">Andrei Karpathy</div>
+<div class="blog-mc-value">"sci-fi takeoff"</div>
+<div class="blog-mc-desc">Tesla's former AI director calls it the most impressive thing he's ever seen.</div>
+</div>
+<div class="blog-mc">
+<div class="blog-mc-icon">📊</div>
+<div class="blog-mc-label">Peak (March 2026)</div>
+<div class="blog-mc-value">247K stars</div>
+<div class="blog-mc-desc">47,700 forks. Search exceeds Claude Code and Codex on Google.</div>
+</div>
+</div>
+<p>
+          What differentiated OpenClaw from ChatGPT, n8n or other AI tools:
+          It was not SaaS, not subscription, not cloud. It was an agent
+          who really acted. Not only answered.
+        </p>
+<p>
+          Steinberger himself describes the principle behind OpenClaw as
+          <em>“Closing the Agentic Loop”</em>: The agent doesn’t just think –
+          he acts in the real world, observes the effects of his actions,
+          learns from it and changes his own behavior. Without human
+          Intervention in every step.
+        </p>
+<div class="blog-quote-grid">
+<div class="blog-quote-card">
+<div class="blog-qc-text">“I was out with friends and instead of joining in the conversation,
+            I sat there doing vibe coding on my phone."</div>
+<div class="blog-qc-source">— Peter Steinberger, Behind the Craft Podcast</div>
+</div>
+<div class="blog-quote-card">
+<div class="blog-qc-text">“Software is an extremely good way to solve complex problems.
+            And AI is extremely good at developing software."</div>
+<div class="blog-qc-source">— Peter Steinberger, OpenClaw Community</div>
+</div>
+</div>
+<p>
+          The renaming – from Clawdbot to Moltbot to OpenClaw – and the chaos
+          around the handle sniping crypto scam generated worldwide coverage
+          on CNBC, Reuters, Engadget and Computerworld.
+          (<a href="openclaw-naming-history.html">The complete one
+          Read naming story →</a>)
+        </p>
+<p>
+          The ecosystem grew exponentially: Custom Skills, an agent marketplace (ClawHub),
+          Enterprise Forks, an AI social network parody (Moltbook, 1.5 million
+          agent accounts in five days) and finally NVIDIA, which is at GTC 2026
+          announced its own OpenClaw fork: <strong>NemoClaw</strong>.
+        </p>
+<!-- Kapitel 6 -->
+<div class="blog-chapter-block" id="openai">
+<div class="blog-chapter-num">06 —</div>
+<h2>The OpenAI deal: Sam Altman calls</h2>
+</div>
+<p>
+          In early February 2026, Steinberger began visiting the AI ​​labs in San Francisco.
+          Not as a visitor – as a candidate. There was interest in the hype surrounding OpenClaw
+          awakened at the highest level. The offers were on the table.
+        </p>
+<table class="blog-table">
+<thead>
+<tr>
+<th>Pursue</th>
+<th>Offer</th>
+<th>focus</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Meta</td>
+<td>Offer (reports: billion)</td>
+<td>AI agents, open source</td>
+<td><span class="blog-badge declined">Rejected</span></td>
+</tr>
+<tr>
+<td>Anthropic</td>
+<td>Offer</td>
+<td>Unknown</td>
+<td><span class="blog-badge declined">Rejected</span></td>
+</tr>
+<tr class="winner">
+<td><strong>OpenAI</strong></td>
+<td>Engineer Hire</td>
+<td>Personal AI Agents</td>
+<td><span class="blog-badge chosen">Voted ✓</span></td>
+</tr>
+</tbody>
+</table>
+<p>
+          It wasn't a classic acqui-hire. OpenClaw was not purchased.
+          The project remained open source, under MIT license, in an independent foundation.
+          Steinberger signed as <strong>Engineer</strong> – with a clear mandate:
+          the next generation of personal AI agents for all people.
+        </p>
+<div class="blog-pull-quote">
+<blockquote>
+            “Peter Steinberger is joining OpenAI to drive the next generation of
+            personal agents. He is a genius with a lot of amazing ideas about the future
+            of very smart agents interacting with each other to do very useful things
+            for people. We expect this will quickly become core to our product offerings."
+          </blockquote>
+<cite>— Sam Altman, X (formerly Twitter), February 15, 2026</cite>
+</div>
+<p>
+          Steinberger's own words were shorter but programmatic:
+          <em>“I'm joining OpenAI to work on bringing agents to everyone.
+          OpenClaw will move to a foundation and stay open and independent."</em>
+</p>
+<p>
+          Why OpenAI and not Meta, the similar or perhaps higher financial one
+          should have made offers? Steinberger gave an answer in his blog,
+          which reveals a lot about his character:
+        </p>
+<div class="blog-callout blue">
+<div class="blog-callout-hl">🎯 Why OpenAI?</div>
+<p>
+            “I could see OpenClaw becoming a large company.
+            But what I want to do is change the world - not build another company."
+            <strong>Steinberger had been building PSPDFKit for thirteen years.
+            He didn't want a second company. He wanted impact.</strong>
+</p>
+</div>
+<p>
+          The analysis community agreed: OpenAI didn't just win with Steinberger
+          a developer. It gained proof that personal AI agents
+          are not only possible, but already viral and ready for production.
+          His wealth of experience - from the developer experience at PSPDFKit to
+          Agentic engineering philosophy at OpenClaw – is for OpenAIs
+          Agent roadmap a direct building block.
+        </p>
+<p>
+          Little has changed formally for OpenClaw itself: the project lives in one
+          independent foundation, OpenAI supports it as an official partner,
+          and the MIT license remains untouched. The community – now
+          Thousands of active contributors - continuing to develop.
+        </p>
+<!-- Was bedeutet das für Unternehmen -->
+<div class="blog-sep">— — —</div>
+<h3>What this story means for companies</h3>
+<p>
+          Peter Steinberger's biography is more than an inspiring founder's story.
+          It shows where AI-supported software development is heading:
+          away from large teams, towards small, agentically operated units –
+          provided the governance is right.
+        </p>
+<p>
+          OpenClaw is proof that autonomous AI agents <em>ready for production</em>
+          are – at least in technically skilled hands. For medium-sized businesses this means:
+          If you don't understand what agents can do today, you will in two to three years
+          be structurally disadvantaged.
+        </p>
+<p>
+          At the same time, the security incidents surrounding OpenClaw show
+          (1,000+ unsecured instances with exposed API keys, 341 malicious
+          Skills on ClawHub with a 12% contamination rate) that enterprise deployments
+          need professional support. This is exactly where Clawgency comes in.
+        </p>
+<div class="blog-article-cta">
+<div class="blog-cta-eyebrow">🦀 OpenClaw experts in the DACH region</div>
+<h3>Use OpenClaw safely in your company</h3>
+<p>
+            We implement OpenClaw GDPR-compliant for your company –
+            with enterprise architecture, security concept and
+            90 day ROI guarantee. Live in 2-4 weeks.
+          </p>
+<a class="btn btn--primary" href="../index.html#kontakt">Free initial consultation →</a>
+</div>
+<!-- FAQ -->
+<h3>FAQ: Questions about Peter Steinberger</h3>
+<div class="blog-faq">
+<div class="blog-faq-item">
+<div class="blog-faq-q">Who is Peter Steinberger?</div>
+<p class="blog-faq-a">
+              Peter Steinberger (born May 22, 1986, Upper Austria) is an Austrian
+              Software developer and entrepreneur. He is the founder of PSPDFKit (now Nutrient)
+              and the creator of OpenClaw. He has been working at OpenAI since February 2026,
+              where he is working on the next generation of personal AI agents.
+              He is online as <strong>steeped</strong> known.
+            </p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What is PSPDFKit?</div>
+<p class="blog-faq-a">
+              PSPDFKit is a PDF SDK (Software Development Kit) developed by Peter Steinberger 2011
+              bootstrapped founded. It has been used in apps on over a billion devices.
+              In 2021, Insight Partners invested $116 million; Steinberger withdrew.
+              In 2024, PSPDFKit was renamed Nutrient.
+            </p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What is Vibe Coding?</div>
+<p class="blog-faq-a">
+              Vibe Coding describes a development approach in which AI agents do the majority of the work
+              write the code. The developer primarily defines architecture and desired ones
+              Outcomes while agents handle implementation, testing and iteration.
+              Steinberger achieved 6,600+ commits in a single month - alone.
+            </p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Why did Steinberger switch to OpenAI and not Meta?</div>
+<p class="blog-faq-a">
+              Steinberger received offers from OpenAI, Meta and Anthropic. He chose OpenAI,
+              because after 13 years of PSPDFKit he can't build another company,
+              but wanted to achieve maximum social impact.
+              Sam Altman publicly called him a "genius" - a rare gesture
+              of the OpenAI CEO for an individual.
+            </p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Is OpenClaw now owned by OpenAI?</div>
+<p class="blog-faq-a">
+              No. OpenClaw was not acquired. The project runs under the MIT license
+              in an independent foundation. OpenAI supports the Foundation,
+              but has no ownership rights to the code.
+              Steinberger was hired as an engineer, not as part of an acquisition.
+            </p>
+</div>
+</div>
+<!-- Related -->
+<nav aria-label="Related articles" class="blog-related">
+<div class="blog-related-title">Further reading</div>
+<div class="blog-related-grid">
+<a class="rc" href="openclaw-naming-history.html">
+<div class="blog-rc-type">Naming &amp; History</div>
+<div class="blog-rc-title">From Clawdbot to Moltbot to OpenClaw: The Complete Naming Story</div>
+</a>
+<a class="rc" href="../openclaw-fuer-unternehmen.html">
+<div class="blog-rc-type">Pillar Guide</div>
+<div class="blog-rc-title">OpenClaw for companies: The ultimate guide for the DACH market</div>
+</a>
+<a class="rc" href="../openclaw-enterprise-architektur-dsgvo.html">
+<div class="blog-rc-type">Security</div>
+<div class="blog-rc-title">GDPR Compliance for OpenClaw: Enterprise Architecture and Security</div>
+</a>
+<a class="rc" href="../openclaw-vs-n8n-zapier.html">
+<div class="blog-rc-type">Comparison</div>
+<div class="blog-rc-title">OpenClaw vs. ChatGPT Enterprise vs. n8n – Which is right for your company?</div>
+</a>
+</div>
+</nav>
+</article>
+</div>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="footer__bottom">
+<p>© 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
+<p class="footer__credit">A service from <a href="https://theaisoftwarecompany.com" rel="noopener" target="_blank">The AI ​​Software Company</a></p>
+</div>
+</div>
+</footer>
+<script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var burger = document.getElementById('navBurger');
+      burger && burger.addEventListener('click', function () {
+        nav.classList.toggle('mobile-open');
+        burger.setAttribute('aria-label', nav.classList.contains('mobile-open') ? 'Close menu' : 'Open menu');
+      });
+    })();
+  </script>
+
+<script src="../../language-switcher.js"></script></body>
+</html>

@@ -361,7 +361,7 @@ def build_post(post: dict) -> str:
         <h1>{post['title_html']}</h1>
         <p class="blog-deck">{post['deck']}</p>
         <div class="blog-meta">
-          <div><strong>Autor:</strong> Clawgency Redaktion</div>
+          <div><strong>Autor:</strong> Joshua Heller</div>
           <div><strong>Veroeffentlicht:</strong> April 2026</div>
           <div><strong>Lesezeit:</strong> ca. {post['read_time']}</div>
           <div><strong>Kategorie:</strong> {post['meta_category']}</div>

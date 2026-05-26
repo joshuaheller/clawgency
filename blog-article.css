@@ -119,8 +119,18 @@
   margin-bottom: 1.25rem;
 }
 
-.blog-body a { color: var(--c-accent); }
-.blog-body a:hover { color: var(--c-accent-2); }
+.blog-body a:not(.btn) { color: var(--c-accent); }
+.blog-body a:not(.btn):hover { color: var(--c-accent-2); }
+
+.blog-body a.btn--primary,
+.blog-article-cta a.btn--primary {
+  color: var(--c-white);
+}
+
+.blog-body a.btn--primary:hover,
+.blog-article-cta a.btn--primary:hover {
+  color: var(--c-white);
+}
 .blog-body strong { color: var(--c-text); font-weight: 700; }
 .blog-body em { font-style: italic; }
 .blog-body code {

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How OpenClaw came to be: The complete product story - from one hour of code to 247,000 GitHub stars | Clawgency</title>
+<meta content="OpenClaw was built in an hour - and changed the AI ​​world. The full product story: architecture, features, development and what really sets the framework apart from ChatGPT, n8n and Claude." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://clawgency.de/en/blog/wie-openclaw-entstand.html" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="https://clawgency.de/en/blog/wie-openclaw-entstand.html" property="og:url"/>
+<meta content="How OpenClaw came to be: From one hour of code to 247,000 GitHub stars" property="og:title"/>
+<meta content="OpenClaw was built in an hour - and changed the AI ​​world. The full product story: architecture, features, development and what really sets the framework apart from ChatGPT, n8n and Claude." property="og:description"/>
+<meta content="https://clawgency.de/assets/og-image.jpg" property="og:image"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Clawgency" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How OpenClaw came to be: The complete product story - from an hour of code to 247,000 GitHub stars", "description": "OpenClaw was built in an hour - and changed the AI world. The complete product story: Architecture, features, development and what really sets the framework apart.", "datePublished": "2026-04-01", "dateModified": "2026-04-01", "author": {"@type": "Person", "name": "Joshua Heller"}, "publisher": {"@type": "Organization", "name": "Clawgency", "url": "https://clawgency.de", "logo": {"@type": "ImageObject", "url": "https://clawgency.de/assets/logo-crab.webp"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://clawgency.de/en/blog/wie-openclaw-entstand.html"}, "keywords": ["OpenClaw", "KI Agent", "OpenClaw Architecture", "SOUL.md", "Open Source AI", "Vibe Coding"], "inLanguage": "en-US"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How was OpenClaw built?", "acceptedAnswer": {"@type": "Answer", "text": "Peter Steinberger built the first version of OpenClaw (then Clawdbot) in an hour: He connected the WhatsApp API to the Anthropic-Claude API and made it possible to delegate tasks to the AI model on your own computer. The project was published on GitHub in November 2025."}}, {"@type": "Question", "name": "What is the difference between OpenClaw and ChatGPT?", "acceptedAnswer": {"@type": "Answer", "text": "ChatGPT answers questions in a browser window: It reads emails, manages calendars, executes terminal commands, controls browsers and performs multi-step tasks - completely autonomously, on your own hardware, without cloud dependency. OpenClaw is not a chatbot, but an execution framework."}}, {"@type": "Question", "name": "What is SOUL.md in OpenClaw?", "acceptedAnswer": {"@type": "Answer", "text": "SOUL.md is a Markdown file that defines the personality, values, and behavior rules of an OpenClaw agent. It is injected into the system prompt each time the agent is started, giving the agent a persistent identity across all sessions."}}, {"@type": "Question", "name": "Which messaging apps does OpenClaw support?", "acceptedAnswer": {"@type": "Answer", "text": "OpenClaw supports WhatsApp, Telegram, Discord, Signal, Slack, iMessage, Matrix, LINE, QQ Bot and Microsoft Teams (as of April 2026). The agent has a single, shared memory - regardless of which channel you use to communicate."}}, {"@type": "Question", "name": "Is OpenClaw suitable for companies?", "acceptedAnswer": {"@type": "Answer", "text": "OpenClaw has enormous potential for companies, but requires a professional enterprise architecture: sandbox environment, access control, audit logging and GDPR-compliant deployment. A setup aimed at standard use is not enough for enterprise."}}]}</script>
+<link href="../../assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../../assets/favicon-crab-48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="../../styles.min.css" rel="stylesheet"/>
+<link href="../../blog-article.css" rel="stylesheet"/>
+<script data-domain="clawgency.de" defer="" src="https://analytics.taisc.de/js/script.js"></script>
+
+<link href="https://clawgency.de/blog/wie-openclaw-entstand.html" hreflang="de" rel="alternate"/>
+<link href="https://clawgency.de/en/blog/wie-openclaw-entstand.html" hreflang="en" rel="alternate"/>
+<link href="https://clawgency.de/blog/wie-openclaw-entstand.html" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav class="nav scrolled" id="nav">
+<div class="nav__inner">
+<a class="nav__logo" href="../index.html">
+<img alt="Clawgency Crab" class="nav__logo-img" height="64" src="../../assets/logo-crab.webp" width="64"/>
+<span class="nav__logo-text">Clawgency</span>
+</a>
+<ul class="nav__links">
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case studies</a></li>
+<li><a class="nav__link" href="../glossar.html">glossary</a></li>
+</ul>
+<a class="btn btn--nav" href="../index.html#kontakt">Book an initial consultation</a>
+<button aria-label="Open menu" class="nav__burger" id="navBurger">
+<span></span><span></span><span></span>
+</button>
+</div>
+<div class="nav__mobile" id="navMobile">
+<ul>
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case studies</a></li>
+<li><a class="nav__link" href="../glossar.html">glossary</a></li>
+<li><a class="btn btn--primary" href="../index.html#kontakt" style="display:inline-block;margin-top:1rem;">Book an initial consultation</a></li>
+</ul>
+</div>
+</nav>
+<main class="blog-article-page">
+<div class="container">
+<a class="blog-back" href="../blog.html">← Back to content hub</a>
+<nav aria-label="Breadcrumbs" class="blog-breadcrumb">
+<a href="../index.html">Home page</a>
+<span aria-hidden="true">›</span>
+<a href="../blog.html">Blog</a>
+<span aria-hidden="true">›</span>
+        How OpenClaw came about
+      </nav>
+<header class="blog-header">
+<span class="section-tag">Product History · Deep Dive</span>
+<h1>How <span class="accent">OpenClaw</span> was created:<br/>From an hour of code<br/>to 247,000 GitHub stars</h1>
+<p class="blog-deck">One hour. A WhatsApp connection. A Claude API. And the question: Why doesn't this exist yet? This was the beginning of OpenClaw - the open source AI agent that shook the developer community in 2026.</p>
+<div class="blog-meta">
+<div><strong>Author:</strong> Joshua Heller</div>
+<div><strong>Published:</strong> April 2026</div>
+<div><strong>Reading time:</strong> approx. 16 minutes</div>
+<div><strong>Category:</strong> Product &amp; Technology</div>
+</div>
+</header>
+<article class="blog-body">
+<div class="blog-stats">
+<div class="blog-stat-cell">
+<div class="blog-stat-num">1h</div>
+<!-- ToC -->
+<nav aria-label="Table of contents" class="blog-toc">
+<div class="blog-toc-title">📋 Table of Contents</div>
+<ol>
+<li><a href="#ursprung">The original idea: “WhatsApp Relay”</a></li>
+<li><a href="#was-ist">What OpenClaw really is - and what it isn't</a></li>
+<li><a href="#architektur">Architecture: The Four Layers of the Agent</a></li>
+<li><a href="#soul">SOUL.md – The “character” of the agent</a></li>
+<li><a href="#memory">The memory system</a></li>
+<li><a href="#skills">Skills: How OpenClaw expands its capabilities</a></li>
+<li><a href="#evolution">Product evolution: From v0.1 to NemoClaw</a></li>
+<li><a href="#vergleich">OpenClaw vs ChatGPT vs n8n</a></li>
+<li><a href="#enterprise">What companies need to know</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ol>
+</nav>
+<!-- 1 -->
+<h2 id="ursprung"><span class="ch">01 —</span>The original idea: “WhatsApp Relay”</h2>
+<p>
+      Peter Steinberger sat at his computer one evening at the end of November 2025 and
+      a simple question arose: <em>“Can I give my computer a task
+      via WhatsApp - and he does it while I'm somewhere else?"</em>
+</p>
+<p>
+      The answer was: Technically yes, but no ready-made tool existed for it.
+      So he built it himself. He called it internal <strong>“WhatsApp Relay”</strong>.
+      The mechanics were radically simple: a message goes to a WhatsApp number.
+      The WhatsApp API forwards them. Anthropic's Claude API receives them,
+      thinks about it, returns an instruction. The instruction will
+      executed on the local computer.
+    </p>
+<p>
+<strong>First working version: one hour.</strong>
+</p>
+<div class="blog-pq">
+<blockquote>
+        “He had a deceptively simple question: Can an AI assistant make progress
+        check his work via a chat app? One evening he bandaged one
+        Messaging API using Claude's API, gave the system local system access -
+        and had a prototype in an hour."
+      </blockquote>
+<cite>— emergent.sh, Complete Guide OpenClaw 2026</cite>
+</div>
+<p>
+      Steinberger thought it was so obvious that OpenAI or Anthropic
+      would soon build exactly that. So he put the code on GitHub –
+      not as a product, but as an experiment. The project was called <strong>Clawdbot</strong>,
+      a pun on "Claude" with a lobster claw as a mascot.
+      The internet responded with an enthusiasm he didn't expect.
+    </p>
+<!-- 2 -->
+<h2 id="was-ist"><span class="ch">02 —</span>What OpenClaw really is - and what it isn't</h2>
+<p>
+      Above all else, one thing must be clear: <strong>OpenClaw is not a chatbot.</strong>
+      It is also not a model, not a SaaS solution and not a competing product to Claude or ChatGPT.
+    </p>
+<p>
+      OpenClaw is one <strong>Orchestration layer</strong> – a framework,
+      that runs on your own computer and from any AI model
+      (Claude, GPT-5, Gemini, DeepSeek, Llama via Ollama) one capable of action
+      agents makes.
+    </p>
+<div class="blog-callout blue">
+<div class="blog-callout-hl">💡 The simplest explanation</div>
+<p>
+<strong>ChatGPT answers questions. OpenClaw gets things done.</strong>
+        It reads emails, books appointments, executes terminal commands, scrapes websites,
+        fills out forms, manages files – and does this autonomously, on your own
+        Hardware, 24/7. It is aptly called: <strong>"Claude with hands."</strong>
+</p>
+</div>
+<p>
+      The crucial difference lies in the ratio of input to output.
+      With a chatbot, you enter a prompt and receive text back.
+      With OpenClaw you specify a goal - and the agent decides independently
+      She carries out which steps are necessary and observes the result
+      and iterates until the task is completed.
+    </p>
+<p>
+      The project is <strong>MIT licensed, free and open source</strong>.
+      Written in TypeScript and Swift. Runs locally on your own hardware –
+      Data only leaves your own computer if you use an external one
+      AI model (Claude API, GPT API) is used.
+    </p>
+<!-- 3 -->
+<h2 id="architektur"><span class="ch">03 —</span>Architecture: The Four Layers of the Agent</h2>
+<p>
+      OpenClaw does not work like a conventional software system
+      solid logic. It is a <em>Composition system</em>, that the agent
+      made up of individual building blocks every time you start –
+      from the file system, in real time.
+    </p>
+<p>
+      The architecture consists of four central layers:
+    </p>
+<div class="blog-arch-box">
+<div class="blog-arch-header">🏗 OpenClaw Core Architecture</div>
+<div class="blog-arch-body">
+<div class="blog-arch-layer" style="margin-bottom:.75rem">
+<div class="blog-arch-tag">identity</div>
+<div class="blog-arch-content">
+<div class="blog-arch-title">SOUL.md + IDENTITY.md</div>
+<div class="blog-arch-desc">Personality, values, communication style, specific role – injected into the system prompt at every start</div>
+</div>
+</div>
+<div class="blog-arch-layer" style="margin-bottom:.75rem">
+<div class="blog-arch-tag t-green">memory</div>
+<div class="blog-arch-content">
+<div class="blog-arch-title">MEMORY.md + Vector Index</div>
+<div class="blog-arch-desc">Persistent long-term memory in Markdown files, semantically searchable via SQLite + embeddings</div>
+</div>
+</div>
+<div class="blog-arch-layer" style="margin-bottom:.75rem">
+<div class="blog-arch-tag t-orange">skills</div>
+<div class="blog-arch-content">
+<div class="blog-arch-title">Skills + HEARTBEAT.md</div>
+<div class="blog-arch-desc">Modular Capabilities (Markdown + Script), Proactive Scheduled Actions, ClawHub Marketplace</div>
+</div>
+</div>
+<div class="blog-arch-layer">
+<div class="blog-arch-tag t-gray">Gateway</div>
+<div class="blog-arch-content">
+<div class="blog-arch-title">Harness / MCPorter / Messaging Bridge</div>
+<div class="blog-arch-desc">Connection to messaging apps (WhatsApp, Telegram etc.), MCP protocol, running on the local system</div>
+</div>
+</div>
+</div>
+</div>
+<p>
+      The crucial difference to other agent frameworks:
+      <strong>Standard agents are amnesiacs.</strong> Start on every reboot
+      them at zero. OpenClaw solves this by consistently reading configuration files
+      at startup - the agent "wakes up" and literally reads itself into its
+      existence into it.
+    </p>
+<p>
+      A deep understanding of your own system is also built in:
+      The agent knows its own source code, its configuration,
+      which models he uses and which options are available.
+      This creates what Steinberger <em>“System Awareness”</em> called –
+      not in a philosophical sense, but in a highly practical one:
+      An agent that knows its own architecture can know itself
+      develop and create new skills on demand.
+    </p>
+<!-- 4 -->
+<h2 id="soul"><span class="ch">04 —</span>SOUL.md – The “character” of the agent</h2>
+<p>
+      One of OpenClaw's most innovative concepts is the <strong>SOUL.md file</strong>.
+      It is the foundation of every OpenClaw agent - a simple Markdown file,
+      which describes in natural language who the agent is, how he communicates,
+      what his values are and what boundaries he has to adhere to.
+    </p>
+<div class="blog-callout">
+<div class="blog-callout-hl">📄 What SOUL.md contains</div>
+<p>
+        Typical SOUL.md sections: <strong>Identity</strong> (Who are you?),
+        <strong>Communication style</strong> (How do you communicate?),
+        <strong>Core Values</strong> (What do you stand for?),
+        <strong>Non-negotiables</strong> (What do you never do?).
+        The file is injected into the system prompt every time the agent is started.
+        No database access, no API – just Markdown.
+      </p>
+</div>
+<p>
+      The philosophical difference to an ordinary system prompt
+      lies in the intention: <em>"You're not a chatbot. You're becoming someone."</em>
+      This is how a much-quoted SOUL.md example from the community begins.
+      The first line of a standard prompt would be: "You are a helpful assistant."
+      This is a behavior instruction. SOUL.md is an identity definition.
+    </p>
+<p>
+      Along with IDENTITY.md (specific role), MEMORY.md (knowledge) and
+      HEARTBEAT.md (planned autonomous actions) forms SOUL.md that,
+      what Steinberger did? <strong>"Harness"</strong> called –
+      the framework that ensures the agent is always running,
+      is always available and always across all channels
+      carries the same context.
+    </p>
+<!-- 5 -->
+<h2 id="memory"><span class="ch">05 —</span>The memory system: Persistence without a database</h2>
+<p>
+      The most common criticism of AI chatbots is: <em>"Goldfish Brain."</em>
+      As soon as the browser window is closed, everything is forgotten.
+      OpenClaw solves the problem in a radically simple way - and that's exactly where the elegance lies.
+    </p>
+<p>
+      Memory in OpenClaw are <strong>Markdown files on the local hard drive</strong>.
+      The agent is instructed to provide relevant facts after each meaningful interaction
+      to write into his memory files. The next time it starts, it reads it.
+      “Mental notes” disappear when restarting – files do not disappear.
+    </p>
+<div class="blog-callout blue">
+<div class="blog-callout-hl">⚙️ Technical: How retrieval works</div>
+<p>
+        OpenClaw is building one <strong>Vector index</strong> about the memory files:
+        Chunking (approx. 400 tokens, 80 token overlap) →
+        Embedding via OpenAI, Gemini or local GGUF model →
+        SQLite with optional sqlite-vec acceleration.
+        When retrieved, it combines <strong>Vector similarity</strong> (semantic match)
+        with <strong>BM25 keyword relevance</strong> (exact token match).
+        Score: <code>vectorWeight × vectorScore + textWeight × textScore</code>.
+        The result: An agent that understands "Mac Studio gateway host"
+        even if the note only says “the machine on which the gateway is running”.
+      </p>
+</div>
+<!-- 6 -->
+<h2 id="skills"><span class="ch">06 —</span>Skills: How OpenClaw expands its capabilities</h2>
+<p>
+      In most agent frameworks, a "tool" is a JSON function signature.
+      A rigid interface. OpenClaw thinks radically differently:
+      <strong>Skills are Markdown files with embedded scripts.</strong>
+</p>
+<p>
+      To teach OpenClaw a new skill, you create a directory
+      writes a Markdown file that describes what the skill does,
+      adds the script – and the agent can use it immediately.
+      No reboot, no code deployment, no API registration.
+    </p>
+<div class="blog-feat-grid">
+<div class="blog-feat-card">
+<div class="blog-fc-icon">📧</div>
+<div class="blog-fc-title">Email &amp; Calendar</div>
+<div class="blog-fc-text">Read, categorize, reply and forward incoming emails. Book appointments, identify conflicts, set reminders.</div>
+</div>
+<div class="blog-feat-card">
+<div class="blog-fc-icon">🖥</div>
+<div class="blog-fc-title">System control</div>
+<div class="blog-fc-text">Execute terminal commands, read/write/move files, start processes, analyze logs - with root level access.</div>
+</div>
+<div class="blog-feat-card">
+<div class="blog-fc-icon">🌐</div>
+<div class="blog-fc-title">Web automation</div>
+<div class="blog-fc-text">Control browsers, fill out forms, scrape websites, extract data - without manual intervention.</div>
+</div>
+<div class="blog-feat-card">
+<div class="blog-fc-icon">🤖</div>
+<div class="blog-fc-title">Sub-agents (Lobster)</div>
+<div class="blog-fc-text">Specialized sub-agents spawn and coordinate. A master agent delegates subtasks – parallel execution.</div>
+</div>
+<div class="blog-feat-card">
+<div class="blog-fc-icon">⏰</div>
+<div class="blog-fc-title">Proactive actions</div>
+<div class="blog-fc-text">HEARTBEAT.md defines planned actions: daily reports, monitoring checks, automatic follow-ups - without user triggers.</div>
+</div>
+<div class="blog-feat-card">
+<div class="blog-fc-icon">🛠</div>
+<div class="blog-fc-title">Self-extension</div>
+<div class="blog-fc-text">If a feature is missing, the agent writes the required script itself. The WhatsApp voice memo example is canonical.</div>
+</div>
+</div>
+<p>
+      The <strong>ClawHub Marketplace</strong> is the app store for OpenClaw skills.
+      Thousands of community-developed skills cover everything: from
+      Notion integration to bright data scraping to Spotify control.
+      The catch: Quality varies greatly, and before security hardening
+      In 2026, there were 341 malicious skills on ClawHub with a contamination rate
+      found by 12% - a direct indication of why enterprise deployments
+      curated, verified skill sources.
+    </p>
+<p>
+      The supported messaging platforms (as of April 2026):
+    </p>
+<div class="blog-platform-grid">
+<span class="blog-plat">Whatsapp</span>
+<span class="blog-plat">Telegram</span>
+<span class="blog-plat">Discord</span>
+<span class="blog-plat">signal</span>
+<span class="blog-plat">Slack</span>
+<span class="blog-plat">iMessage</span>
+<span class="blog-plat">matrix</span>
+<span class="blog-plat">LINE</span>
+<span class="blog-plat">QQBot</span>
+<span class="blog-plat">Microsoft Teams</span>
+</div>
+<p>
+      All channels share a single, shared memory.
+      The agent is aware of a command via WhatsApp in the morning,
+      when asked via Slack in the evening.
+    </p>
+<!-- 7 -->
+<h2 id="evolution"><span class="ch">07 —</span>Product evolution: From v0.1 to NemoClaw</h2>
+<div class="blog-evo">
+<div class="blog-evo-item">
+<div class="blog-evo-dot filled"></div>
+<div class="blog-evo-phase">Nov. 2025 · Phase 0</div>
+<div class="blog-evo-title">“WhatsApp Relay” – The first hour</div>
+<div class="blog-evo-text">Peter Steinberger connects WhatsApp with the Claude API. Local system execution. First version in an hour. The project is internally called “WhatsApp Relay” – no name yet, no GitHub repo yet.</div>
+<div class="blog-evo-chips"><span class="blog-chip">WhatsApp ↔ Claude API</span><span class="blog-chip">1 hour build</span><span class="blog-chip orange">Private</span></div>
+</div>
+<div class="blog-evo-item">
+<div class="blog-evo-dot filled"></div>
+<div class="blog-evo-phase">Nov. 2025 · Phase 1</div>
+<div class="blog-evo-title">Clawdbot – First public release</div>
+<div class="blog-evo-text">Published on GitHub under the name Clawdbot. Mascot: Cartoon lobster “Clawd”. Support for multiple AI models. First plugin architecture. Browser automation is added – the jump from a simple chatbot to an automation agent.</div>
+<div class="blog-evo-chips"><span class="blog-chip">Multi-model</span><span class="blog-chip">Plugin architecture</span><span class="blog-chip">Browser automation</span><span class="blog-chip green">Open source</span></div>
+</div>
+<div class="blog-evo-item">
+<div class="blog-evo-dot"></div>
+<div class="blog-evo-phase">Jan 25, 2026 · Phase 2</div>
+<div class="blog-evo-title">Official launch – 9,000 stars in 24 hours</div>
+<div class="blog-evo-text">Official GitHub launch with global media coverage. 9,000 stars in 24 hours. Andrej Karpathy calls it the most impressive thing he's ever seen. 2 million visitors in one week.</div>
+<div class="blog-evo-chips"><span class="blog-chip">9K Stars / 24h</span><span class="blog-chip">2M weekly visitors</span></div>
+</div>
+<div class="blog-evo-item">
+<div class="blog-evo-dot"></div>
+<div class="blog-evo-phase">27–30 Jan 2026 · Phase 3</div>
+<div class="blog-evo-title">Moltbot → OpenClaw: Two renames in one week</div>
+<div class="blog-evo-text">Trademark Complaint by Anthropic. 5am ​​Discord Brainstorm. Moltbot. Handle sniping. $CLAWD crypto crash. Three days later: OpenClaw. Trademark checked, domains secured. (<a href="openclaw-naming-history.html">Full naming history →</a>)</div>
+<div class="blog-evo-chips"><span class="blog-chip orange">Trademark dispute</span><span class="blog-chip">OpenClaw</span><span class="blog-chip green">MIT license confirmed</span></div>
+</div>
+<div class="blog-evo-item">
+<div class="blog-evo-dot filled"></div>
+<div class="blog-evo-phase">Feb. 2026 · Phase 4</div>
+<div class="blog-evo-title">100,000 Stars · Security Hardening · OpenAI Hire</div>
+<div class="blog-evo-text">100K Stars – fastest growth in GitHub history. Security researchers report 1,000+ unsecured instances. Steinberger publishes 34 security commits. ClawHub Marketplace is growing. Vercel sponsors the project. February 14: Steinberger moves to OpenAI, OpenClaw to independent foundation.</div>
+<div class="blog-evo-chips"><span class="blog-chip">100K stars</span><span class="blog-chip">ClawHub</span><span class="blog-chip green">Foundation</span></div>
+</div>
+<div class="blog-evo-item">
+<div class="blog-evo-dot filled"></div>
+<div class="blog-evo-phase">March 2026 · Phase 5</div>
+<div class="blog-evo-title">247,000 stars · NVIDIA NemoClaw · Global ecosystem</div>
+<div class="blog-evo-text">NVIDIA announces NemoClaw at GTC 2026 – an enterprise version with GPU acceleration. Tencent, Alibaba and ByteDance are building platforms on OpenClaw. 300,000 lines of code. 47,700 forks. Feishu/Lark support for the Chinese market.</div>
+<div class="blog-evo-chips"><span class="blog-chip">247K stars</span><span class="blog-chip">NVIDIA NemoClaw</span><span class="blog-chip">300K+ LoC</span></div>
+</div>
+</div>
+<!-- 8 -->
+<h2 id="vergleich"><span class="ch">08 —</span>OpenClaw vs. ChatGPT Enterprise vs. n8n – the honest comparison</h2>
+<table class="blog-table">
+<thead>
+<tr>
+<th>criterion</th>
+<th>OpenClaw</th>
+<th>ChatGPT Enterprise</th>
+<th>n8n/Zapier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>type</strong></td>
+<td>Autonomous agent + framework</td>
+<td>Chatbot with restricted Actions</td>
+<td>Workflow automation</td>
+</tr>
+<tr>
+<td><strong>Acts autonomously</strong></td>
+<td><span class="blog-check">✓ Yes</span> – multi-stage, without confirmation</td>
+<td><span class="blog-part">⚠ Restricted</span> – Tools via API</td>
+<td><span class="blog-cross">✗ No</span> – rule-based, no AI thinking</td>
+</tr>
+<tr>
+<td><strong>Data sovereignty</strong></td>
+<td><span class="blog-check">✓</span> Local, on-premise possible</td>
+<td><span class="blog-cross">✗</span> OpenAI US Cloud</td>
+<td><span class="blog-part">⚠</span> Depends on hosting</td>
+</tr>
+<tr>
+<td><strong>memory</strong></td>
+<td><span class="blog-check">✓</span> Persistent, across sessions</td>
+<td><span class="blog-part">⚠</span> Memory feature, limited</td>
+<td><span class="blog-cross">✗</span> No AI memory</td>
+</tr>
+<tr>
+<td><strong>Skill expansion</strong></td>
+<td><span class="blog-check">✓</span> Markdown files, self-writing</td>
+<td><span class="blog-part">⚠</span> GPT plugins (limited)</td>
+<td><span class="blog-check">✓</span> Lots of connectors</td>
+</tr>
+<tr>
+<td><strong>Multi-model</strong></td>
+<td><span class="blog-check">✓</span> Claude, GPT, Gemini, DeepSeek, Ollama</td>
+<td><span class="blog-cross">✗</span> OpenAI only</td>
+<td><span class="blog-part">⚠</span> About AI nodes</td>
+</tr>
+<tr>
+<td><strong>Messaging native</strong></td>
+<td><span class="blog-check">✓</span> WhatsApp, Telegram, Slack and much more.</td>
+<td><span class="blog-cross">✗</span> Browser/API only</td>
+<td><span class="blog-part">⚠</span> About webhook connectors</td>
+</tr>
+<tr>
+<td><strong>Open source</strong></td>
+<td><span class="blog-check">✓</span> MIT license</td>
+<td><span class="blog-cross">✗</span> Closed Source</td>
+<td><span class="blog-part">⚠</span> n8n: partially, Zapier: no</td>
+</tr>
+<tr>
+<td><strong>Enterprise ready (out of box)</strong></td>
+<td><span class="blog-part">⚠</span> Needs professional setup</td>
+<td><span class="blog-check">✓</span> Can be used immediately</td>
+<td><span class="blog-check">✓</span> For simple flows</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td>€ – LLM API costs only</td>
+<td>€€€ – Subscription + API</td>
+<td>€ to €€ – subscription model</td>
+</tr>
+</tbody>
+</table>
+<p>
+      The short version for decision-makers: <strong>n8n and Zapier</strong> are
+      the right choice for rule-based, predictable processes without AI thinking.
+      <strong>ChatGPT Enterprise</strong> is the easiest way to use AI,
+      with the disadvantage of US cloud dependency and no real agent logic.
+      <strong>OpenClaw</strong> is the most powerful tool for complex,
+      Autonomous workflows – but professional deployment is needed in order to
+      Meet enterprise requirements.
+    </p>
+<!-- 9 -->
+<h2 id="enterprise"><span class="ch">09 —</span>What companies in the DACH region need to know</h2>
+<p>
+      OpenClaw is not a plug-and-play enterprise product.
+      The security researchers at SOCprime found shortly after the launch
+      over 1,000 unsecured instances on the public internet –
+      with exposed API keys, chat histories and system credentials.
+      The reason: The agent needs root-level access to the system,
+      to fulfill his tasks. Without a professional security concept
+      This is a massive attack surface.
+    </p>
+<div class="blog-callout amber">
+<div class="blog-callout-hl">⚠️ Enterprise requirements for OpenClaw</div>
+<p>
+<strong>What every business installation needs:</strong>
+        Sandboxed Execution Environment
+        Role-Based Access Control (RBAC) ·
+        Audit logging of all agent actions ·
+        Encryption of all communication channels ·
+        Curated, verified skill sources instead of ClawHub community ·
+        AVV contract for all API calls to external models ·
+        On-premise deployment for GDPR-critical data
+      </p>
+</div>
+<p>
+      The good news: Enterprise maturity is growing rapidly.
+      NVIDIA NemoClaw addresses GPU acceleration and enterprise governance.
+      The OpenClaw Foundation works on team management, compliance tools
+      and auditable logging. And focus on projects like IronClaw (NEAR AI).
+      explicitly focuses on safer sandboxing.
+    </p>
+<p>
+      For companies in the DACH region that want to start using OpenClaw today,
+      There is no way around an experienced implementation partner –
+      someone who knows enterprise architecture, GDPR-compliant deployments
+      has carried out and understands where the limitations of the current framework lie.
+    </p>
+<div class="blog-sep">— — —</div>
+<!-- FAQ -->
+<h2 id="faq" style="padding-top:0;margin-top:0;border-top:none;">FAQ: Frequently asked questions about OpenClaw</h2>
+<div class="blog-faq">
+<div class="blog-faq-item">
+<div class="blog-faq-q">How was OpenClaw built?</div>
+<p class="blog-faq-a">Peter Steinberger built the first version in an hour: He connected the WhatsApp API with Anthropic's Claude API and made it possible to delegate tasks to the AI ​​model on the local computer. The project was published on GitHub in November 2025 and has since grown by the community to 300,000+ lines of code.</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What is the difference between OpenClaw and ChatGPT?</div>
+<p class="blog-faq-a">ChatGPT is a chatbot that generates text. OpenClaw is an execution framework that performs autonomous actions in the real world: reading emails, executing terminal commands, managing calendars, controlling browsers, moving files - without confirmation at each step. It runs locally, is model-agnostic and open source.</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What is SOUL.md?</div>
+<p class="blog-faq-a">SOUL.md is a Markdown file that defines the personality, values, and behavior rules of an OpenClaw agent in natural language. It is injected into the system prompt every time the agent is started and ensures a persistent, consistent identity across all sessions and messaging channels.</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Which AI models does OpenClaw support?</div>
+<p class="blog-faq-a">OpenClaw is model-agnostic: It supports Claude (Anthropic), GPT-5 (OpenAI), Gemini (Google), DeepSeek, KIMI K2.5, Xiaomi MiMo as well as locally operated models via Ollama. Companies can choose any model – or combine different models for different tasks.</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Is OpenClaw suitable for businesses?</div>
+<p class="blog-faq-a">OpenClaw has enormous potential for companies, but requires a professional enterprise architecture: sandbox environment, role-based access control, audit logging and GDPR-compliant deployment. A standard community setup is not enterprise-ready. Clawgency implements OpenClaw with this architecture for companies in the DACH region.</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What is the ClawHub Marketplace?</div>
+<p class="blog-faq-a">ClawHub is the official skill marketplace for OpenClaw - comparable to an app store for agent skills. Thousands of community-developed skills expand the agent. For enterprise use, only verified, curated skills should be used; Malware-infected skills were found in the community pool.</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="blog-article-cta">
+<div class="blog-cta-eyebrow">🦀 OpenClaw experts in the DACH region</div>
+<h3>Make OpenClaw enterprise-ready – for your company</h3>
+<p>
+        Clawgency implements OpenClaw with professional enterprise architecture:
+        GDPR compliant, secure, scalable – live in 2-4 weeks, with 90 day ROI guarantee.
+      </p>
+<a class="btn btn--primary" href="../index.html#kontakt">Book a free initial consultation →</a>
+</div>
+<!-- Related -->
+<nav aria-label="Related articles" class="blog-related">
+<div class="blog-related-title">Further reading</div>
+<div class="blog-related-grid">
+<a class="rc" href="openclaw-naming-history.html">
+<div class="blog-rc-type">Naming &amp; History</div>
+<div class="blog-rc-title">From Clawdbot to Moltbot to OpenClaw: The Complete Naming Story</div>
+</a>
+<a class="rc" href="peter-steinberger-story.html">
+<div class="blog-rc-type">People &amp; background</div>
+<div class="blog-rc-title">Peter Steinberger: From PSPDFKit to Burnout to OpenAI</div>
+</a>
+<a class="rc" href="../openclaw-enterprise-architektur-dsgvo.html">
+<div class="blog-rc-type">Enterprise &amp; GDPR</div>
+<div class="blog-rc-title">GDPR Compliance for OpenClaw: Enterprise Architecture and Security</div>
+</a>
+<a class="rc" href="../openclaw-vs-n8n-zapier.html">
+<div class="blog-rc-type">Comparison</div>
+<div class="blog-rc-title">OpenClaw vs. ChatGPT Enterprise vs. n8n – Which is right for your company?</div>
+</a>
+</div>
+</nav>
+</div></div></article>
+</div>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="footer__bottom">
+<p>© 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
+<p class="footer__credit">A service from <a href="https://theaisoftwarecompany.com" rel="noopener" target="_blank">The AI ​​Software Company</a></p>
+</div>
+</div>
+</footer>
+<script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var burger = document.getElementById('navBurger');
+      burger && burger.addEventListener('click', function () {
+        nav.classList.toggle('mobile-open');
+        burger.setAttribute('aria-label', nav.classList.contains('mobile-open') ? 'Close menu' : 'Open menu');
+      });
+    })();
+  </script>
+
+<script src="../../language-switcher.js"></script></body>
+</html>
