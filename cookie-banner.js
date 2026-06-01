@@ -5,14 +5,14 @@
   var isEnglishPage = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
   var TEXT = isEnglishPage ? {
     ariaLabel: 'Cookie settings',
-    message: 'We use cookies - required ones plus optional Google Analytics. Is that okay? 🦀',
+    message: 'We use cookies - required ones plus optional Google Analytics and the LinkedIn Insight Tag. Is that okay? 🦀',
     decline: 'Required only',
     accept: 'Allow all',
     learnMore: 'Learn more',
     privacyHref: '/en/datenschutz.html'
   } : {
     ariaLabel: 'Cookie-Einstellungen',
-    message: 'Wir nutzen Cookies - nur essenzielle, plus optional Google Analytics. Alles klar? 🦀',
+    message: 'Wir nutzen Cookies - nur essenzielle, plus optional Google Analytics und das LinkedIn Insight Tag. Alles klar? 🦀',
     decline: 'Nur notwendige',
     accept: 'Alle erlauben',
     learnMore: 'Mehr erfahren',
@@ -44,6 +44,26 @@
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(s);
+  }
+
+  function loadLinkedInInsight() {
+    if (window.lintrk) return;
+    window._linkedin_partner_id = '7050346';
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+    window.lintrk = function(a, b) { window.lintrk.q.push([a, b]); };
+    window.lintrk.q = [];
+    var s = document.getElementsByTagName('script')[0];
+    var b = document.createElement('script');
+    b.type = 'text/javascript';
+    b.async = true;
+    b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+    s.parentNode.insertBefore(b, s);
+  }
+
+  function loadOptional() {
+    loadGoogleAnalytics();
+    loadLinkedInInsight();
   }
 
   function hideBanner() {
@@ -87,7 +107,7 @@
 
     banner.querySelector('[data-action="accept"]').addEventListener('click', function() {
       setConsent('accept');
-      loadGoogleAnalytics();
+      loadOptional();
       hideBanner();
     });
 
@@ -103,7 +123,7 @@
     initBanner();
     var consent = getConsent();
     if (consent === 'accept') {
-      loadGoogleAnalytics();
+      loadOptional();
       hideBanner();
     } else if (consent === 'decline') {
       hideBanner();
