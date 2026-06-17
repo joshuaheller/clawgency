@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parallel Development with AI Agents: Git Worktrees as a Productivity Multiplier | Clawgency</title>
+<meta content="How Git Worktrees turn one AI coding agent into three – without conflicts, without chaos. A practical guide for running Claude Code, Codex, and GPT-5.5 in parallel on the same repository." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html" property="og:url"/>
+<meta content="Parallel Development with AI Agents: Git Worktrees as a Productivity Multiplier" property="og:title"/>
+<meta content="How Git Worktrees turn one AI coding agent into three – without conflicts, without chaos. A practical guide for running Claude Code, Codex, and GPT-5.5 in parallel on the same repository." property="og:description"/>
+<meta content="https://replicate.delivery/yhqm/0OlgAfc2Kegfvp9D6DXznaPfGVQT4L0bKzlflkptmo01L8A2C/out-0.webp" property="og:image"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Clawgency" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="https://clawgency.de/blog/git-worktrees-parallele-ki-agenten.html" hreflang="de" rel="alternate"/>
+<link href="https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html" hreflang="en" rel="alternate"/>
+<link href="https://clawgency.de/blog/git-worktrees-parallele-ki-agenten.html" hreflang="x-default" rel="alternate"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Parallel Development with AI Agents: Git Worktrees as a Productivity Multiplier",
+  "description": "How Git Worktrees turn one AI coding agent into three – without conflicts, without chaos. A practical guide for running Claude Code, Codex, and GPT-5.5 in parallel on the same repository.",
+  "datePublished": "2026-06-17",
+  "dateModified": "2026-06-17",
+  "author": {
+    "@type": "Person",
+    "name": "Joshua Heller"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Clawgency",
+    "url": "https://clawgency.de",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://clawgency.de/assets/logo-crab.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html"
+  },
+  "image": "https://replicate.delivery/yhqm/0OlgAfc2Kegfvp9D6DXznaPfGVQT4L0bKzlflkptmo01L8A2C/out-0.webp",
+  "keywords": ["Git Worktrees", "parallel AI agents", "Claude Code Worktree", "parallel AI development", "agentic workflows", "OpenClaw"],
+  "inLanguage": "en-US"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are Git Worktrees and how do they work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Git Worktrees let you check out multiple working directories from a single Git repository – each on its own branch. Unlike a fresh clone, all worktrees share the same .git database, so no space is wasted on duplicate objects and commits are immediately visible across all worktrees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many AI agents can I run in parallel at the same time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Theoretically unlimited – in practice, 3 to 5 parallel agents is a good starting point, constrained by the available API rate limits and the number of CPU cores on your machine. Most teams report that 3 concurrent agents (one per feature ticket) hit the sweet spot between speed and manageability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work with OpenClaw?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. OpenClaw natively supports parallel agent instances across different worktrees. The OpenClaw Dispatcher automatically distributes tasks to available worktrees, including automatic logging, retry logic, and a central review dashboard."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which tasks are suitable for parallel agents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Best suited are tasks that are independent of each other: different features, independent bug fixes, migration scripts, test suites, documentation updates, or refactoring tasks in different modules. Unsuitable are tasks that work in the same files or depend on shared locks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between git worktree and a fresh git clone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A fresh clone duplicates the entire .git database – costing time and disk space. Git Worktrees share the same .git database: commits, blobs, and trees exist only once. A new worktree is created in seconds, regardless of repo size. Branches are also immediately visible between worktrees – no fetch or push required."
+      }
+    }
+  ]
+}
+</script>
+<link href="../../assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../../assets/favicon-crab-48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="../../styles.min.css" rel="stylesheet"/>
+<link href="../../blog-article.css" rel="stylesheet"/>
+<script data-domain="clawgency.de" defer="" src="https://analytics.taisc.de/js/script.js"></script>
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+<div class="nav__inner">
+<a class="nav__logo" href="../index.html">
+<img alt="Clawgency Crab" class="nav__logo-img" height="64" src="../../assets/logo-crab.webp" width="64"/>
+<span class="nav__logo-text">Clawgency</span>
+</a>
+<ul class="nav__links">
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case Studies</a></li>
+<li><a class="nav__link" href="../glossar.html">Glossary</a></li>
+</ul>
+<a class="btn btn--nav" href="../index.html#contact">Book a Free Call</a>
+<button aria-label="Open menu" class="nav__burger" id="navBurger">
+<span></span><span></span><span></span>
+</button>
+</div>
+<div class="nav__mobile" id="navMobile">
+<ul>
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case Studies</a></li>
+<li><a class="nav__link" href="../glossar.html">Glossary</a></li>
+<li><a class="btn btn--primary" href="../index.html#contact" style="display:inline-block;margin-top:1rem;">Book a Free Call</a></li>
+</ul>
+</div>
+</nav>
+
+<main class="blog-article-page">
+<div class="container">
+<a class="blog-back" href="../blog.html">← Back to Content Hub</a>
+<nav aria-label="Breadcrumb" class="blog-breadcrumb">
+<a href="../index.html">Home</a>
+<span aria-hidden="true">›</span>
+<a href="../blog.html">Blog</a>
+<span aria-hidden="true">›</span>
+Parallel Development with AI Agents
+</nav>
+
+<header class="blog-header">
+<span class="section-tag">Developer Workflow · AI Agents · Productivity</span>
+<h1>Parallel Development with AI Agents:<br/><em>Git Worktrees as a Productivity Multiplier</em></h1>
+<p class="blog-deck">The question is no longer whether you work with agents. The question is: parallel or serial? Developers who run AI coding agents one after the other throw away 70% of their potential throughput. Git Worktrees fix that – without conflicts, without chaos.</p>
+<div class="blog-meta">
+<div><strong>Author:</strong> Joshua Heller</div>
+<div><strong>Published:</strong> June 17, 2026</div>
+<div><strong>Reading time:</strong> approx. 15 min.</div>
+<div><strong>Category:</strong> Developer Workflow</div>
+</div>
+</header>
+
+<article class="blog-body">
+
+<!-- Hero Image -->
+<figure style="margin:0 0 2.5rem;border-radius:12px;overflow:hidden;">
+<img alt="Parallel AI agents working simultaneously on different Git worktrees – visualised as glowing network nodes" loading="eager" src="https://replicate.delivery/yhqm/0OlgAfc2Kegfvp9D6DXznaPfGVQT4L0bKzlflkptmo01L8A2C/out-0.webp" style="width:100%;height:auto;display:block;"/>
+</figure>
+
+<!-- TOC -->
+<nav aria-label="Table of Contents" class="blog-toc">
+<div class="blog-toc-title">Table of Contents</div>
+<ol>
+<li><a href="#blind-spot">The Blind Spot Most Developers Have</a></li>
+<li><a href="#what-are-worktrees">What Are Git Worktrees?</a></li>
+<li><a href="#claude-code-support">Claude Code's Native Worktree Support</a></li>
+<li><a href="#architecture-diagram">Architecture Diagram: What Parallel Work Looks Like</a></li>
+<li><a href="#scenarios">3 Concrete Use Cases</a></li>
+<li><a href="#quickstart">Quick-Start Guide: Parallel Workflow in 10 Minutes</a></li>
+<li><a href="#best-practices">Best Practices and Common Pitfalls</a></li>
+<li><a href="#openclaw-integration">How This Works with OpenClaw</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ol>
+</nav>
+
+<!-- Stats -->
+<div class="blog-stats">
+<div class="blog-stat-cell">
+<div class="blog-stat-num">3x</div>
+<div class="blog-stat-label">throughput vs. serial workflow</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">Multiple Agents</div>
+<div class="blog-stat-label">active simultaneously on the same repo</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">1 Repository</div>
+<div class="blog-stat-label">no duplicate clones, no conflicts</div>
+</div>
+</div>
+
+<!-- Section 1 -->
+<h2 id="blind-spot">The Blind Spot Most Developers Have</h2>
+<p>
+There is a workflow mistake that almost every developer makes when first working with AI coding agents: they start an agent, wait for it to finish, review the result, merge – and then start the next agent. Serial. One after another. As if time were not a resource.
+</p>
+<p>
+It feels tidy. It feels controlled. And it wastes most of the productivity potential that AI agents actually offer.
+</p>
+<p>
+Simon Willison, one of the most prolific AI tooling researchers in the field, described this problem precisely in October 2025: while an agent works on Task A, your machine sits idle, the API connection waits, and the next ticket goes unstarted. In the time one agent spends 10 minutes building a feature, a second agent could already have the next feature half finished. <strong>Serial execution does not just halve your output – it thirds it.</strong>
+</p>
+<p>
+The conceptual fix is simple: start multiple agents in parallel. The technical challenge is doing this without the agents getting in each other's way – writing to the same files, clobbering the same branches, generating merge conflicts that cost more time than the parallelism saves.
+</p>
+<p>
+<strong>Git Worktrees</strong> solve exactly this problem. And Claude Code has built a native integration for them.
+</p>
+
+<div class="blog-pull-quote">
+<blockquote>
+"The question is no longer whether you work with agents. The question is: parallel or serial?"
+</blockquote>
+<cite>— Joshua Heller, LinkedIn, June 15, 2026</cite>
+</div>
+
+<!-- Section 2 -->
+<h2 id="what-are-worktrees">What Are Git Worktrees?</h2>
+<p>
+Git Worktrees are an often-overlooked feature of Git, present in the core since version 2.5 (2015) – but experiencing their breakthrough as a productivity tool only with the AI agent wave. The core idea: <strong>a single Git repository can have multiple working directories at the same time.</strong>
+</p>
+<p>
+Normally, a repository has exactly one working directory – the folder where you see and edit your files. Everything else lives in the <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.git</code> database. With worktrees you can "check out" this working directory as many times as you like – each on its own branch, in its own folder on your filesystem. All worktrees share the same <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.git</code> database.
+</p>
+
+<h3>The Critical Difference from a Fresh Clone</h3>
+<p>
+Many developers solve the parallel work problem by cloning the repository multiple times. That works – but it has significant drawbacks:
+</p>
+<ul style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li>Every clone duplicates the entire <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.git</code> database. For large repos (100 MB+) that costs time and disk space.</li>
+<li>Commits in Clone A are not visible in Clone B until after a <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">git fetch</code> and <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">git pull</code>.</li>
+<li>It is easy to lose track of which clone has which state.</li>
+<li>Node modules, Python virtual environments, build artifacts – everything gets duplicated unless carefully configured.</li>
+</ul>
+<p>
+With worktrees, Git creates only a new working directory that points to a branch. The entire object database (commits, blobs, trees) continues to exist exactly once. A new worktree is created in seconds – regardless of whether the repo is 10 MB or 10 GB.
+</p>
+
+<h3>The Three Most Important Worktree Commands</h3>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Create a new worktree (creates branch feature/payment-api and folder ../repo-payment)</span>
+git worktree add ../repo-payment feature/payment-api
+
+<span style="color:#8b949e"># New worktree from an existing remote branch</span>
+git worktree add ../repo-auth -b feature/auth-refactor origin/main
+
+<span style="color:#8b949e"># List all active worktrees</span>
+git worktree list
+
+<span style="color:#8b949e"># Remove a worktree (after merging)</span>
+git worktree remove ../repo-payment
+
+<span style="color:#8b949e"># Prune stale worktree references</span>
+git worktree prune</pre>
+
+<p>
+The output of <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">git worktree list</code> shows all active directories at a glance:
+</p>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;">/home/user/my-project              a3f9b21  [main]
+/home/user/my-project-payment      8c4d032  [feature/payment-api]
+/home/user/my-project-auth         1e7f994  [feature/auth-refactor]
+/home/user/my-project-tests        9a2c551  [feature/test-coverage]</pre>
+
+<div class="blog-callout accent">
+<span class="blog-callout-icon">💡</span>
+<div class="blog-callout-title">Worktree Naming Convention for Teams</div>
+<p>
+The naming schema <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">[repo-name]-[ticket-id]</code> for worktree folders has proven itself in practice: <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">myapp-123</code>, <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">myapp-456</code>. Every developer immediately knows which folder belongs to which ticket – and which AI agent is currently working there.
+</p>
+</div>
+
+<!-- Section 3 -->
+<h2 id="claude-code-support">Claude Code's Native Worktree Support</h2>
+<p>
+What turns Git Worktrees from a useful tool into a genuine productivity multiplier is the native integration in <strong>Claude Code</strong> – Anthropic's CLI for using Claude as a coding agent. Claude Code has two flags built specifically for the parallel worktree workflow:
+</p>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Claude Code starts in a new worktree (isolated branch)</span>
+claude --worktree
+
+<span style="color:#8b949e"># Claude Code + tmux: agent runs in a dedicated tmux pane</span>
+claude --worktree --tmux</pre>
+
+<p>
+What happens when you run <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">claude --worktree</code>? Claude Code:
+</p>
+<ol style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li>Automatically creates a new worktree – with a cleanly generated branch name based on your task description.</li>
+<li>Starts the Claude session in this isolated working directory.</li>
+<li>All changes made by the agent land on this branch, not on <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">main</code>.</li>
+<li>After the task is complete, you can review, adjust, and merge – or discard the worktree.</li>
+</ol>
+
+<p>
+The <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">--tmux</code> flag adds another layer: each agent gets its own tmux pane in your terminal. You can switch between running agents, observe progress, and intervene if needed – all in a single terminal window.
+</p>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Typical parallel workflow: starting 3 agents simultaneously</span>
+<span style="color:#8b949e"># Terminal 1: Feature A</span>
+claude --worktree "Implement Payment Integration with Stripe"
+
+<span style="color:#8b949e"># Terminal 2: Feature B (start at the same time)</span>
+claude --worktree "Refactor Auth module to use JWT"
+
+<span style="color:#8b949e"># Terminal 3: Tests (start at the same time)</span>
+claude --worktree "Increase test coverage to 80% for User Service"
+
+<span style="color:#8b949e"># Or everything in one tmux session:</span>
+claude --worktree --tmux "Implement Payment Integration with Stripe"</pre>
+
+<div class="blog-callout">
+<span class="blog-callout-icon">🔧</span>
+<div class="blog-callout-title">Tip: Don't Forget .env Files</div>
+<p>
+Git Worktrees do not inherit <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.env</code> files – these are typically listed in <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.gitignore</code>. Copy them manually or create a setup script that automatically symlinks <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.env</code> when creating a worktree.
+</p>
+</div>
+
+<!-- Section 4: Interactive Diagram -->
+<h2 id="architecture-diagram">Architecture Diagram: What Parallel Work Looks Like</h2>
+<p>
+The following diagram shows how a central repository is split into multiple worktrees, each with its own agent – and how the results flow back into <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">main</code>:
+</p>
+
+<div style="background:#0d1117;border-radius:12px;padding:1.5rem;margin:2rem 0;overflow:hidden;">
+<canvas id="worktreeDiagram" style="width:100%;display:block;cursor:default;" height="420"></canvas>
+<div style="text-align:center;margin-top:0.75rem;">
+<button id="diagramRestart" style="background:#1f2937;color:#8b949e;border:1px solid #30363d;border-radius:6px;padding:0.4rem 1rem;font-size:0.8rem;cursor:pointer;font-family:monospace;">Restart Animation</button>
+</div>
+</div>
+
+<script>
+(function() {
+  var canvas = document.getElementById('worktreeDiagram');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H;
+  var animFrame;
+  var t = 0;
+  var phase = 0;
+  var phaseT = 0;
+
+  function resize() {
+    var container = canvas.parentElement;
+    W = container.clientWidth - 48;
+    H = 420;
+    canvas.width = W;
+    canvas.height = H;
+  }
+
+  var nodes = {
+    main:   { label: 'main', sublabel: 'Repository', x: 0, y: 0, color: '#58a6ff', r: 28 },
+    wt1:    { label: 'worktree-1', sublabel: 'feature/payment', x: 0, y: 0, color: '#3fb950', r: 22 },
+    wt2:    { label: 'worktree-2', sublabel: 'feature/auth', x: 0, y: 0, color: '#d29922', r: 22 },
+    wt3:    { label: 'worktree-3', sublabel: 'feature/tests', x: 0, y: 0, color: '#bc8cff', r: 22 },
+    ag1:    { label: 'Claude Opus', sublabel: 'Agent 1', x: 0, y: 0, color: '#3fb950', r: 18 },
+    ag2:    { label: 'Codex', sublabel: 'Agent 2', x: 0, y: 0, color: '#d29922', r: 18 },
+    ag3:    { label: 'GPT-5.5', sublabel: 'Agent 3', x: 0, y: 0, color: '#bc8cff', r: 18 },
+    merged: { label: 'main', sublabel: 'Merged', x: 0, y: 0, color: '#58a6ff', r: 28 }
+  };
+
+  var agentProgress = [0, 0, 0];
+
+  function setPositions() {
+    nodes.main.x   = W * 0.12;  nodes.main.y   = H * 0.5;
+    nodes.wt1.x    = W * 0.38;  nodes.wt1.y    = H * 0.22;
+    nodes.wt2.x    = W * 0.38;  nodes.wt2.y    = H * 0.5;
+    nodes.wt3.x    = W * 0.38;  nodes.wt3.y    = H * 0.78;
+    nodes.ag1.x    = W * 0.62;  nodes.ag1.y    = H * 0.22;
+    nodes.ag2.x    = W * 0.62;  nodes.ag2.y    = H * 0.5;
+    nodes.ag3.x    = W * 0.62;  nodes.ag3.y    = H * 0.78;
+    nodes.merged.x = W * 0.88;  nodes.merged.y = H * 0.5;
+  }
+
+  function drawNode(n, alpha, pulse, showProgress, progress) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    if (pulse > 0) {
+      var grad = ctx.createRadialGradient(n.x, n.y, n.r * 0.5, n.x, n.y, n.r * 2.5 + pulse * 12);
+      grad.addColorStop(0, n.color + '44');
+      grad.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 2.5 + pulse * 12, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fillStyle = '#161b22';
+    ctx.fill();
+    ctx.strokeStyle = n.color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    if (showProgress && progress > 0) {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r + 5, -Math.PI/2, -Math.PI/2 + Math.PI*2*progress);
+      ctx.strokeStyle = n.color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#e6edf3';
+    ctx.font = 'bold ' + (n.r < 20 ? '9' : '10') + 'px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(n.label, n.x, n.y - 3);
+    ctx.font = '8px monospace';
+    ctx.fillStyle = '#8b949e';
+    ctx.fillText(n.sublabel, n.x, n.y + 8);
+    ctx.restore();
+  }
+
+  function drawArrow(x1, y1, x2, y2, color, alpha, dashed, progress) {
+    if (alpha <= 0) return;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    if (dashed) ctx.setLineDash([4, 4]);
+    var dx = x2 - x1, dy = y2 - y1;
+    var ex = x1 + dx * progress, ey = y1 + dy * progress;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+    if (progress >= 0.99) {
+      var angle = Math.atan2(dy, dx);
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.moveTo(x2, y2);
+      ctx.lineTo(x2 - 8*Math.cos(angle-0.4), y2 - 8*Math.sin(angle-0.4));
+      ctx.lineTo(x2 - 8*Math.cos(angle+0.4), y2 - 8*Math.sin(angle+0.4));
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawLabel(text, x, y, color, alpha) {
+    if (alpha <= 0) return;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color || '#8b949e';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    ctx.strokeStyle = '#21262d';
+    ctx.lineWidth = 0.5;
+    for (var gx = 0; gx < W; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
+    for (var gy = 0; gy < H; gy += 40) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke(); }
+    ctx.restore();
+
+    ctx.save();
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('PARALLEL WORKTREE WORKFLOW', 12, 18);
+    ctx.restore();
+
+    var p = phaseT;
+
+    if (phase === 0) {
+      var mainAlpha = Math.min(1, p * 3);
+      drawNode(nodes.main, mainAlpha, 0, false, 0);
+      var branchAlpha = Math.max(0, (p - 0.3) * 2.5);
+      var arrowP1 = Math.max(0, Math.min(1, (p - 0.3) * 3));
+      var arrowP2 = Math.max(0, Math.min(1, (p - 0.45) * 3));
+      var arrowP3 = Math.max(0, Math.min(1, (p - 0.6) * 3));
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt1.x-nodes.wt1.r, nodes.wt1.y, '#58a6ff', branchAlpha, true, arrowP1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt2.x-nodes.wt2.r, nodes.wt2.y, '#58a6ff', branchAlpha, true, arrowP2);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt3.x-nodes.wt3.r, nodes.wt3.y, '#58a6ff', branchAlpha, true, arrowP3);
+      drawLabel('git worktree add', (nodes.main.x + nodes.wt1.x)/2, nodes.wt1.y - 14, '#58a6ff', arrowP1);
+      drawNode(nodes.wt1, Math.min(branchAlpha, arrowP1), 0, false, 0);
+      drawNode(nodes.wt2, Math.min(branchAlpha, arrowP2), 0, false, 0);
+      drawNode(nodes.wt3, Math.min(branchAlpha, arrowP3), 0, false, 0);
+
+    } else if (phase === 1) {
+      var pulse1 = Math.sin(t * 0.07) * 0.5 + 0.5;
+      var pulse2 = Math.sin(t * 0.07 + 1) * 0.5 + 0.5;
+      var pulse3 = Math.sin(t * 0.07 + 2) * 0.5 + 0.5;
+      drawNode(nodes.main, 1, 0, false, 0);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt1.x-nodes.wt1.r, nodes.wt1.y, '#58a6ff', 0.4, true, 1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt2.x-nodes.wt2.r, nodes.wt2.y, '#58a6ff', 0.4, true, 1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt3.x-nodes.wt3.r, nodes.wt3.y, '#58a6ff', 0.4, true, 1);
+      drawNode(nodes.wt1, 1, pulse1, false, 0);
+      drawNode(nodes.wt2, 1, pulse2, false, 0);
+      drawNode(nodes.wt3, 1, pulse3, false, 0);
+      var agAlpha = Math.min(1, p * 3);
+      var agArrow1 = Math.max(0, Math.min(1, (p - 0) * 4));
+      var agArrow2 = Math.max(0, Math.min(1, (p - 0.1) * 4));
+      var agArrow3 = Math.max(0, Math.min(1, (p - 0.2) * 4));
+      drawArrow(nodes.wt1.x+nodes.wt1.r, nodes.wt1.y, nodes.ag1.x-nodes.ag1.r, nodes.ag1.y, nodes.ag1.color, agAlpha, false, agArrow1);
+      drawArrow(nodes.wt2.x+nodes.wt2.r, nodes.wt2.y, nodes.ag2.x-nodes.ag2.r, nodes.ag2.y, nodes.ag2.color, agAlpha, false, agArrow2);
+      drawArrow(nodes.wt3.x+nodes.wt3.r, nodes.wt3.y, nodes.ag3.x-nodes.ag3.r, nodes.ag3.y, nodes.ag3.color, agAlpha, false, agArrow3);
+      agentProgress[0] = Math.min(1, p * 1.2);
+      agentProgress[1] = Math.min(1, p * 1.0);
+      agentProgress[2] = Math.min(1, p * 1.4);
+      drawNode(nodes.ag1, agAlpha, pulse1 * agAlpha, true, agentProgress[0]);
+      drawNode(nodes.ag2, agAlpha, pulse2 * agAlpha, true, agentProgress[1]);
+      drawNode(nodes.ag3, agAlpha, pulse3 * agAlpha, true, agentProgress[2]);
+      if (agentProgress[0] < 1) drawLabel('working...', nodes.ag1.x + 34, nodes.ag1.y, nodes.ag1.color, agAlpha * (1 - agentProgress[0]));
+      if (agentProgress[1] < 1) drawLabel('working...', nodes.ag2.x + 34, nodes.ag2.y, nodes.ag2.color, agAlpha * (1 - agentProgress[1]));
+      if (agentProgress[2] < 1) drawLabel('working...', nodes.ag3.x + 34, nodes.ag3.y, nodes.ag3.color, agAlpha * (1 - agentProgress[2]));
+      if (agentProgress[0] >= 1) drawLabel('✓ done', nodes.ag1.x + 28, nodes.ag1.y, nodes.ag1.color, agAlpha);
+      if (agentProgress[1] >= 1) drawLabel('✓ done', nodes.ag2.x + 28, nodes.ag2.y, nodes.ag2.color, agAlpha);
+      if (agentProgress[2] >= 1) drawLabel('✓ done', nodes.ag3.x + 28, nodes.ag3.y, nodes.ag3.color, agAlpha);
+
+    } else if (phase === 2) {
+      drawNode(nodes.main, 0.3, 0, false, 0);
+      drawNode(nodes.wt1, 1, 0, false, 0);
+      drawNode(nodes.wt2, 1, 0, false, 0);
+      drawNode(nodes.wt3, 1, 0, false, 0);
+      drawNode(nodes.ag1, 1, 0, true, 1);
+      drawNode(nodes.ag2, 1, 0, true, 1);
+      drawNode(nodes.ag3, 1, 0, true, 1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt1.x-nodes.wt1.r, nodes.wt1.y, '#58a6ff', 0.2, true, 1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt2.x-nodes.wt2.r, nodes.wt2.y, '#58a6ff', 0.2, true, 1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt3.x-nodes.wt3.r, nodes.wt3.y, '#58a6ff', 0.2, true, 1);
+      drawArrow(nodes.wt1.x+nodes.wt1.r, nodes.wt1.y, nodes.ag1.x-nodes.ag1.r, nodes.ag1.y, nodes.ag1.color, 0.3, false, 1);
+      drawArrow(nodes.wt2.x+nodes.wt2.r, nodes.wt2.y, nodes.ag2.x-nodes.ag2.r, nodes.ag2.y, nodes.ag2.color, 0.3, false, 1);
+      drawArrow(nodes.wt3.x+nodes.wt3.r, nodes.wt3.y, nodes.ag3.x-nodes.ag3.r, nodes.ag3.y, nodes.ag3.color, 0.3, false, 1);
+      var m1 = Math.min(1, p * 2.5);
+      var m2 = Math.min(1, Math.max(0, (p - 0.15) * 2.5));
+      var m3 = Math.min(1, Math.max(0, (p - 0.3) * 2.5));
+      drawArrow(nodes.wt1.x+nodes.wt1.r, nodes.wt1.y, nodes.merged.x-nodes.merged.r, nodes.merged.y, nodes.wt1.color, 1, false, m1);
+      drawArrow(nodes.wt2.x+nodes.wt2.r, nodes.wt2.y, nodes.merged.x-nodes.merged.r, nodes.merged.y, nodes.wt2.color, 1, false, m2);
+      drawArrow(nodes.wt3.x+nodes.wt3.r, nodes.wt3.y, nodes.merged.x-nodes.merged.r, nodes.merged.y, nodes.wt3.color, 1, false, m3);
+      drawLabel('git merge / PR', (nodes.wt1.x + nodes.merged.x)/2, nodes.wt1.y - 14, '#8b949e', m1);
+      var mergedAlpha = Math.min(1, Math.max(0, (p - 0.6) * 3));
+      drawNode(nodes.merged, mergedAlpha, mergedAlpha, false, 0);
+      if (mergedAlpha > 0) {
+        ctx.save();
+        ctx.globalAlpha = mergedAlpha;
+        ctx.fillStyle = '#3fb950';
+        ctx.font = 'bold 11px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('All PRs merged', nodes.merged.x, nodes.merged.y + 46);
+        ctx.restore();
+      }
+
+    } else if (phase === 3) {
+      drawNode(nodes.main, 0.3, 0, false, 0);
+      drawNode(nodes.wt1, 0.5, 0, false, 0);
+      drawNode(nodes.wt2, 0.5, 0, false, 0);
+      drawNode(nodes.wt3, 0.5, 0, false, 0);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt1.x-nodes.wt1.r, nodes.wt1.y, '#58a6ff', 0.15, true, 1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt2.x-nodes.wt2.r, nodes.wt2.y, '#58a6ff', 0.15, true, 1);
+      drawArrow(nodes.main.x+nodes.main.r, nodes.main.y, nodes.wt3.x-nodes.wt3.r, nodes.wt3.y, '#58a6ff', 0.15, true, 1);
+      drawArrow(nodes.wt1.x+nodes.wt1.r, nodes.wt1.y, nodes.merged.x-nodes.merged.r, nodes.merged.y, nodes.wt1.color, 0.4, false, 1);
+      drawArrow(nodes.wt2.x+nodes.wt2.r, nodes.wt2.y, nodes.merged.x-nodes.merged.r, nodes.merged.y, nodes.wt2.color, 0.4, false, 1);
+      drawArrow(nodes.wt3.x+nodes.wt3.r, nodes.wt3.y, nodes.merged.x-nodes.merged.r, nodes.merged.y, nodes.wt3.color, 0.4, false, 1);
+      var pulse = Math.sin(t * 0.05) * 0.5 + 0.5;
+      drawNode(nodes.merged, 1, pulse, false, 0);
+      ctx.save();
+      ctx.fillStyle = '#3fb950';
+      ctx.font = 'bold 11px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('All PRs merged', nodes.merged.x, nodes.merged.y + 46);
+      ctx.fillStyle = '#8b949e';
+      ctx.font = '9px monospace';
+      ctx.fillText('git worktree remove [wt1/wt2/wt3]', nodes.merged.x, nodes.merged.y + 62);
+      ctx.restore();
+    }
+  }
+
+  var phaseDurations = [200, 300, 240, 9999];
+
+  function tick() {
+    t++;
+    phaseT = Math.min(1, phaseT + 1 / phaseDurations[phase]);
+    if (phaseT >= 1 && phase < 3) {
+      phase++;
+      phaseT = 0;
+    }
+    draw();
+    animFrame = requestAnimationFrame(tick);
+  }
+
+  function restart() {
+    cancelAnimationFrame(animFrame);
+    t = 0; phase = 0; phaseT = 0;
+    agentProgress = [0,0,0];
+    tick();
+  }
+
+  resize();
+  setPositions();
+  tick();
+
+  document.getElementById('diagramRestart').addEventListener('click', function() { restart(); });
+  window.addEventListener('resize', function() {
+    resize();
+    setPositions();
+  });
+})();
+</script>
+
+<!-- Section 5: Use Cases -->
+<h2 id="scenarios">3 Concrete Use Cases</h2>
+
+<h3>Scenario 1: Parallel Feature Development</h3>
+<p>
+The most obvious scenario – and the most common use case in development teams that work with AI agents in parallel. You have multiple tickets in the sprint: Feature A, Feature B, a bug fix in an unrelated module. Normally a developer would tackle these one after another, or the team would split tasks.
+</p>
+<p>
+With parallel agents you start all three tasks simultaneously:
+</p>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Task 1: Payment Integration (Terminal 1)</span>
+cd /workspace/my-project
+claude --worktree "Implement Stripe webhook handler for subscription events.
+Requirements:
+- Accept POST /webhooks/stripe
+- Events: customer.subscription.updated, invoice.payment_failed
+- Log to webhook_events table
+- Retry logic on DB failure"
+
+<span style="color:#8b949e"># Task 2: Auth Refactoring (Terminal 2, simultaneously)</span>
+cd /workspace/my-project
+claude --worktree "Refactor src/auth/ from session cookies to JWT.
+All existing tests must still pass.
+New tests for token refresh flow expected."
+
+<span style="color:#8b949e"># Task 3: Database Migration (Terminal 3, simultaneously)</span>
+cd /workspace/my-project
+claude --worktree "Create DB migration for new user_preferences table.
+Schema: user_id (FK), key VARCHAR(64), value JSONB, updated_at.
+Include rollback script."</pre>
+
+<p>
+While you grab a coffee or prepare for the next meeting, all three agents run in parallel. When you return, you have three pull requests ready to review and merge. At an average task runtime of 8–15 minutes, you have waited once for 15 minutes instead of 45 minutes serially.
+</p>
+<p>
+<strong>Important:</strong> Tasks must genuinely be independent. Payment integration and auth refactoring touch different modules – that is ideal. If both agents were to work on <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">src/middleware/auth.ts</code>, merge conflicts would be guaranteed.
+</p>
+
+<h3>Scenario 2: Model Comparison – Claude Opus 4.8 vs. Codex vs. GPT-5.5</h3>
+<p>
+A particularly powerful scenario: you send the same task to three different models simultaneously and compare the results. This might sound inefficient – but it is not, when you face a complex implementation decision and want to know which approach is best.
+</p>
+<p>
+Practical example: you need to implement a caching strategy for a high-traffic API. Redis? In-memory LRU? Edge caching? Three models, three approaches – you review the differences and pick the best:
+</p>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Create worktrees</span>
+git worktree add ../project-cache-claude  -b experiment/cache-claude
+git worktree add ../project-cache-codex   -b experiment/cache-codex
+git worktree add ../project-cache-gpt     -b experiment/cache-gpt
+
+<span style="color:#8b949e"># Start agents (different models, same task)</span>
+cd ../project-cache-claude && claude --model opus "Implement caching for GET /api/products..."
+cd ../project-cache-codex  && codex "Implement caching for GET /api/products..."
+cd ../project-cache-gpt    && gpt-code "Implement caching for GET /api/products..."
+
+<span style="color:#8b949e"># Compare results</span>
+git diff experiment/cache-claude experiment/cache-codex -- src/cache/
+git diff experiment/cache-claude experiment/cache-gpt   -- src/cache/</pre>
+
+<p>
+What you will regularly observe: the models choose different abstraction levels. Claude Opus 4.8 tends toward more complete implementations with error handling and tests. Codex often produces more compact code that stays closer to the existing patterns in the repository. GPT-5.5 frequently shines with well-thought-out types and interfaces.
+</p>
+<p>
+The outcome is not a question of "which model is better" but which approach fits this specific codebase, this team, and these requirements.
+</p>
+
+<div class="blog-callout accent">
+<span class="blog-callout-icon">💡</span>
+<div class="blog-callout-title">Cost Note on Model Comparison</div>
+<p>
+The model comparison costs roughly three times as much as a single agent session. It pays off for complex implementation decisions where a wrong approach will be expensive to fix later. For routine tasks like bug fixes or CRUD operations, a single agent is more cost-efficient.
+</p>
+</div>
+
+<h3>Scenario 3: Scout Mode – Explore Without Commitment</h3>
+<p>
+Scout mode is a pattern Simon Willison described in his October 2025 post, and it is extremely valuable in practice: you send an agent into a worktree to answer a question without intending to merge the code.
+</p>
+<p>
+Typical scout questions:
+</p>
+<ul style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li>"How hard would it be to migrate this module to TypeScript 5.x?"</li>
+<li>"Which tests break if we switch the database connection to connection pooling?"</li>
+<li>"Can our API layer support GraphQL without breaking the REST endpoints?"</li>
+</ul>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Create scout worktree</span>
+git worktree add ../project-scout -b scout/typescript-migration
+
+<span style="color:#8b949e"># Agent explores – no merge planned</span>
+cd ../project-scout
+claude "Try to migrate src/api/ to TypeScript 5.5.
+Write a summary at the end:
+- How many files need to change?
+- What breaking changes are there?
+- Estimate: how many hours of manual work?
+You do NOT need to fix everything, just explore and report."
+
+<span style="color:#8b949e"># After the scout: read result, then remove worktree</span>
+cat SCOUT_REPORT.md
+git worktree remove ../project-scout</pre>
+
+<p>
+The key advantage: the scout agent can and should make mistakes, leave incomplete implementations behind, break tests – that is intentional. The output is not mergeable code but an effort estimate and risk assessment. For planning conversations and sprint estimates, that is invaluable.
+</p>
+
+<!-- Section 6: Quickstart -->
+<h2 id="quickstart">Quick-Start Guide: Parallel Workflow in 10 Minutes</h2>
+<p>
+Here is the complete step-by-step guide to get started with parallel AI agents on worktrees immediately:
+</p>
+
+<h3>Step 1: Prepare the Repository</h3>
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Make sure main is clean</span>
+git checkout main
+git pull origin main
+git status  <span style="color:#8b949e"># no uncommitted changes!</span></pre>
+
+<h3>Step 2: Create Worktrees</h3>
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Pattern: [parent-dir]/[repo]-[ticket-id]</span>
+git worktree add ../my-project-123 -b feature/TICKET-123
+git worktree add ../my-project-124 -b feature/TICKET-124
+git worktree add ../my-project-125 -b feature/TICKET-125
+
+<span style="color:#8b949e"># Verify all worktrees</span>
+git worktree list</pre>
+
+<h3>Step 3: Copy .env Files</h3>
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># .env is in .gitignore – copy manually</span>
+cp my-project/.env ../my-project-123/.env
+cp my-project/.env ../my-project-124/.env
+cp my-project/.env ../my-project-125/.env
+
+<span style="color:#8b949e"># Optional: script for automatic setup</span>
+cat &gt; setup-worktree.sh &lt;&lt; 'EOF'
+#!/bin/bash
+WT_PATH=$1
+cp .env "$WT_PATH/.env"
+echo "Worktree $WT_PATH ready."
+EOF
+chmod +x setup-worktree.sh</pre>
+
+<h3>Step 4: Start Agents in Parallel</h3>
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Option A: Separate terminals</span>
+<span style="color:#8b949e"># Terminal 1:</span>
+cd ../my-project-123 && claude "TICKET-123: ..."
+<span style="color:#8b949e"># Terminal 2:</span>
+cd ../my-project-124 && claude "TICKET-124: ..."
+<span style="color:#8b949e"># Terminal 3:</span>
+cd ../my-project-125 && claude "TICKET-125: ..."
+
+<span style="color:#8b949e"># Option B: tmux (all in one window)</span>
+tmux new-session -d -s agents
+tmux send-keys -t agents "cd ../my-project-123 && claude --worktree 'TICKET-123...'" Enter
+tmux split-window -h
+tmux send-keys -t agents "cd ../my-project-124 && claude --worktree 'TICKET-124...'" Enter
+tmux split-window -v
+tmux send-keys -t agents "cd ../my-project-125 && claude --worktree 'TICKET-125...'" Enter
+tmux attach -t agents</pre>
+
+<h3>Step 5: Review and Merge</h3>
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Review diff before merging</span>
+cd ../my-project-123
+git diff main...HEAD
+
+<span style="color:#8b949e"># Run tests</span>
+npm test
+
+<span style="color:#8b949e"># Go back to main repo and merge</span>
+cd my-project
+git merge feature/TICKET-123
+git merge feature/TICKET-124
+git merge feature/TICKET-125
+
+<span style="color:#8b949e"># Clean up worktrees</span>
+git worktree remove ../my-project-123
+git worktree remove ../my-project-124
+git worktree remove ../my-project-125
+git worktree prune</pre>
+
+<!-- Section 7: Best Practices -->
+<h2 id="best-practices">Best Practices and Common Pitfalls</h2>
+
+<table class="blog-table">
+<thead>
+<tr>
+<th>Situation</th>
+<th>DO ✓</th>
+<th>DON'T ✗</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task selection</td>
+<td>Run independent tasks in parallel (different modules, different features)</td>
+<td>Parallelize tasks that touch the same files</td>
+</tr>
+<tr>
+<td>Worktree naming</td>
+<td><code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">[repo]-[ticket-id]</code> – unambiguous, instantly understandable</td>
+<td>Generic names like <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">temp1</code>, <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">test</code>, <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">new</code></td>
+</tr>
+<tr>
+<td>.env files</td>
+<td>Copy or symlink when creating the worktree</td>
+<td>Forget to copy – the agent will have no credentials and fail silently</td>
+</tr>
+<tr>
+<td>Retries</td>
+<td>Max 2 retry attempts per task, then check manually</td>
+<td>Let agents loop blindly – API costs spiral out of control</td>
+</tr>
+<tr>
+<td>Code review</td>
+<td>Review every agent output before merging – even for simple tasks</td>
+<td>Blind merge without reviewing the diff</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Update shared libraries in a separate step beforehand</td>
+<td>Let different agents upgrade the same dependency simultaneously</td>
+</tr>
+<tr>
+<td>Cleanup</td>
+<td>Remove worktrees immediately after merging (<code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">git worktree remove</code>)</td>
+<td>Leave worktrees around for months – they confuse future sessions</td>
+</tr>
+<tr>
+<td>Number of parallel agents</td>
+<td>3–5 agents as a sweet spot, depending on rate limits</td>
+<td>20+ agents simultaneously – rate limits and API costs spiral</td>
+</tr>
+</tbody>
+</table>
+
+<div class="blog-callout warning">
+<span class="blog-callout-icon">⚠️</span>
+<div class="blog-callout-title">Warning: Locked Resources</div>
+<p>
+Databases, ports, and processes cannot be shared between worktrees. If Task 1 starts a dev server on port 3000 and Task 2 does the same, there will be a conflict. Solution: configure different ports per worktree, or only test the final build rather than running live servers.
+</p>
+</div>
+
+<!-- Section 8: OpenClaw -->
+<h2 id="openclaw-integration">How This Works with OpenClaw</h2>
+<p>
+Teams using OpenClaw as their agent framework get native support for parallel worktree workflows – with considerably more comfort than the manual approach using the Claude Code CLI.
+</p>
+<p>
+OpenClaw has had a built-in <strong>Worktree Dispatcher</strong> since version 0.8, which automatically distributes tasks to available worktrees. The core principle:
+</p>
+<ol style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li><strong>Task Queue:</strong> You pass multiple tasks to OpenClaw. The dispatcher orders them by dependency and resource contention.</li>
+<li><strong>Automatic Worktree Management:</strong> OpenClaw creates worktrees, copies <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.env</code> files, and configures the correct branch automatically.</li>
+<li><strong>Parallelisation:</strong> Independent tasks run simultaneously. Dependent tasks wait for their prerequisites.</li>
+<li><strong>Review Dashboard:</strong> All results land in a central review interface – you see the diff, can provide feedback, and merge or reject with one click.</li>
+<li><strong>Cleanup:</strong> After merging, worktrees are automatically removed and branches cleaned up.</li>
+</ol>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># OpenClaw parallel task queue</span>
+openclaw dispatch \
+  --task "TICKET-123: Payment Integration" \
+  --task "TICKET-124: Auth Refactoring" \
+  --task "TICKET-125: DB Migration" \
+  --parallel \
+  --model claude-opus-4-8 \
+  --review-before-merge
+
+<span style="color:#8b949e"># OpenClaw automatically starts 3 worktrees and shows dashboard</span>
+<span style="color:#3fb950">&gt; Dispatching 3 tasks to parallel worktrees...</span>
+<span style="color:#3fb950">&gt; worktree-1 [feature/ticket-123]: RUNNING (Claude Opus 4.8)</span>
+<span style="color:#3fb950">&gt; worktree-2 [feature/ticket-124]: RUNNING (Claude Opus 4.8)</span>
+<span style="color:#3fb950">&gt; worktree-3 [feature/ticket-125]: RUNNING (Claude Opus 4.8)</span>
+<span style="color:#8b949e">&gt; Open dashboard: http://localhost:8080/review</span></pre>
+
+<p>
+For enterprise teams running OpenClaw on-premises, Clawgency additionally provides a central monitoring system that makes all parallel agent activities visible in real time – including token consumption, runtimes, and an audit log for GDPR compliance.
+</p>
+
+<div class="blog-callout">
+<span class="blog-callout-icon">🦀</span>
+<div class="blog-callout-title">OpenClaw Enterprise by Clawgency</div>
+<p>
+Clawgency implements OpenClaw for DACH-region enterprises – including parallel worktree workflows, a central review dashboard, GDPR-compliant audit logging, and integration into existing CI/CD pipelines (GitHub Actions, GitLab CI, Azure DevOps). Live in 2–4 weeks.
+</p>
+</div>
+
+<div class="blog-sep">◆ ◆ ◆</div>
+
+<!-- FAQ -->
+<h2 id="faq">FAQ: All Questions About Parallel AI Agents with Git Worktrees</h2>
+<div class="blog-faq">
+<div class="blog-faq-item">
+<div class="blog-faq-q">What are Git Worktrees and how do they work?</div>
+<p class="blog-faq-a">
+Git Worktrees let you check out multiple working directories from a single Git repository – each on its own branch. Unlike a fresh clone, all worktrees share the same <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.git</code> database, so no space is wasted on duplicate objects and commits are immediately visible across all worktrees. You create them with <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">git worktree add [path] [branch]</code>.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">How many AI agents can I run in parallel at the same time?</div>
+<p class="blog-faq-a">
+Theoretically unlimited – in practice, 3 to 5 parallel agents is a good starting point. Limiting factors are the available API rate limits of the model you are using (Claude Opus 4.8 has higher limits than Haiku), the CPU/RAM of your machine, and the number of independent tasks available. Most teams report that 3 concurrent agents (one per feature ticket) hit the sweet spot between speed and manageability.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Does this work with OpenClaw?</div>
+<p class="blog-faq-a">
+Yes. OpenClaw natively supports parallel agent instances on different worktrees. The OpenClaw Dispatcher can automatically distribute tasks to available worktrees, including automatic logging, retry logic, and a central review dashboard. Clawgency implements this workflow for enterprise teams with a GDPR-compliant audit trail.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Which tasks are suitable for parallel agents?</div>
+<p class="blog-faq-a">
+Best suited are tasks that are independent of each other: different features, independent bug fixes, migration scripts, test suites, documentation updates, or refactoring tasks in different modules. Unsuitable are tasks that work on the same files, occupy the same ports, or depend on shared database locks. The rule of thumb: if two tasks could be conflict-free merged onto <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">main</code>, they can run in parallel.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What is the difference between git worktree and a fresh git clone?</div>
+<p class="blog-faq-a">
+A fresh clone duplicates the entire <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.git</code> database – costing time and disk space. Git Worktrees share the same <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">.git</code> database: commits, blobs, and trees exist only once. A new worktree is created in seconds, regardless of repo size. Branches are also immediately visible between worktrees – no fetch or push required.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Do I need to clean up worktrees manually after merging?</div>
+<p class="blog-faq-a">
+Yes, worktrees are not deleted automatically. After merging, remove them with <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">git worktree remove [path]</code> and clean up stale references with <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">git worktree prune</code>. OpenClaw handles this cleanup automatically after each merge.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What is the difference between claude --worktree and the manual approach?</div>
+<p class="blog-faq-a">
+<code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">claude --worktree</code> automates the worktree setup: branching, directory creation, and session context are configured automatically. In the manual approach you create the worktree and branch yourself, change into the directory, and start Claude there. Both approaches produce the same result; <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">--worktree</code> is more convenient for ad-hoc tasks, while the manual approach gives you more control over branch names and directory structure.
+</p>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="blog-article-cta">
+<div class="blog-cta-eyebrow">🦀 Parallel Agent Workflows for Your Team</div>
+<h3>Ready to develop 3x faster?</h3>
+<p>
+Clawgency implements parallel AI agent workflows with OpenClaw for enterprises in Germany, Austria, and Switzerland – GDPR-compliant, integrated into existing CI/CD pipelines, and live within 2 to 4 weeks.
+</p>
+<a class="btn btn--primary" href="../index.html#contact">Book a Free Discovery Call →</a>
+</div>
+
+<!-- Related Posts -->
+<nav aria-label="Related Articles" class="blog-related">
+<div class="blog-related-title">Further Reading</div>
+<div class="blog-related-grid">
+<a class="blog-related-card" href="../openclaw-fuer-unternehmen.html">
+<div class="blog-rc-type">Pillar Guide</div>
+<div class="blog-rc-title">OpenClaw for Enterprises: The Ultimate Guide for the DACH Market</div>
+</a>
+<a class="blog-related-card" href="../openclaw-enterprise-architektur-dsgvo.html">
+<div class="blog-rc-type">Security &amp; GDPR</div>
+<div class="blog-rc-title">GDPR Compliance for OpenClaw: Deploying AI Agents in a Privacy-Compliant Way</div>
+</a>
+<a class="blog-related-card" href="wie-openclaw-entstand.html">
+<div class="blog-rc-type">History &amp; Background</div>
+<div class="blog-rc-title">How OpenClaw Was Created: From Clawdbot to One of the Biggest Open-Source Projects</div>
+</a>
+<a class="blog-related-card" href="../openclaw-use-cases-roi-mittelstand.html">
+<div class="blog-rc-type">Use Cases &amp; ROI</div>
+<div class="blog-rc-title">OpenClaw in Practice: Use Cases and ROI Patterns for Mid-Market Companies</div>
+</a>
+</div>
+</nav>
+
+</article>
+</div>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer__bottom">
+<p>© 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
+<p class="footer__credit">A service of <a href="https://theaisoftwarecompany.com" rel="noopener" target="_blank">The AI Software Company</a></p>
+</div>
+</div>
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav');
+  var burger = document.getElementById('navBurger');
+  burger && burger.addEventListener('click', function () {
+    nav.classList.toggle('mobile-open');
+    burger.setAttribute('aria-label', nav.classList.contains('mobile-open') ? 'Close menu' : 'Open menu');
+  });
+})();
+</script>
+<script src="../../language-switcher.js"></script>
+</body>
+</html>
