@@ -44,6 +44,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/openclaw-fuer-unternehmen.html"/>
   </url>
   <url>
+    <loc>https://clawgency.de/ki-beratung-mittelstand.html</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://clawgency.de/openclaw-vs-n8n-zapier.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
