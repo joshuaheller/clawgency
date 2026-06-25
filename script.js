@@ -384,9 +384,9 @@ const isEnglishPage = (document.documentElement.lang || '').toLowerCase().starts
   const barFill = $('#roiBarFill');
 
   function formatCurrency(num) {
-    return new Intl.NumberFormat(isEnglishPage ? 'en-US' : 'de-DE', {
+    return new Intl.NumberFormat(isEnglishPage ? 'en-GB' : 'de-DE', {
       style: 'currency',
-      currency: isEnglishPage ? 'USD' : 'EUR',
+      currency: 'EUR',
       maximumFractionDigits: 0
     }).format(num);
   }
@@ -399,7 +399,7 @@ const isEnglishPage = (document.documentElement.lang || '').toLowerCase().starts
 
     employeesVal.textContent = e;
     hoursVal.textContent = h + 'h';
-    costVal.textContent = isEnglishPage ? `$${c}` : `${c}€`;
+    costVal.textContent = isEnglishPage ? `€${c}` : `${c}€`;
     automationVal.textContent = (a * 100) + '%';
 
     const weeklyHoursSaved = e * h * a;

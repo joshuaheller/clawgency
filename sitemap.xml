@@ -131,6 +131,14 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/wie-openclaw-entstand.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/wie-openclaw-entstand.html"/>
   </url>
+  <url>
+    <loc>https://clawgency.de/blog/git-worktrees-parallele-ki-agenten.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/git-worktrees-parallele-ki-agenten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html"/>
+  </url>
 
   <!-- English -->
   <url>
@@ -154,60 +162,80 @@
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/glossar.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/glossar.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/case-studies.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/case-studies.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/case-studies.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/openclaw-fuer-unternehmen.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/openclaw-fuer-unternehmen.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/openclaw-fuer-unternehmen.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/openclaw-vs-n8n-zapier.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/openclaw-vs-n8n-zapier.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/openclaw-vs-n8n-zapier.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/openclaw-enterprise-architektur-dsgvo.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/openclaw-enterprise-architektur-dsgvo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/openclaw-enterprise-architektur-dsgvo.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/openclaw-use-cases-roi-mittelstand.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/openclaw-use-cases-roi-mittelstand.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/openclaw-use-cases-roi-mittelstand.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/case-study-openclaw-logistik.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/case-study-openclaw-logistik.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/case-study-openclaw-logistik.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/impressum.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/impressum.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/datenschutz.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/datenschutz.html"/>
   </url>
   <url>
     <loc>https://clawgency.de/en/agb.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/agb.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/agb.html"/>
   </url>
 
   <!-- English blog posts -->
@@ -234,6 +262,14 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/wie-openclaw-entstand.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/wie-openclaw-entstand.html"/>
+  </url>
+  <url>
+    <loc>https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/git-worktrees-parallele-ki-agenten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html"/>
   </url>
 
 </urlset>
