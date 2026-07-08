@@ -139,6 +139,14 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/git-worktrees-parallele-ki-agenten.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html"/>
   </url>
+  <url>
+    <loc>https://clawgency.de/blog/claude-code-goal-autonome-agenten.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/claude-code-goal-autonome-agenten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html"/>
+  </url>
 
   <!-- English -->
   <url>
@@ -270,6 +278,14 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/git-worktrees-parallele-ki-agenten.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/git-worktrees-parallel-ai-agents.html"/>
+  </url>
+  <url>
+    <loc>https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/claude-code-goal-autonome-agenten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html"/>
   </url>
 
 </urlset>
