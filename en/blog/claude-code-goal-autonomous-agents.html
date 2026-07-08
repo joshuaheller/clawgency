@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Claude Code's /goal Command: Depth Instead of Width | Clawgency</title>
+<meta content="Claude Code's /goal command lets a single agent test, debug, and run security checks autonomously for hours – one agent, one goal, many turns. How it actually works, how it differs from parallel agents, and where humans still need to review." name="description"/>
+<meta content="Claude Code goal command, autonomous AI coding agent testing, agentic software testing, AI agent bug fixing, OpenClaw" name="keywords"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html" property="og:url"/>
+<meta content="Claude Code's /goal Command: Depth Instead of Width" property="og:title"/>
+<meta content="Claude Code's /goal command lets a single agent test, debug, and run security checks autonomously for hours – one agent, one goal, many turns. How it works and where humans still need to review." property="og:description"/>
+<meta content="https://clawgency.de/assets/blog-claude-code-goal-hero.webp" property="og:image"/>
+<meta content="en_GB" property="og:locale"/>
+<meta content="Clawgency" property="og:site_name"/>
+<meta content="2026-07-08" property="article:published_time"/>
+<meta content="Joshua Heller" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Claude Code's /goal Command: Depth Instead of Width" name="twitter:title"/>
+<meta content="Claude Code's /goal command lets a single agent test, debug, and run security checks autonomously for hours. How it works – and where humans still need to review." name="twitter:description"/>
+<meta content="https://clawgency.de/assets/blog-claude-code-goal-hero.webp" name="twitter:image"/>
+<link href="https://clawgency.de/blog/claude-code-goal-autonome-agenten.html" hreflang="de" rel="alternate"/>
+<link href="https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html" hreflang="en" rel="alternate"/>
+<link href="https://clawgency.de/blog/claude-code-goal-autonome-agenten.html" hreflang="x-default" rel="alternate"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code's /goal Command: Depth Instead of Width",
+  "description": "Claude Code's /goal command lets a single agent test, debug, and run security checks autonomously for hours – one agent, one goal, many turns. How it actually works, how it differs from parallel agents, and where humans still need to review.",
+  "datePublished": "2026-07-08",
+  "dateModified": "2026-07-08",
+  "author": {
+    "@type": "Person",
+    "name": "Joshua Heller"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Clawgency",
+    "url": "https://clawgency.de",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://clawgency.de/assets/logo-crab.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html"
+  },
+  "image": "https://clawgency.de/assets/blog-claude-code-goal-hero.webp",
+  "keywords": ["Claude Code goal command", "autonomous AI coding agent testing", "agentic software testing", "AI agent bug fixing", "loop engineering", "OpenClaw"],
+  "inLanguage": "en-US"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does Claude Code's /goal command actually do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "/goal sets a completion condition (e.g. \"all tests in test/auth pass and the lint step is clean\"). Claude then keeps working turn after turn without waiting for approval at each step. After every turn, a small fast model (Haiku by default) checks whether the condition holds. If not, the next turn starts automatically. Once the condition is met, the goal clears itself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does /goal differ from running parallel agents with Git Worktrees?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Git Worktrees (see our companion article) spread multiple independent tasks across several agents running at the same time – width. /goal keeps a single agent focused on one concrete objective across many turns – depth. Both patterns solve different problems and can be combined."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long can a /goal session run, and how is it bounded?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A /goal session runs until the condition is met or you run \"/goal clear\". Since the evaluator has no built-in time limit, Anthropic's own documentation recommends adding an explicit bound to the condition itself, such as \"or stop after 20 turns\". Without such a clause, a session can in theory run for a very long time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does /goal replace manual code review?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The evaluator does not run commands itself and only reads what Claude has already surfaced in the conversation. It cannot judge what Claude didn't test or didn't mention. Autonomous output is not automatically shippable – a diff review before merging remains mandatory, especially for security-sensitive code and edge cases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does this have to do with OpenClaw?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude Code and OpenClaw are different systems – Claude Code is Anthropic's CLI for coding agents, OpenClaw is the agent framework Clawgency implements for business processes. But the trust question is identical: how do you review autonomous agent work without watching every step? That is exactly the question Clawgency answers for OpenClaw deployments in the Mittelstand."
+      }
+    }
+  ]
+}
+</script>
+<link href="../../assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../../assets/favicon-crab-48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="../../styles.min.css" rel="stylesheet"/>
+<link href="../../blog-article.css" rel="stylesheet"/>
+<script data-domain="clawgency.de" defer="" src="https://analytics.taisc.de/js/script.js"></script>
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+<div class="nav__inner">
+<a class="nav__logo" href="../index.html">
+<img alt="Clawgency Crab" class="nav__logo-img" height="64" src="../../assets/logo-crab.webp" width="64"/>
+<span class="nav__logo-text">Clawgency</span>
+</a>
+<ul class="nav__links">
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case Studies</a></li>
+<li><a class="nav__link" href="../glossar.html">Glossary</a></li>
+</ul>
+<a class="btn btn--nav" href="../index.html#contact">Book a Free Call</a>
+<button aria-label="Open menu" class="nav__burger" id="navBurger">
+<span></span><span></span><span></span>
+</button>
+</div>
+<div class="nav__mobile" id="navMobile">
+<ul>
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case Studies</a></li>
+<li><a class="nav__link" href="../glossar.html">Glossary</a></li>
+<li><a class="btn btn--primary" href="../index.html#contact" style="display:inline-block;margin-top:1rem;">Book a Free Call</a></li>
+</ul>
+</div>
+</nav>
+
+<main class="blog-article-page">
+<div class="container">
+<a class="blog-back" href="../blog.html">← Back to Content Hub</a>
+<nav aria-label="Breadcrumb" class="blog-breadcrumb">
+<a href="../index.html">Home</a>
+<span aria-hidden="true">›</span>
+<a href="../blog.html">Blog</a>
+<span aria-hidden="true">›</span>
+Claude Code /goal
+</nav>
+
+<header class="blog-header">
+<span class="section-tag">Developer Workflow · AI Agents · Autonomous Testing</span>
+<h1>Claude Code's /goal Command:<br/><em>Depth Instead of Width</em></h1>
+<p class="blog-deck">While everyone talks about parallel agent fleets, a single command solves a different problem: one agent, one goal, running alone in a loop for hours – until tests are green and security checks pass. What /goal actually does, where it hits its limits, and what that means for businesses evaluating autonomous agents of their own.</p>
+<div class="blog-meta">
+<div><strong>Author:</strong> Joshua Heller</div>
+<div><strong>Published:</strong> July 8, 2026</div>
+<div><strong>Reading time:</strong> approx. 11 min.</div>
+<div><strong>Category:</strong> Developer Workflow</div>
+</div>
+</header>
+
+<article class="blog-body">
+
+<!-- Hero Image -->
+<figure style="margin:0 0 2.5rem;border-radius:12px;overflow:hidden;">
+<img alt="A glowing loop around a terminal window symbolizes the autonomous agent loop behind Claude Code's /goal command" loading="eager" src="../../assets/blog-claude-code-goal-hero.webp" style="width:100%;height:auto;display:block;"/>
+</figure>
+
+<!-- TOC -->
+<nav aria-label="Table of Contents" class="blog-toc">
+<div class="blog-toc-title">Table of Contents</div>
+<ol>
+<li><a href="#the-other-mode">The Other Mode: Depth Instead of Width</a></li>
+<li><a href="#what-goal-does">What the /goal Command Actually Does</a></li>
+<li><a href="#depth-vs-width">Depth vs. Width: /goal Compared to Parallel Agents</a></li>
+<li><a href="#case-example">A Case Example: From Prototype to MVP</a></li>
+<li><a href="#best-practices">Best Practices for Using It Safely</a></li>
+<li><a href="#industry-context">The Industry Context: What the Numbers Really Show</a></li>
+<li><a href="#human-review">What Still Needs Human Review</a></li>
+<li><a href="#openclaw-parallel">The Parallel to OpenClaw in the Enterprise</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ol>
+</nav>
+
+<!-- Stats -->
+<div class="blog-stats">
+<div class="blog-stat-cell">
+<div class="blog-stat-num">v2.1.139</div>
+<div class="blog-stat-label">Claude Code release that introduced /goal (May 2026)</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">1 Agent, 1 Goal</div>
+<div class="blog-stat-label">Depth instead of width – one loop until the condition holds</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">$102,610</div>
+<div class="blog-stat-label">Median annual wage, US software QA analysts, per BLS (May 2024)</div>
+</div>
+</div>
+
+<!-- Section 1 -->
+<h2 id="the-other-mode">The Other Mode: Depth Instead of Width</h2>
+<p>
+Most of the current conversation about AI coding agents is about scaling outward: more agents, more worktrees, more tickets running at once. We devoted an entire article to that pattern – <a href="git-worktrees-parallel-ai-agents.html">Parallel Development with AI Agents: Git Worktrees as a Productivity Multiplier</a> – because it unlocks real throughput for teams with many independent tasks.
+</p>
+<p>
+But there's a second, quieter pattern that matters just as much for businesses looking to deploy autonomous agents in their own processes: what happens when you point a single agent at a single hard problem and let it run for hours without checking in at every step? Not more agents – one agent going deeper.
+</p>
+<p>
+Anthropic turned exactly this pattern into a concrete tool with the <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> command in Claude Code. According to Anthropic's official changelog, it shipped with Claude Code v2.1.139 in the week of May 11–15, 2026 – part of the same release cycle as the new "Agent view" dashboard for running sessions.
+</p>
+
+<!-- Section 2 -->
+<h2 id="what-goal-does">What the /goal Command Actually Does</h2>
+<p>
+The core idea is simple to state but precisely implemented: you set a completion condition, and Claude Code then works toward it on its own – across many turns – without you approving every single step.
+</p>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Set a goal – kicks off the first turn immediately</span>
+/goal all tests in test/auth pass and the lint step is clean
+
+<span style="color:#8b949e"># Check status: duration, turns, tokens, evaluator's latest reason</span>
+/goal
+
+<span style="color:#8b949e"># Clear the goal early (aliases: stop, off, reset, none, cancel)</span>
+/goal clear
+
+<span style="color:#8b949e"># Headless: runs the loop to completion in a single invocation</span>
+claude -p "/goal CHANGELOG.md has an entry for every PR merged this week"</pre>
+
+<p>
+Per Anthropic's own documentation, <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> is technically a wrapper around a session-scoped, prompt-based Stop hook. After every turn, Claude Code sends the condition together with the conversation so far to a small, fast model – Haiku by default. That evaluator model returns a yes-or-no decision plus a short reason. On "no," Claude keeps working in the next turn, using the reason as guidance for what's still missing. On "yes," the goal clears automatically and the achievement is recorded in the transcript.
+</p>
+<p>
+Crucially, the evaluator does not call tools itself. It only reads what Claude has already surfaced in the conversation – a test run, a build exit code, a diff output. That's why a condition like "all tests in test/auth pass" works well: Claude runs the tests itself, the result lands in the transcript, and the evaluator can read it. The condition can be up to 4,000 characters long, and Anthropic's documentation explicitly recommends building in an upper bound, such as "or stop after 20 turns" – without such a clause, a session can in theory keep running for a very long time.
+</p>
+<p>
+Only one goal can be active per session. It's also worth distinguishing /goal from so-called Auto Mode: Auto Mode automatically approves tool calls <em>within</em> a turn but doesn't decide whether a new turn starts. <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> adds a second, independent layer of judgment <em>between</em> turns – a fresh model decides whether the work is really done, instead of relying on the model that wrote the code.
+</p>
+
+<!-- Section 3: Contrast -->
+<h2 id="depth-vs-width">Depth vs. Width: /goal Compared to Parallel Agents</h2>
+<p>
+This is where the explicit comparison to our article on <a href="git-worktrees-parallel-ai-agents.html">Git Worktrees and parallel AI agents</a> is worth making. Both patterns solve an autonomy problem – but a different one.
+</p>
+<p>
+Parallel agents via Git Worktrees spread multiple <strong>independent</strong> tasks across several agents running at the same time: feature A in worktree 1, refactor B in worktree 2, migration C in worktree 3. That's width – more throughput through parallelization. Anthropic pushed this pattern even further with "dynamic workflows" (introduced alongside Opus 4.8, in the week of May 25–29, 2026): a script that Claude itself writes then orchestrates dozens to hundreds of subagents.
+</p>
+<p>
+<code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> does the opposite: <strong>one</strong> agent, <strong>one</strong> goal, many turns in sequence on the same branch. Instead of finishing ten small tasks in parallel, one agent works its way through a single, larger task – for example, a complete module migration, until every call site compiles and every test passes. That's depth.
+</p>
+
+<table class="blog-table">
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Depth: /goal</th>
+<th>Width: worktrees / dynamic workflows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of agents</td>
+<td>One agent</td>
+<td>Several agents at once</td>
+</tr>
+<tr>
+<td>Task structure</td>
+<td>One large, connected task</td>
+<td>Several independent subtasks</td>
+</tr>
+<tr>
+<td>What triggers the next turn</td>
+<td>Evaluator model checks the completion condition</td>
+<td>A new agent starts on a new worktree</td>
+</tr>
+<tr>
+<td>Typical use</td>
+<td>Migration, refactoring until coverage is met, clearing a backlog</td>
+<td>Parallel feature tickets, model comparison, scout exploration</td>
+</tr>
+<tr>
+<td>Review effort</td>
+<td>One diff at the end of a long session</td>
+<td>Several diffs from several branches</td>
+</tr>
+</tbody>
+</table>
+
+<div class="blog-callout accent">
+<span class="blog-callout-icon">💡</span>
+<div class="blog-callout-title">The two patterns combine</div>
+<p>
+Nothing stops you from setting a <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> inside each worktree of a parallel run. Then you get several deep loops running in parallel instead of several shallow interactions. Width and depth aren't mutually exclusive.
+</p>
+</div>
+
+<!-- Section 4: Anecdote -->
+<h2 id="case-example">A Case Example: From Prototype to MVP</h2>
+<p>
+Clawgency founder Joshua Heller described a concrete example from his own practice in a LinkedIn post – and we want to frame it deliberately as a single case, not as a general benchmark.
+</p>
+<p>
+The starting point was migrating an application from prototype to MVP: a new database, a new backend, a new storage layer, new authentication – changes that touch nearly every part of the application. Instead of clicking through every test case by hand, he set a <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> that drove Claude Code to run end-to-end tests and security checks on its own: start the app, walk through core flows, interpret failures, fix code, retest – repeating until the agent itself concluded the condition held.
+</p>
+<p>
+By his own account, the agent caught most bugs automatically and saved him, by his own estimate, roughly a day of manual testing. Some edge cases still needed manual review afterward. That second part matters – more on it in the human-review section below. The example shows what <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> can do in one concrete situation – it is not a reliable benchmark for "what percentage of bugs AI agents catch automatically." Sweeping percentage claims like that circulate in social-media discussions about agents but aren't rigorously substantiated and should be treated with caution.
+</p>
+
+<!-- Section 5: Best Practices -->
+<h2 id="best-practices">Best Practices for Using It Safely</h2>
+<p>
+Official documentation and practical experience both point to clear guardrails before you point <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> at anything that matters:
+</p>
+<ul style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li><strong>A tightly bounded scope:</strong> one module, one feature, one directory – not "make the whole codebase better."</li>
+<li><strong>One testable success condition:</strong> "all tests pass" works because the evaluator can read it in the transcript. Vague goals like "the code is cleaner" don't.</li>
+<li><strong>Explicit constraints:</strong> what must not change? Which files are off-limits? That belongs in the condition, not just in your head.</li>
+<li><strong>Context the agent can't infer:</strong> business rules, compliance requirements, existing architectural decisions.</li>
+<li><strong>Always on a version-controlled branch:</strong> never on main. A long autonomous run belongs in isolation.</li>
+<li><strong>A diff review before merging:</strong> without exception – more on why in the next section.</li>
+</ul>
+
+<!-- Section 6: Industry context -->
+<h2 id="industry-context">The Industry Context: What the Numbers Really Show</h2>
+<p>
+Why does this matter right now? Because software testing is an expensive, labor-intensive field – and because the industry is visibly moving toward automation in 2026, without the underlying problem being solved yet.
+</p>
+<p>
+On pure cost: the U.S. Bureau of Labor Statistics puts the median annual wage for software quality assurance analysts and testers, in its Occupational Outlook Handbook (May 2024 data), at <strong>$102,610</strong> (about $49 per hour); for the broader combined category of software developers plus QA analysts and testers, the figure is $131,450 per year ($63.20 per hour).
+</p>
+<p>
+Industry trend reports paint a picture of growing automation: ThinkSys's "QA Trends Report 2026" reports that over 60% of enterprise QA pipelines are now automated. That's a trend finding from one vendor's research, not a universal fact – but the direction is clear. At the same time, Tricentis's "2026 Quality Transformation Report" shows an interesting counterpoint: despite AI acceleration, 60% of surveyed organizations say they are still shipping untested code to production. Autonomous testing agents, in other words, are not a solved problem — they sit at an active tension point between development speed and testing capacity.
+</p>
+<p>
+On the cost side, testing vendor Bug0 estimates in its blog post "The 2026 Quality Tax" that manual QA at a fast-growing startup creates hidden costs of roughly $55,000 to $78,000 per developer per year – explicitly one testing vendor's own estimate, not an industry-wide benchmark.
+</p>
+
+<!-- Section 7: What still needs human review -->
+<h2 id="human-review">What Still Needs Human Review</h2>
+<p>
+As capable as the loop is, it has a structural limit that follows directly from how the evaluator works: it doesn't run commands itself and can only judge what Claude has surfaced in the conversation. Whatever Claude doesn't test or doesn't mention, the evaluator cannot assess. A "yes" means "the condition holds according to what's in the transcript" – not "the code is bug-free."
+</p>
+<p>
+Concretely, at least these things remain a human responsibility:
+</p>
+<ul style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li><strong>Business-logic edge cases:</strong> cases no test covers because nobody thought to write one.</li>
+<li><strong>Security-sensitive code:</strong> even with a "security check" written into the goal, that's no substitute for a dedicated security review around auth, payments, or personal data.</li>
+<li><strong>Data migrations:</strong> a green test run doesn't prove historical production data migrated correctly.</li>
+<li><strong>Compliance questions:</strong> automated tests check function, not legal compliance.</li>
+<li><strong>UX and product decisions:</strong> "it works" and "it's the right solution for users" are two different questions.</li>
+</ul>
+<p>
+The honest framing: autonomous agents like a <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> run shift where human attention is spent – from "watch every intermediate step" to "review the final result." They don't remove the review.
+</p>
+
+<!-- Section 8: OpenClaw -->
+<h2 id="openclaw-parallel">The Parallel to OpenClaw in the Enterprise</h2>
+<p>
+This trust question isn't unique to software development. Anyone embedding OpenClaw agents into their own business processes – customer service automation, quote preparation, document processing – faces the same underlying question as a developer watching a long <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">/goal</code> run: how do you review autonomous work without watching every step?
+</p>
+<p>
+Claude Code and OpenClaw are deliberately separate here: Claude Code is Anthropic's CLI for coding agents, while OpenClaw is the open-source agent framework Clawgency implements for business-process automation across the German-speaking Mittelstand – built in part on tools like Claude Code, but a distinct product with its own governance layer. The core pattern from this article – a tightly bounded scope, a testable success condition, review at the end rather than at every step – carries over directly to our <a href="../openclaw-fuer-unternehmen.html">OpenClaw implementations for enterprises</a> and to the concrete <a href="../openclaw-use-cases-roi-mittelstand.html">use cases and ROI patterns for the Mittelstand</a> we describe there.
+</p>
+
+<div class="blog-callout">
+<span class="blog-callout-icon">🦀</span>
+<div class="blog-callout-title">Autonomous agents for your business</div>
+<p>
+Clawgency implements OpenClaw agents for DACH businesses – with clearly defined approval boundaries, audit logging, and review processes that answer exactly the questions this article raises for Claude Code: where can the agent act autonomously, and where does it need a human in the loop?
+</p>
+</div>
+
+<div class="blog-sep">◆ ◆ ◆</div>
+
+<!-- FAQ -->
+<h2 id="faq">FAQ: Claude Code /goal and Autonomous Testing Agents</h2>
+<div class="blog-faq">
+<div class="blog-faq-item">
+<div class="blog-faq-q">What does Claude Code's /goal command actually do?</div>
+<p class="blog-faq-a">
+/goal sets a completion condition (e.g. "all tests in test/auth pass and the lint step is clean"). Claude then keeps working turn after turn without waiting for approval at each step. After every turn, a small fast model (Haiku by default) checks whether the condition holds. If not, the next turn starts automatically. Once the condition is met, the goal clears itself.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">How does /goal differ from running parallel agents with Git Worktrees?</div>
+<p class="blog-faq-a">
+<a href="git-worktrees-parallel-ai-agents.html">Git Worktrees</a> spread multiple independent tasks across several agents running at the same time – width. /goal keeps a single agent focused on one concrete objective across many turns – depth. Both patterns solve different problems and can be combined.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">How long can a /goal session run, and how is it bounded?</div>
+<p class="blog-faq-a">
+A /goal session runs until the condition is met or you run "/goal clear". Since the evaluator has no built-in time limit, Anthropic's own documentation recommends adding an explicit bound to the condition itself, such as "or stop after 20 turns". Without such a clause, a session can in theory run for a very long time.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Does /goal replace manual code review?</div>
+<p class="blog-faq-a">
+No. The evaluator does not run commands itself and only reads what Claude has already surfaced in the conversation. It cannot judge what Claude didn't test or didn't mention. Autonomous output is not automatically shippable – a diff review before merging remains mandatory, especially for security-sensitive code and edge cases.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">What does this have to do with OpenClaw?</div>
+<p class="blog-faq-a">
+Claude Code and OpenClaw are different systems – Claude Code is Anthropic's CLI for coding agents, OpenClaw is the agent framework Clawgency implements for business processes. But the trust question is identical: how do you review autonomous agent work without watching every step? That is exactly the question Clawgency answers for OpenClaw deployments in the Mittelstand.
+</p>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="blog-article-cta">
+<div class="blog-cta-eyebrow">🦀 Deploy autonomous agents safely</div>
+<h3>Ready for agents that work independently – under control?</h3>
+<p>
+Clawgency implements OpenClaw agents for businesses in Germany, Austria, and Switzerland – with clear approval boundaries, audit logging, and a compliance-ready review process. Live in 2 to 4 weeks.
+</p>
+<a class="btn btn--primary" href="../index.html#contact">Book a Free Call →</a>
+</div>
+
+<!-- Related Posts -->
+<nav aria-label="Further reading" class="blog-related">
+<div class="blog-related-title">Further Reading</div>
+<div class="blog-related-grid">
+<a class="blog-related-card" href="git-worktrees-parallel-ai-agents.html">
+<div class="blog-rc-type">Companion Article</div>
+<div class="blog-rc-title">Parallel Development with AI Agents: Git Worktrees as a Productivity Multiplier</div>
+</a>
+<a class="blog-related-card" href="../openclaw-fuer-unternehmen.html">
+<div class="blog-rc-type">Pillar Guide</div>
+<div class="blog-rc-title">OpenClaw for Enterprises: The Ultimate Guide for the DACH Market</div>
+</a>
+<a class="blog-related-card" href="../openclaw-use-cases-roi-mittelstand.html">
+<div class="blog-rc-type">Use Cases &amp; ROI</div>
+<div class="blog-rc-title">OpenClaw in Practice: Use Cases and ROI Patterns for the Mittelstand</div>
+</a>
+<a class="blog-related-card" href="wie-openclaw-entstand.html">
+<div class="blog-rc-type">History &amp; Background</div>
+<div class="blog-rc-title">How OpenClaw Came to Be: From Clawdbot to One of the Largest Open-Source Projects</div>
+</a>
+</div>
+</nav>
+
+</article>
+</div>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer__bottom">
+<p>© 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
+<p class="footer__credit">A service by <a href="https://theaisoftwarecompany.com" rel="noopener" target="_blank">The AI Software Company</a></p>
+</div>
+</div>
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav');
+  var burger = document.getElementById('navBurger');
+  burger && burger.addEventListener('click', function () {
+    nav.classList.toggle('mobile-open');
+    burger.setAttribute('aria-label', nav.classList.contains('mobile-open') ? 'Close menu' : 'Open menu');
+  });
+})();
+</script>
+<script src="../../language-switcher.js"></script>
+</body>
+</html>
