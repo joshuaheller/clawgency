@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advisor and Orchestrator Patterns: Multi-Agent Cost Optimization for Autonomous Agents | Clawgency</title>
+<meta content="How the advisor and orchestrator patterns from Anthropic's Claude Cookbooks cut model costs for autonomous multi-agent systems – with verified numbers and an OpenClaw architecture." name="description"/>
+<meta content="multi-agent cost optimization, model routing for AI agents, advisor orchestrator pattern, LLM routing, Claude Cookbooks, OpenClaw" name="keywords"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://clawgency.de/en/blog/multi-agent-cost-optimization-advisor-orchestrator.html" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="https://clawgency.de/en/blog/multi-agent-cost-optimization-advisor-orchestrator.html" property="og:url"/>
+<meta content="Advisor and Orchestrator Patterns: Multi-Agent Cost Optimization for Autonomous Agents" property="og:title"/>
+<meta content="How the advisor and orchestrator patterns from Anthropic's Claude Cookbooks cut model costs for autonomous multi-agent systems – with verified numbers and an OpenClaw architecture." property="og:description"/>
+<meta content="https://clawgency.de/assets/blog-multi-agent-cost-hero.webp" property="og:image"/>
+<meta content="en_GB" property="og:locale"/>
+<meta content="Clawgency" property="og:site_name"/>
+<meta content="2026-07-15" property="article:published_time"/>
+<meta content="Joshua Heller" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Advisor and Orchestrator Patterns: Multi-Agent Cost Optimization for Autonomous Agents" name="twitter:title"/>
+<meta content="How two architecture patterns documented by Anthropic structurally cut model costs for autonomous multi-agent systems – with verified numbers from the Claude Cookbooks." name="twitter:description"/>
+<meta content="https://clawgency.de/assets/blog-multi-agent-cost-hero.webp" name="twitter:image"/>
+<link href="https://clawgency.de/blog/multi-agent-kostenoptimierung-advisor-orchestrator.html" hreflang="de" rel="alternate"/>
+<link href="https://clawgency.de/en/blog/multi-agent-cost-optimization-advisor-orchestrator.html" hreflang="en" rel="alternate"/>
+<link href="https://clawgency.de/blog/multi-agent-kostenoptimierung-advisor-orchestrator.html" hreflang="x-default" rel="alternate"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Advisor and Orchestrator Patterns: Multi-Agent Cost Optimization for Autonomous Agents",
+  "description": "How the advisor and orchestrator patterns from Anthropic's Claude Cookbooks cut model costs for autonomous multi-agent systems – with verified numbers and an OpenClaw architecture.",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "author": {
+    "@type": "Person",
+    "name": "Joshua Heller"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Clawgency",
+    "url": "https://clawgency.de",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://clawgency.de/assets/logo-crab.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://clawgency.de/en/blog/multi-agent-cost-optimization-advisor-orchestrator.html"
+  },
+  "image": "https://clawgency.de/assets/blog-multi-agent-cost-hero.webp",
+  "keywords": ["multi-agent cost optimization", "model routing for AI agents", "advisor orchestrator pattern", "LLM routing", "Claude Cookbooks", "OpenClaw"],
+  "inLanguage": "en-US"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the difference between the advisor and orchestrator patterns?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the advisor pattern, a cheap model does all the work and only calls in a more expensive model at critical decision points. In the orchestrator pattern, the expensive model plans the task while several cheap models execute the subtasks in parallel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the quoted percentages officially confirmed by Anthropic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Partly. The advisor numbers (+2.7 percentage points, −11.9% cost) come directly from Anthropic's own announcement. The orchestrator numbers come from the public Claude Cookbooks repository. The often-cited \"92% at 63%\" figure for newer models, on the other hand, could not be clearly traced to any primary source."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this pattern transfer to any agent framework, or only to Claude?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The underlying principle – only spend on an expensive model where it makes a measurable difference – is model-agnostic and known in research as \"model cascading\" or \"LLM routing\". The specific figures in this article refer to Anthropic's models, but the architectural principle carries over to other providers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Clawgency build this pattern into its own OpenClaw implementations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Model selection per agent role and cost transparency are standard parts of our OpenClaw implementations for businesses, not an afterthought add-on."
+      }
+    }
+  ]
+}
+</script>
+<link href="../../assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../../assets/favicon-crab-48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="../../styles.min.css" rel="stylesheet"/>
+<link href="../../blog-article.css" rel="stylesheet"/>
+<script data-domain="clawgency.de" defer="" src="https://analytics.taisc.de/js/script.js"></script>
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+<div class="nav__inner">
+<a class="nav__logo" href="../index.html">
+<img alt="Clawgency Crab" class="nav__logo-img" height="64" src="../../assets/logo-crab.webp" width="64"/>
+<span class="nav__logo-text">Clawgency</span>
+</a>
+<ul class="nav__links">
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case Studies</a></li>
+<li><a class="nav__link" href="../glossar.html">Glossary</a></li>
+</ul>
+<a class="btn btn--nav" href="../index.html#contact">Book a Free Call</a>
+<button aria-label="Open menu" class="nav__burger" id="navBurger">
+<span></span><span></span><span></span>
+</button>
+</div>
+<div class="nav__mobile" id="navMobile">
+<ul>
+<li><a class="nav__link" href="../index.html#openclaw">Services</a></li>
+<li><a class="nav__link" href="../blog.html">Blog</a></li>
+<li><a class="nav__link" href="../case-studies.html">Case Studies</a></li>
+<li><a class="nav__link" href="../glossar.html">Glossary</a></li>
+<li><a class="btn btn--primary" href="../index.html#contact" style="display:inline-block;margin-top:1rem;">Book a Free Call</a></li>
+</ul>
+</div>
+</nav>
+
+<main class="blog-article-page">
+<div class="container">
+<a class="blog-back" href="../blog.html">← Back to Content Hub</a>
+<nav aria-label="Breadcrumb" class="blog-breadcrumb">
+<a href="../index.html">Home</a>
+<span aria-hidden="true">›</span>
+<a href="../blog.html">Blog</a>
+<span aria-hidden="true">›</span>
+Advisor &amp; Orchestrator Pattern
+</nav>
+
+<header class="blog-header">
+<span class="section-tag">Developer Workflow · AI Agents · Architecture</span>
+<h1>Advisor and Orchestrator Patterns:<br/><em>Multi-Agent Cost Optimization for Autonomous Agents</em></h1>
+<p class="blog-deck">Route every single task an autonomous agent handles through the most expensive model available, and you're paying for intelligence you often don't need. Two architecture patterns documented by Anthropic show how to structurally cut costs without giving up result quality — and how directly that carries over to OpenClaw agents.</p>
+<div class="blog-meta">
+<div><strong>Author:</strong> Joshua Heller</div>
+<div><strong>Published:</strong> July 15, 2026</div>
+<div><strong>Reading time:</strong> approx. 10 min.</div>
+<div><strong>Category:</strong> Developer Workflow</div>
+</div>
+</header>
+
+<article class="blog-body">
+
+<!-- Hero Image -->
+<figure style="margin:0 0 2.5rem;border-radius:12px;overflow:hidden;">
+<img alt="Abstract network graphic: many small, fast nodes handle most of the work while a single larger node is only called in at a few key decision points" loading="eager" src="../../assets/blog-multi-agent-cost-hero.webp" style="width:100%;height:auto;display:block;"/>
+</figure>
+
+<!-- TOC -->
+<nav aria-label="Table of Contents" class="blog-toc">
+<div class="blog-toc-title">Table of Contents</div>
+<ol>
+<li><a href="#cost-problem">The Cost Problem in Autonomous Multi-Agent Systems</a></li>
+<li><a href="#advisor-pattern">The Advisor Pattern: Expensive Model Only at Decision Points</a></li>
+<li><a href="#orchestrator-pattern">The Orchestrator Pattern: Plan Expensive, Execute Cheap</a></li>
+<li><a href="#verified-numbers">What's Verified, and What Isn't</a></li>
+<li><a href="#openclaw-architecture">How This Transfers to OpenClaw Agents</a></li>
+<li><a href="#worked-example">A Worked Example: Verifying 20 Facts</a></li>
+<li><a href="#limits">Where This Approach Hits Its Limits</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ol>
+</nav>
+
+<!-- Stats -->
+<div class="blog-stats">
+<div class="blog-stat-cell">
+<div class="blog-stat-num">−54%</div>
+<div class="blog-stat-label">cost in the verified orchestrator example (BrowseComp benchmark, Claude Cookbooks)</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">2.5×</div>
+<div class="blog-stat-label">cheaper in the cookbook's worked example: verifying 20 facts for $1.61 instead of $4.00</div>
+</div>
+<div class="blog-stat-cell">
+<div class="blog-stat-num">3×</div>
+<div class="blog-stat-label">faster in the same example: 194 seconds instead of 608 seconds</div>
+</div>
+</div>
+
+<!-- Section 1 -->
+<h2 id="cost-problem">The Cost Problem in Autonomous Multi-Agent Systems</h2>
+<p>
+Autonomous agent systems like the ones Clawgency implements for OpenClaw deployments rarely consist of a single model call. A customer-service agent, for example, looks something up in the CRM, searches a knowledge base, drafts a reply, and logs the interaction – four to ten model calls for a single task is nothing unusual. If every one of those calls runs through the most capable model available, the bill scales linearly with volume, regardless of whether that particular subtask actually needs that level of capability.
+</p>
+<p>
+On pure model pricing: Anthropic's currently published API prices (as of July 15, 2026, platform.claude.com/docs/en/about-claude/pricing) show a price ratio of roughly 5:1 to 10:1 between the flagship model Fable 5 ($10 input / $50 output per million tokens) and a faster model like Sonnet 5 ($2 input / $10 output, pricing through August 31, 2026). That gap multiplies across every agent step, every session, every month.
+</p>
+
+<!-- Section 2 -->
+<h2 id="advisor-pattern">The Advisor Pattern: Expensive Model Only at Decision Points</h2>
+<p>
+In April 2026, Anthropic introduced its own advisor tool in the blog post "The advisor strategy": a faster, cheaper model handles the entire workflow. A more capable model is only consulted as an "advisor" at select, critical decision points – not on every step. In Anthropic's own benchmark, this combination improved results on SWE-bench Multilingual by <strong>2.7 percentage points</strong> over using the expensive model alone, at <strong>11.9% lower cost</strong> per task.
+</p>
+<p>
+Technically, the advisor tool is implemented as a standalone tool-call pattern: the cheaper model can invoke the advisor tool mid-workflow whenever it hits a point where it's uncertain or needs a higher-quality judgment call. The rest of the session keeps running on the cheaper model unchanged.
+</p>
+<p>
+A note of caution on numbers circulating online: for newer model pairings (Sonnet 5 as the working model, Fable 5 as advisor), higher figures are sometimes quoted, such as "92% of Fable 5's performance at 63% of the cost" on a benchmark referred to as "SWE-bench Pro". We couldn't trace that figure to any official Anthropic source, so we're not reporting it as an established fact – only the 2.7 percentage points and 11.9% cited above, which trace directly back to Anthropic's own announcement.
+</p>
+
+<!-- Section 3 -->
+<h2 id="orchestrator-pattern">The Orchestrator Pattern: Plan Expensive, Execute Cheap</h2>
+<p>
+A second, even better-documented pattern comes from the official Claude Cookbooks repository (github.com/anthropics/claude-cookbooks, notebook <code style="background:#1a1a2e;color:#e6637a;padding:0.15em 0.4em;border-radius:3px;font-family:monospace;font-size:0.9em;">managed_agents/CMA_plan_big_execute_small.ipynb</code>): the expensive flagship model handles planning only – it breaks a task down into subtasks. Several instances of a cheaper model then work through those subtasks in parallel as workers.
+</p>
+<p>
+That's a different kind of "parallel" than the one in our article on <a href="git-worktrees-parallel-ai-agents.html">Git Worktrees and parallel AI agents</a>: there, several agents split independent development tasks across multiple worktrees – throughput through task parallelization. Here, several instances of the same cheap model work in parallel on subtasks of a single task planned by the expensive model – cost optimization through role separation, not more tasks completed at once.
+</p>
+<p>
+On the BrowseComp benchmark, this setup reached 86.8% accuracy at $18.53 per task, versus 90.8% accuracy at $40.56 when the flagship model solves the entire task alone – roughly 96% of the original performance at about 46% of the cost. These figures can be traced directly to the cookbook, not just paraphrased.
+</p>
+<p>
+An additional, mechanically traceable cost lever: each sub-agent runs its own prompt cache. Repeated context (system prompt, shared reference data) isn't billed again at full price for every worker as a result.
+</p>
+
+<div class="blog-callout warning">
+<span class="blog-callout-icon">⚠️</span>
+<div class="blog-callout-title">Verify caching explicitly – don't assume it</div>
+<p>
+Per-sub-agent prompt caching is not an automatic effect of every agent framework. According to a public GitHub issue (anthropics/claude-code#29966), Claude Code's own sub-agent feature had a bug at one point where caching was disabled by default for sub-agents. If you're building this pattern yourself, verify caching explicitly rather than assuming it.
+</p>
+</div>
+
+<!-- Section 4 -->
+<h2 id="verified-numbers">What's Verified, and What Isn't</h2>
+<p>
+A quick summary of which figures in this article trace back to a primary source – and which don't:
+</p>
+
+<table class="blog-table">
+<thead>
+<tr>
+<th>Claim</th>
+<th>Status</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Advisor pattern: +2.7 percentage points at −11.9% cost (SWE-bench Multilingual)</td>
+<td>Verified</td>
+<td>Official Anthropic announcement, "The advisor strategy" (April 2026)</td>
+</tr>
+<tr>
+<td>Orchestrator pattern: ~96% performance at ~46% cost (BrowseComp), incl. $1.61-vs-$4.00 worked example</td>
+<td>Verified</td>
+<td>Claude Cookbooks repository (CMA_plan_big_execute_small.ipynb), independently confirmed</td>
+</tr>
+<tr>
+<td>"92% of Fable 5's performance at 63% of the cost" for newer model pairings on "SWE-bench Pro"</td>
+<td>Not verifiable</td>
+<td>No clear primary source found</td>
+</tr>
+</tbody>
+</table>
+
+<!-- Section 5 -->
+<h2 id="openclaw-architecture">How This Transfers to OpenClaw Agents</h2>
+<p>
+OpenClaw agents, as Clawgency implements them for DACH businesses, consist of configurable roles each with its own model backend. The advisor/orchestrator principle transfers directly:
+</p>
+<ul style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li><strong>For customer-service agents:</strong> standard requests (FAQ answers, status lookups) run on a fast, cheap model. Escalations, ambiguous requests, or cases with high business risk get handed off to a more capable model as an advisor – directly analogous to Anthropic's pattern.</li>
+<li><strong>For document processing and batch tasks:</strong> a planning step (which documents, what order, which exceptions) runs on a more capable model, while the actual extraction/classification runs in parallel across several cheaper worker instances – a direct orchestrator pattern.</li>
+<li><strong>Cost transparency as a prerequisite:</strong> without logging per agent role and model combination, any optimization is guesswork. That's why we build it into every OpenClaw implementation by default.</li>
+</ul>
+
+<pre style="background:#0d1117;color:#e6edf3;padding:1.25rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.88rem;line-height:1.6;margin:1.5rem 0;"><span style="color:#8b949e"># Illustrative OpenClaw agent role configuration (example syntax, not a reference implementation)</span>
+
+role: customer-service-standard
+model: fast-cheap
+escalation:
+  condition: ambiguous_request OR high_risk
+  model: high-capability        <span style="color:#8b949e"># advisor pattern</span>
+
+role: document-review-planning
+model: high-capability          <span style="color:#8b949e"># plans, doesn't execute itself</span>
+workers:
+  count: 5
+  model: fast-cheap              <span style="color:#8b949e"># orchestrator pattern</span></pre>
+
+<!-- Section 6 -->
+<h2 id="worked-example">A Worked Example: Verifying 20 Facts</h2>
+<p>
+From the Claude Cookbooks example, directly transferable to many OpenClaw use cases (research, data reconciliation, document review): the task of verifying 20 facts cost <strong>$1.61</strong> and took <strong>194 seconds</strong> in the orchestrator setup. The same task, solved by the flagship model alone, cost <strong>$4.00</strong> and took <strong>608 seconds</strong> – not just 2.5 times more expensive, but roughly 3 times slower as well. Over 80% of the tokens consumed in the orchestrator setup ran on the cheaper worker rate.
+</p>
+
+<!-- Section 7 -->
+<h2 id="limits">Where This Approach Hits Its Limits</h2>
+<ul style="line-height:1.85;margin:1rem 0 1.5rem 1.5rem;">
+<li><strong>Not every task splits cleanly.</strong> Some agent tasks are demanding end-to-end and can't be broken into "simple" and "critical" subtasks without risking quality.</li>
+<li><strong>Splitting the work is architecture, not a config toggle.</strong> The workflow has to be structured from the start so roles and subtasks can actually be separated.</li>
+<li><strong>Caching must be checked explicitly</strong> – see the "Orchestrator pattern" section above.</li>
+<li><strong>Treat the 92/63 figure with caution.</strong> Plan around the verified magnitudes (advisor: roughly 12% savings; orchestrator: sometimes over 50% on parallelizable tasks), not the largest numbers circulating.</li>
+</ul>
+
+<div class="blog-callout">
+<span class="blog-callout-icon">🦀</span>
+<div class="blog-callout-title">Model costs under structural control</div>
+<p>
+Clawgency builds model selection per agent role and cost transparency into every OpenClaw implementation by default – instead of buying expensive intelligence where nobody needs it.
+</p>
+</div>
+
+<div class="blog-sep">◆ ◆ ◆</div>
+
+<!-- FAQ -->
+<h2 id="faq">FAQ: Multi-Agent Cost Optimization with Advisor and Orchestrator Patterns</h2>
+<div class="blog-faq">
+<div class="blog-faq-item">
+<div class="blog-faq-q">What's the difference between the advisor and orchestrator patterns?</div>
+<p class="blog-faq-a">
+In the advisor pattern, a cheap model does all the work and only calls in a more expensive model at critical decision points. In the orchestrator pattern, the expensive model plans the task while several cheap models execute the subtasks in parallel.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Are the quoted percentages officially confirmed by Anthropic?</div>
+<p class="blog-faq-a">
+Partly. The advisor numbers (+2.7 percentage points, −11.9% cost) come directly from Anthropic's own announcement. The orchestrator numbers come from the public Claude Cookbooks repository. The often-cited "92% at 63%" figure for newer models, on the other hand, could not be clearly traced to any primary source.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Does this pattern transfer to any agent framework, or only to Claude?</div>
+<p class="blog-faq-a">
+The underlying principle – only spend on an expensive model where it makes a measurable difference – is model-agnostic and known in research as "model cascading" or "LLM routing". The specific figures in this article refer to Anthropic's models, but the architectural principle carries over to other providers.
+</p>
+</div>
+<div class="blog-faq-item">
+<div class="blog-faq-q">Does Clawgency build this pattern into its own OpenClaw implementations?</div>
+<p class="blog-faq-a">
+Yes. Model selection per agent role and cost transparency are standard parts of our OpenClaw implementations for businesses, not an afterthought add-on.
+</p>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="blog-article-cta">
+<div class="blog-cta-eyebrow">🦀 Cut model costs structurally</div>
+<h3>Ready to run autonomous agents cost-efficiently?</h3>
+<p>
+Clawgency implements OpenClaw agents for businesses in Germany, Austria, and Switzerland – with model selection per agent role, cost transparency, and advisor/orchestrator architecture where it pays off. Live in 2 to 4 weeks.
+</p>
+<a class="btn btn--primary" href="../index.html#contact">Book a Free Call →</a>
+</div>
+
+<!-- Related Posts -->
+<nav aria-label="Further reading" class="blog-related">
+<div class="blog-related-title">Further Reading</div>
+<div class="blog-related-grid">
+<a class="blog-related-card" href="git-worktrees-parallel-ai-agents.html">
+<div class="blog-rc-type">Companion Article</div>
+<div class="blog-rc-title">Parallel Development with AI Agents: Git Worktrees as a Productivity Multiplier</div>
+</a>
+<a class="blog-related-card" href="../openclaw-fuer-unternehmen.html">
+<div class="blog-rc-type">Pillar Guide</div>
+<div class="blog-rc-title">OpenClaw for Companies: The DACH Guide</div>
+</a>
+<a class="blog-related-card" href="claude-code-goal-autonomous-agents.html">
+<div class="blog-rc-type">Developer Workflow</div>
+<div class="blog-rc-title">Claude Code's /goal Command: Depth Instead of Width</div>
+</a>
+</div>
+</nav>
+
+</article>
+</div>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer__bottom">
+<p>© 2026 Clawgency · <a href="mailto:clawgency@theaisoftwarecompany.com">clawgency@theaisoftwarecompany.com</a></p>
+<p class="footer__credit">A service by <a href="https://theaisoftwarecompany.com" rel="noopener" target="_blank">The AI Software Company</a></p>
+</div>
+</div>
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav');
+  var burger = document.getElementById('navBurger');
+  burger && burger.addEventListener('click', function () {
+    nav.classList.toggle('mobile-open');
+    burger.setAttribute('aria-label', nav.classList.contains('mobile-open') ? 'Close menu' : 'Open menu');
+  });
+})();
+</script>
+<script src="../../language-switcher.js"></script>
+</body>
+</html>

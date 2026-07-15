@@ -147,6 +147,14 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/claude-code-goal-autonome-agenten.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html"/>
   </url>
+  <url>
+    <loc>https://clawgency.de/blog/multi-agent-kostenoptimierung-advisor-orchestrator.html</loc>
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/multi-agent-kostenoptimierung-advisor-orchestrator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/multi-agent-cost-optimization-advisor-orchestrator.html"/>
+  </url>
 
   <!-- English -->
   <url>
@@ -286,6 +294,14 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/claude-code-goal-autonome-agenten.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/claude-code-goal-autonomous-agents.html"/>
+  </url>
+  <url>
+    <loc>https://clawgency.de/en/blog/multi-agent-cost-optimization-advisor-orchestrator.html</loc>
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clawgency.de/blog/multi-agent-kostenoptimierung-advisor-orchestrator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clawgency.de/en/blog/multi-agent-cost-optimization-advisor-orchestrator.html"/>
   </url>
 
 </urlset>
